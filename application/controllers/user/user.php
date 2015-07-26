@@ -140,7 +140,7 @@ class User extends CI_Controller
 				break;
 			}
                 }
-                $data['errorInfo'] = "Invalid Login Id Or Password";
+                $data['errorInfo'] = "Invalid Username Or Password";
                 $this->load->view('login',$data);
 		}
 		else

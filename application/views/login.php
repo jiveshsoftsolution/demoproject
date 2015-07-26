@@ -33,7 +33,7 @@
 											<div class="sepH_c">
 												<div class="elVal">
 													<label for="username">Username</label>
-													<input type="text" id="username" name="login_id" class="expand input-text" placeholder="Login ID" />
+													<input type="text" id="username" name="login_id" class="expand input-text" placeholder="Username" />
 												</div>
 												<div class="elVal">
 													<label for="password">Password</label>

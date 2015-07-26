@@ -55,10 +55,7 @@
 		});
 	}
 </script>
-<div class="alert alert-success">
-  <strong>Success!</strong> Indicates a successful or positive action.
-</div>
-	<div class="nine columns">
+<div class="nine columns">
       <div class="row">
         <div class="twelve columns">
           <div class="box_c">
@@ -86,7 +83,7 @@
 						<div class="three columns">
 							<label for="salutation_id">Salutation</label>
 							<select class="small" name="salutation_id" id="salutation_id">
-								<option value="-1">Select Salutation</option>
+								<!--<option value="-1">Select Salutation</option>-->
 								<?php foreach($salutation as $salutationData) {?>
 								<option value="<?php echo $salutationData->salutation_id?>"><?php echo $salutationData->salutation?></option>
 								<?php }?>
@@ -114,7 +111,7 @@
 						<div class="three columns">
 						  <label for="gender">Gender</label>
 						  <select name="gender" id="gender" class="small">
-							<option value="-1">Select Gender</option>
+							<!--<option value="-1">Select Gender</option>-->
 							<option value="M">Male</option>
 							<option value="F">Female</option>
 						  </select>
@@ -225,7 +222,7 @@
 					<div class="three columns">
 						<label for="father_salutation_id">Salutaiton</label>
 						<select class="small" name="father_salutation_id" id="father_salutation_id">
-							<option value="-1">Select Salutation</option>
+							<!--<option value="-1">Select Salutation</option>-->
 							<option value="1">Mr.</option>
 							<option value="2">Miss.</option>
 						</select>
@@ -252,9 +249,9 @@
 					<div class="three columns">
 						<label for="mother_salutation_id">Salutation</label>
 						<select class="small" name="mother_salutation_id" id="mother_salutation_id">
-							<option value="-1">Select Salutation</option>
+							<!--<option value="-1">Select Salutation</option>-->
 							<option value="1">Mr.</option>
-							<option value="2">Miss.</option>
+							<option value="2" selected="selected">Miss.</option>
 						</select>
 						<span id="sp_mother_salutation_id" class="error">Select Salutation.</span>
 					</div>
