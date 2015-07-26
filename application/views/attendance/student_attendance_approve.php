@@ -183,20 +183,19 @@
 						<?php } ?>
 							</tbody>
 						</table>
-						<?php if($apprrove ==1) 
-							{
-								echo $approvemsg;
-							}
-							?>
-							<div class="formRow cf">			
-								<div  class="two columns">
-									<input type="submit" class="button small" value="Submit">
-								</div>
-							</div>
-						
+						<?php if($apprrove ==1) {
+							  echo $approvemsg;
+							} else {
+						?>
+						<div class="formRow cf">			
+						  <div  class="two columns">
+						    <input type="submit" class="button small" value="Submit">
+						  </div>
+						</div>
+						<?php } ?>
 					</form>
 					<?php } ?>
-					</div>
+				      </div>
                 </div>
             </div>
         </div>

@@ -2,22 +2,18 @@
 
 class Student_attendance extends CI_Controller 
 {
-    public function __construct() 
-	{
+    public function __construct() {
         parent::__construct();
         $this->load->model('attendance/attendance_model', 'attendanceModel');
-		$this->load->model('student/student_model','studentModel');
+	$this->load->model('student/student_model','studentModel');
         $this->load->helper('crud_model');
         $this->load->helper('student_model');
+	require_once APPPATH.'third_party/sms/sms.php';
     }
 
-    public function index() 
-	{
-        
-    }
-
-    public function get_attendance($class_section_id = "" ,$session_id = "") 
-	{
+    public function index() {}
+    
+    public function get_attendance($class_section_id = "" ,$session_id = "") {
         $data = array();
         $filterColumns = array();
         $offset = NULL;
@@ -140,8 +136,8 @@ class Student_attendance extends CI_Controller
         $session_Id = NULL;
         $class_section_Id = NULL;
         $this->template->getScript(); 
-		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+	$this->template->getAdminHeader(); 
+	$this->template->getAdminLeftBar();	
         $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");
         $data['classSecton'] = getClass_section();
 
@@ -168,23 +164,20 @@ class Student_attendance extends CI_Controller
         {
             $recordsFound = getStudentBySessionId_ClassSectionId($filterColumns, $offset, $limit, $sort);
             $data['studentListForSendSms'] = $recordsFound;
-            if (isset($recordsFound['result']))
-            {
-            }
-			else
-			{             
-				$studentListForSendSms = $data['studentListForSendSms'];
-				$student_teacher_class_id = array();
-				for ($i = 0; $i < count($studentListForSendSms); $i++) 
-				{
-					$student_teacher_class_id[] = $studentListForSendSms[$i]->student_teacher_class_id;
-				}
-				$totalApprove = $this->attendanceModel->checkStudentAttendanceApprove($student_teacher_class_id, date('Y-m-d'));
-				if ($totalApprove > 0) {
-					$data['approvemsg'] = "Attendance already approved";
-					$data['apprrove'] = 1;
-				}
-				$data['StudentAttendance'] = $this->attendanceModel->getStudentAttendance($student_teacher_class_id, date('Y-m-d'));
+            if (isset($recordsFound['result'])) {
+            } else {             
+		$studentListForSendSms = $data['studentListForSendSms'];
+		$student_teacher_class_id = array();
+		for ($i = 0; $i < count($studentListForSendSms); $i++) 
+		{
+		    $student_teacher_class_id[] = $studentListForSendSms[$i]->student_teacher_class_id;
+		}
+		$totalApprove = $this->attendanceModel->checkStudentAttendanceApprove($student_teacher_class_id, date('Y-m-d'));
+		if ($totalApprove > 0) {
+		    $data['approvemsg'] = "Attendance already approved";
+		    $data['apprrove'] = 1;
+		}
+		$data['StudentAttendance'] = $this->attendanceModel->getStudentAttendance($student_teacher_class_id, date('Y-m-d'));
             }
         }
       
@@ -192,54 +185,50 @@ class Student_attendance extends CI_Controller
         $this->template->getFooter();
     }
 
-    public function add_attendance_approve_information() 
-	{
-		$logInUser = loggedUser();
+    public function add_attendance_approve_information() {
+	$logInUser = loggedUser();
         $attendance_data = array();
-		$sendSMSArray = array();
-		$student_record = array();
+	$sendSMSArray = array();
+	$student_record = array();
         $userDetail = $this->session->userdata('user');
-        if ($this->input->post('attendance')) 
-		{
+        if ($this->input->post('attendance')) {
             $temp_data = $this->input->post('attendance');
             $count = 0;
             $student_teacher_class_id = array();
             foreach ($temp_data as $key => $value) 
-			{
+	    {
                 if ($value == "A" || $value == "L") 
-				{                    
+		{                    
                     $aproveStatus = $this->attendanceModel->checkStudentAttendanceStatus($key, date('Y-m-d'));
                     if ($aproveStatus > 0) 
-					{                      
+		    {                      
                         continue;
                     }
                     $attendance_data['is_send'] = 1;
                     $attendance_data['attendance_approve_by'] = $logInUser['user_id'];
-					$attendance_data['attendance_approve_by_type'] = $logInUser['user_type'];
+		    $attendance_data['attendance_approve_by_type'] = $logInUser['user_type'];
                     $attendance_data['approve_date'] = date('Y-m-d');
                     $attendance_data['approve_time'] = date('H:i:s');
                     $this->attendanceModel->updateStudentAttendance($key, date('Y-m-d'), $attendance_data);
-					
-					$student_id = $this->studentModel->get_student_id_by_st_id($key);
-					$filterColumns =  array();
-					$filterColumns['student_id'] = $student_id;
-					$student_record = retrieve_records($filterColumns, $offset = NULL, $limit = NULL, $sort = NULL, "emsstudent");
-					
-					$data['sender_id'] = $logInUser['user_id'];
-					$data['receiver_id'] = $student_record[0]->student_Id;
-					$msg_student_id = $key;					
-					$txt_message = "Your child ".$student_record[0]->first_name." is absent today. Hope everything is fine.";
-					$content_message  = "This is a test transaction sms";
-					$data['message_content']  = $content_message;
-					$mobile_no = $this->studentModel->get_mobile_no($student_id);
-					$country_code_mobile_no = '91'.$mobile_no;
-					if(strlen($mobile_no)==10)
-					{	
-						$data['mobile_no'] = $mobile_no;
-						$this->send_sms($country_code_mobile_no,$content_message);
-						insert($data , "ems_sent_messages") ;
-					}
-					
+		    
+		    $student_id = $this->studentModel->get_student_id_by_st_id($key);
+		    $filterColumns =  array();
+		    $filterColumns['student_id'] = $student_id;
+		    $student_record = retrieve_records($filterColumns, $offset = NULL, $limit = NULL, $sort = NULL, "emsstudent");
+		    
+		    $data['sender_id'] = $logInUser['user_id'];
+		    $data['receiver_id'] = $student_record[0]->student_Id;
+		    $msg_student_id = $key;					
+		    $content_message = "Dear Parent, Your child ".$student_record[0]->first_name." is absent today. Hope everything is fine. Regards eSchool";
+		    $data['message_content']  = $content_message;
+		    $mobile_no = $this->studentModel->get_mobile_no($student_id);
+		    //$country_code_mobile_no = '91'.$mobile_no;
+		    if(strlen($mobile_no)==10){	
+			$data['mobile_no'] = $mobile_no;
+			//$this->send_sms($country_code_mobile_no,$content_message);
+			delevire_meesage("8750953636",$content_message);
+			insert($data , "ems_sent_messages") ;
+		    }					
                 }
             }
         }		

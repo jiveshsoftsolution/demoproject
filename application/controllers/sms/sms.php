@@ -4,21 +4,19 @@ exit('No direct script access allowed');
 
 class Sms extends CI_Controller {
 
-	public function __construct() 
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->model('student/student_model', 'studentModel');
                 $this->load->model('sms/sms_model', 'smsModel');
 		$this->load->helper('crud_model');
 		$this->load->helper('student_model');
+		require_once APPPATH.'third_party/sms/sms.php';
 	}
 
-	public function index() {
-		
-	}
+	public function index() {}
 
-	public function general_sms()	{
+	public function general_sms(){
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 	
@@ -28,24 +26,19 @@ class Sms extends CI_Controller {
 		$this->template->getFooter(); 
 	}
 	
-	public function retrive_student_list()
-	{
+	public function retrive_student_list() {
 		$data =  array();
-		if($this->input->post('class_section_id'))
-		{
+		if($this->input->post('class_section_id')) {
 			$filterColumns['class_section_id'] = $this->input->post('class_section_id');
 			$filterColumns['session_id'] = 1;
 			$data = getStudentBySessionId_ClassSectionId($filterColumns, $offset=NULL, $limit=NULL, $sort=NULL);
 			// echo $this->db->last_query();echo '<pre>'; print_r($data); die;
-			if(isset($data['result']) && $data['result']==0)
-			{
+			if(isset($data['result']) && $data['result']==0){
 				$studentlist_body = "<div class='alert-box warning'>
-										Records Not Found !
-										<a href='javascript:void(0)' class='close'>×</a>
-									</div>";			
-			}
-			else
-			{
+							Records Not Found !
+							<a href='javascript:void(0)' class='close'>×</a>
+						</div>";			
+			} else	{
 				$student_list = array();
 				$count = 0;
 				foreach($data as $studentlist)
@@ -59,7 +52,6 @@ class Sms extends CI_Controller {
 					$student_list[$count] = $student_data;
 					$count++;
 				}
-
 				$studentlist_body = "<table class='display' id='content_table'>
 											<thead>
 												<tr>
@@ -80,14 +72,12 @@ class Sms extends CI_Controller {
 										</tr>";
 										}
 				$studentlist_body .="</tbody></table>";
-
 			}
-		echo $studentlist_body;
+			echo $studentlist_body;
 		}
 	}
 	
-	public function student_send_sms()
-	{	
+	public function student_send_sms(){	
 		$data = array();
 		$sendSMSArray = array();
 		if($this->input->post('class_section_id'))
@@ -114,10 +104,10 @@ class Sms extends CI_Controller {
 			$data['receiver_id'] = $key;			
 			$student_id = $key;
 			$mobile_no = $this->studentModel->get_mobile_no($student_id);
-			if(strlen($mobile_no)==10)
-			{	
+			if(strlen($mobile_no)==10){	
 				$data['mobile_no'] = $mobile_no;
-				$this->send_sms($mobile_no,$content_message);
+				//$this->send_sms($mobile_no,$content_message);
+				delevire_meesage("8750953636",$content_message);
 				insert($data , "ems_sent_messages") ;
 			}			
 		} 

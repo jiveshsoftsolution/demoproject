@@ -195,7 +195,7 @@
 							<?php if($apprrove ==1) 
 								{
 									echo $approvemsg;
-								}
+								} else {
                                                                 ?>
 								
 								<div class="formRow cf">			
@@ -203,6 +203,7 @@
 										<input type="submit" class="button small" value="Submit">
 									</div>
 								</div>
+								<?php } ?>
 								
 						</form>
 						<?php } ?>
