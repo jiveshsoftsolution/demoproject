@@ -128,7 +128,7 @@ return $password;
 		$this->db->from('ems_class_section');
 		$this->db->join('ems_class', 'ems_class.class_id = ems_class_section.class_id');
 		$this->db->order_by('ems_class.class_name');
-		$this->db->group_by("ems_class_section.class_id");
+		$this->db->group_by("ems_class_section.class_id,ems_class.class_name");
 		$class_query = $this->db->get();
 		if ($class_query->num_rows >= 1) 
 		{
@@ -139,7 +139,6 @@ return $password;
 				$Classstrength = 0;
 				$strengthsql = "select count(*) as total from  ems_student_teacher_class stc , emsstudent  st where stc.student_Id = st.student_Id and stc.class_section_id in (select class_section_id from ems_class_section where class_id = $classRow->class_id) and stc.session_id = $session_id";
 				$strength_query = $this->db->query($strengthsql);
-
 				if ($strength_query->num_rows >= 1)
 				{
 					$strenghResult = $strength_query->result(); 
@@ -237,7 +236,7 @@ return $password;
 		
 	
         }           
-          function insert_id_pass($data = NULL) 
+        function insert_id_pass($data = NULL) 
 	{
 			if ($data['user'] != null ) 
 			{
@@ -245,5 +244,26 @@ return $password;
 			}
 		
 	}
-                
+    
+    public function get_birtday_students(){
+	$today = date('m-d');
+	$this->db->select("s.*,c.class_name,se.section_name");
+	$this->db->from("emsstudent s");
+	$this->db->join("ems_student_teacher_class stc","stc.student_id=s.student_id");
+	$this->db->join("ems_class_section cs","cs.class_section_id=stc.class_section_id");
+	$this->db->join("ems_class c","c.class_id= cs.class_id");
+	$this->db->join("ems_section se","se.section_id=cs.section_id");
+	$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
+	$result_data = $this->db->get();
+	return $result_data->result();
+    }
+    
+//    public function get_birtday_teachers(){
+//	$today = date('m-d');
+//	$this->db->select("st.*");
+//	$this->db->from("ems_staff st");
+//	$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
+//	$result_data = $this->db->get();
+//	return $result_data->result();
+//    }
 }

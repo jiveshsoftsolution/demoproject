@@ -35,7 +35,7 @@ class Session_model extends CI_Model
 	public function getCurrent_Session()
 	{
 		$this->db->select('*');
-		$this->db->where('start_date <=',date('Y-m-d')."00:00:00");
+		$this->db->where('DATE(start_date) <=',date('Y-m-d'));
 		$this->db->from('ems_session');
 		$query = $this->db->get();
 		return $query->result();

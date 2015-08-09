@@ -39,20 +39,20 @@ $(function () {
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: 'Present',
-                data: [<?php if(isset($absentStudent)) echo $absentStudent;  ?>]
-				
-    
-            
-            },
-			   
-			{
+            series: [
+		     {
 			
-			 name: 'Absent',
+			 name: 'Present',
               data: [<?php if(isset($presentStudent)) echo $presentStudent;  ?>]
 			
 			},
+		     {
+				name: 'Absent',
+			data: [<?php if(isset($absentStudent)) echo $absentStudent;  ?>]
+            
+			 },
+			   
+			
 			{
 			
 			 name: 'Leave',
@@ -276,9 +276,9 @@ $(function () {
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<!--<div class="row">
 							<div class="four columns"> <a class="gh_button pill small image_from_chart" style="display:none;margin-top:10px" href="#">Create image from chart</a> </div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -316,51 +316,35 @@ $(function () {
 				</div>
 			</div>
 		</div>
-
 		<div class="six columns">
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
 					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-					<p>Fees Charts
-						<select name="class_section_id" id="class_section_id" style="display: inline-table">
-							<option value="-1" selected="selected">April</option>
-							<option value="1">January</option>
-							<option value="2">Feb</option>
-							<option value="3">March</option>
-							<option value="4">April</option>
-							<option value="5">May</option>
-							<option value="6">Jun</option>
-							<option value="7">Jul</option>
-							<option value="8">Aug</option>
-							<option value="9">Sep</option>
-							<option value="10">Oct</option>
-							<option value="11">Nov</option>
-							<option value="12">Dec</option>
-						</select>
-					</p>
+					<p>Notice Board</p>
 				</div>
-				<div class="box_c_content">
-					<div class="inner_block">
-						<div class="h_scrollable sepH_a sw_resizedEL" style="height:290px">
-							<div class="items">
-								<div class="left">
-									<div id="fees_chart" title="Unique visitors" style="height:290px;margin:0 auto" class="chart_flw"></div>
-								</div>
-								<div class="left">
-									<div id="ds_plot2" title="Another chart" style="height:280px;margin:0 auto" class="chart_flw"></div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="four columns"> <a class="gh_button pill small image_from_chart" style="display:none;margin-top:10px" href="#">Create image from chart</a> </div>
-						</div>
-					</div>
+				<div class="box_c_content" style="overflow-x: hidden;overflow-y: scroll; height:350px; ">
+					<p class="inner_heading sepH_c">All Notices</p>
+					<ul class="overview_list">
+					<?php if(!isset($ems_admin_notice['result'])){ foreach($ems_admin_notice as $adminNoticeData) {?>
+						<li>
+							<a href="#full_notice_view">
+								<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/happy-face.png)" alt="" />
+								<span class="ov_nb"><?php if(isset($adminNoticeData->notice_subject)){echo $adminNoticeData->notice_subject; }?></span>
+								<?php if($adminNoticeData->post_to_web) { ?>								
+									<img src="<?php echo base_url()?>assets/assets/img/new_red.gif" style="float: right !important;height: 14px;position: relative;right: 30px !important;top: -15px;width: 30px;">
+								<?php }?>
+								
+								<span class="ov_text"><?php if(isset($adminNoticeData->notice)){echo $adminNoticeData->notice;} ?></span>
+							</a>	
+						</li>
+						<?php  } }else { echo '<h2 align ="center">Notice Not Found </h2>';}?>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" style="display: none">
 		<div class="six columns">
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
@@ -419,33 +403,7 @@ $(function () {
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="six columns">
-			<div class="box_c">
-				<div class="box_c_heading cf box_actions">
-					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-					<p>Notice Board</p>
-				</div>
-				<div class="box_c_content" style="overflow-x: hidden;overflow-y: scroll; height:350px; ">
-					<p class="inner_heading sepH_c">All Notices</p>
-					<ul class="overview_list">
-					<?php if(!isset($ems_admin_notice['result'])){ foreach($ems_admin_notice as $adminNoticeData) {?>
-						<li>
-							<a href="#full_notice_view">
-								<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/happy-face.png)" alt="" />
-								<span class="ov_nb"><?php if(isset($adminNoticeData->notice_subject)){echo $adminNoticeData->notice_subject; }?></span>
-								<?php if($adminNoticeData->post_to_web) { ?>								
-									<img src="http://isdc.ac.in/newicon.gif" style="float: right !important;height: 14px;position: relative;right: 30px !important;top: -15px;width: 30px;">
-								<?php }?>
-								
-								<span class="ov_text"><?php if(isset($adminNoticeData->notice)){echo $adminNoticeData->notice;} ?></span>
-							</a>	
-						</li>
-						<?php  } }else { echo '<h2 align ="center">Notice Not Found </h2>';}?>
-					</ul>
-				</div>
-			</div>
-		</div>
+	<div class="row" style="display: none">
 		<div class="six columns">
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">

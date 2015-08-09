@@ -5,9 +5,10 @@ exit('No direct script access allowed');
 class Class_section extends CI_Controller {
 
 	public function __construct() {
-	parent::__construct();
-	$this->load->model('class_section/class_section_model','classSection');
-	$this->load->helper('crud_model');
+		parent::__construct();
+		$this->load->model('class_section/class_section_model','classSection');
+		$this->load->helper('crud_model');
+		$this->load->helper('student_model');
 	}
 
 	public function index() {
@@ -18,7 +19,9 @@ class Class_section extends CI_Controller {
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);	
 		$data['ems_class'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");
 		$this->load->view('class-section/class_add' ,$data);
 		$this->template->getFooter(); 
@@ -28,7 +31,9 @@ class Class_section extends CI_Controller {
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);	
 		$data['ems_section'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_section");
 		$this->load->view('class-section/section_add',$data);
 		$this->template->getFooter();
@@ -38,7 +43,9 @@ class Class_section extends CI_Controller {
 		$classSectionData = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);	
 		$classSectionData['ems_class'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");
 		$classSectionData['ems_section'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_section");
 		$classSectionData['ems_class_section'] = $this->classSection->getClass_section();

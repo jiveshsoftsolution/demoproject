@@ -9,6 +9,7 @@ class Session extends CI_Controller {
 		$this->load->model('session/session_model', 'sessionModel');
 		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->helper('crud_model');
+		$this->load->helper('student_model');
 	}
 
 	public function index() {
@@ -19,7 +20,9 @@ class Session extends CI_Controller {
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);	
 		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
 		$this->load->view('session_add' ,$data);
 		$this->template->getFooter(); 
@@ -29,7 +32,9 @@ class Session extends CI_Controller {
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);	
 		$data['season']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_season");	
 		$this->load->view('season_add',$data);
 		$this->template->getFooter();

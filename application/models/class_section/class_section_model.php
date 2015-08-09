@@ -27,7 +27,7 @@ class Class_section_model extends CI_Model {
 		$this->db->order_by('ems_class_section.class_section_id');
 		$classSection_query = $this->db->get();
 		return $classSection_query->result();
-    }
+	}
   //class_section_id
         public function get_student_Class_Section($student_id)
 	{

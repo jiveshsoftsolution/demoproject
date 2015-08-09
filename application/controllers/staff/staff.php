@@ -10,6 +10,7 @@ class Staff extends CI_Controller
 		$this->load->model('staff/staff_model', 'staffModel');
 		$this->load->helper('crud_model');
 		$this->load->library('image_lib');
+		$this->load->helper('student_model');
 	}
 
 	public function index() {
@@ -21,7 +22,9 @@ class Staff extends CI_Controller
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);	
 		$data['salutation'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");
 		$data['country'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_country");
 		$data['user_type'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_school_user_type");
@@ -124,7 +127,9 @@ class Staff extends CI_Controller
 				$data = array();
 				$this->template->getScript(); 
 				$this->template->getAdminHeader(); 
-				$this->template->getAdminLeftBar();	
+				$birthday_teacher_data = get_birtday_teachers();
+				$data['birthday_teacher_data']	= $birthday_teacher_data;	
+				$this->load->view('admin_include/left_sidebar',$data);	
 				$data['registration_message'] = "Staff Not Registered , Please Contact To Admin!";
 				$this->load->view('staff/staff_registration' ,$data);
 				$this->template->getFooter(); 
@@ -142,7 +147,9 @@ class Staff extends CI_Controller
 		$class_section_Id = NULL;
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);
 		$data['school_user_type_id'] = $school_user_type_id;
 		if($this->input->post('school_user_type_id'))
 		{

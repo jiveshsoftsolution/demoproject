@@ -18,7 +18,7 @@
 
 
 var base_path = 'http://localhost/school_gyan/assets/assets/';
-//var base_path = 'http://maahanswahini.com/sch/assets/assets/';
+//var base_path = 'http://abetsys.com/assets/assets/';
 
 
 // ----- Global ----- //
@@ -1161,7 +1161,7 @@ var base_path = 'http://localhost/school_gyan/assets/assets/';
 		
 		new_admission: function() {
 
-			var new_admission_data = [['2010-2011', 120],['2011-2012', 140],['2012-2013', 200],['2013-2014', 0]];
+			var new_admission_data = [['2011-2012', 600],['2013-2014', 800],['2014-2015', 1000],['2015-2016', 1200]];
 
 			yearlyAdmission = $.jqplot('new_admission', [new_admission_data], {
 

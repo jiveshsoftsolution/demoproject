@@ -29,7 +29,9 @@ class Student extends CI_Controller
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);
 		$data['salutation'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");
 		$data['country'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_country");
 		$data['session']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
@@ -243,7 +245,9 @@ class Student extends CI_Controller
 			$data = array();
 			$this->template->getScript(); 
 			$this->template->getAdminHeader(); 
-			$this->template->getAdminLeftBar();	
+			$birthday_teacher_data = get_birtday_teachers();
+			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$this->load->view('admin_include/left_sidebar',$data);	
 			$data['country'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_country");
 			$data['session']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
 			$data['classSecton'] = $this->classSection->getClass_section();
@@ -261,7 +265,11 @@ class Student extends CI_Controller
 		$sort = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+		
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);
+		
 		$data['session']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
 		$data['classSecton'] = $this->classSection->getClass_section();
 		$data['selected_session'] = $session_Id;
@@ -439,7 +447,9 @@ class Student extends CI_Controller
 			$data['salutation'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");
 			$this->template->getScript(); 
 			$this->template->getAdminHeader(); 
-			$this->template->getAdminLeftBar();	
+			$birthday_teacher_data = get_birtday_teachers();
+			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$this->load->view('admin_include/left_sidebar',$data);	
 			$this->load->view('student/student_registration_edit',$data);
 			$this->template->getFooter(); 
 		}

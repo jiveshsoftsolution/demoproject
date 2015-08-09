@@ -1,68 +1,68 @@
 	<script type="text/javascript" src="<?php echo base_url() ?>assets/chartjs/jquery.min.js"></script>
 	<script type="text/javascript">
 	/*  my Exam peformance*/
-	$(function () {
-			$('#studentExam').highcharts({
-				chart: {
-					type: 'column'
-				},
-				title: {
-					text: 'My Exam Performance'
-				},
-			   
-				xAxis: {
-					categories: [
-						 'Hindi',
-						'English',
-						'Math',
-						'Science',
-						'History',
-						'Geogyaraphy',
-						'Art',
-						''
-					]
-				},
-				yAxis: {
-					min: 0,
-					title: {
-						text: 'Students'
-					}
-				},
-				tooltip: {
-					headerFormat: '<span style="font-size:10px">Subject: {point.key}</span><table>',
-					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-						'<td style="padding:0"><b>{point.y:1f} </b></td></tr>',
-					footerFormat: '</table>',
-					shared: true,
-					useHTML: true
-				},
-				plotOptions: {
-					column: {
-						pointPadding: 0.2,
-						borderWidth: 0
-					}
-				},
-				series: [{
-					name: 'Santosh',
-					data: [40, 60, 75, 45, 80, 55, 60,0]
-					
-		
-				
-				},
-				   
-				{
-				
-				 name: 'My Class mate',
-				  data: [65, 0, 0, 55, 0, 75, 70,0]
-				
-				}
-				
-				
-				
-				]
-				
-			});
-		});
+	//$(function () {
+	//		$('#studentExam').highcharts({
+	//			chart: {
+	//				type: 'column'
+	//			},
+	//			title: {
+	//				text: 'My Exam Performance'
+	//			},
+	//		   
+	//			xAxis: {
+	//				categories: [
+	//					 'Hindi',
+	//					'English',
+	//					'Math',
+	//					'Science',
+	//					'History',
+	//					'Geogyaraphy',
+	//					'Art',
+	//					''
+	//				]
+	//			},
+	//			yAxis: {
+	//				min: 0,
+	//				title: {
+	//					text: 'Students'
+	//				}
+	//			},
+	//			tooltip: {
+	//				headerFormat: '<span style="font-size:10px">Subject: {point.key}</span><table>',
+	//				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	//					'<td style="padding:0"><b>{point.y:1f} </b></td></tr>',
+	//				footerFormat: '</table>',
+	//				shared: true,
+	//				useHTML: true
+	//			},
+	//			plotOptions: {
+	//				column: {
+	//					pointPadding: 0.2,
+	//					borderWidth: 0
+	//				}
+	//			},
+	//			series: [{
+	//				name: 'Santosh',
+	//				data: [40, 60, 75, 45, 80, 55, 60,0]
+	//				
+	//	
+	//			
+	//			},
+	//			   
+	//			{
+	//			
+	//			 name: 'My Class mate',
+	//			  data: [65, 0, 0, 55, 0, 75, 70,0]
+	//			
+	//			}
+	//			
+	//			
+	//			
+	//			]
+	//			
+	//		});
+	//	});
 		  /* END*/ 
 	</script>
 	<script type="text/javascript">
@@ -142,33 +142,24 @@
 		<div class="row">
 			<div class="six columns">
 				<div class="box_c">
-					<div class="box_c_heading cf green">
-						<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
-						<p>Marks Exam	
-							<select name="examID" id="exam_id" style="display:inline-table">
-								<option value="1">Half Yearly</option>
-								<option value="2">Anuval</option> 
-							</select>
-							Subject
-							<select name="subjectID" id="subject_id" style="display:inline-table">
-								<option value="1">All Subject</option>
-								<option value="2">Hindi</option> 
-							</select>
-						</p>
+					<div class="box_c_heading cf box_actions">
+						<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
+						<p>Notice Area</p>
 					</div>
-					<div class="box_c_content">
-						<div class="inner_block">
-							<div class="h_scrollable sepH_a sw_resizedEL" style="height:320px;">
-								<div class="items" style="width: 100%">
-									<div class="left" style="width: 100%">
-										<div id="studentExam" style="height:290px;margin:0 auto; width:100%"  title="Combined chart"></div>
-									</div>
-									<div class="left">
-										<div id="ds_plot2" title="Another chart" style="height:280px;margin:0 auto" class="chart_flw"></div>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="box_c_content" style=" overflow:scroll; height:350px; ">
+						<p class="inner_heading sepH_c">Latest info</p>
+						<ul class="overview_list">
+						<?php if(!isset($ems_admin_notice['result'])){ foreach($student_notice as $studentNoticeData) {?>
+							<li>
+								<a href="#">
+									<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/happy-face.png)" alt="" />
+									<span class="ov_nb"><?php if(isset($studentNoticeData->notice_subject)){echo $studentNoticeData->notice_subject; }?></span>
+									<span class="ov_text"><?php if(isset($studentNoticeData->notice)){echo $studentNoticeData->notice;} ?></span>
+								</a>
+							</li>
+							<?php  } }else { echo '<h2 align ="center">Notice Not Found </h2>';}?>
+							
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -191,32 +182,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="twelve columns">
-				<div class="box_c">
-					<div class="box_c_heading cf box_actions">
-						<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-						<p>Notice Area</p>
-					</div>
-					<div class="box_c_content" style=" overflow:scroll; height:350px; ">
-						<p class="inner_heading sepH_c">Latest info</p>
-						<ul class="overview_list">
-						<?php if(!isset($ems_admin_notice['result'])){ foreach($student_notice as $studentNoticeData) {?>
-							<li>
-								<a href="#">
-									<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/happy-face.png)" alt="" />
-									<span class="ov_nb"><?php if(isset($studentNoticeData->notice_subject)){echo $studentNoticeData->notice_subject; }?></span>
-									<span class="ov_text"><?php if(isset($studentNoticeData->notice)){echo $studentNoticeData->notice;} ?></span>
-								</a>
-							</li>
-							<?php  } }else { echo '<h2 align ="center">Notice Not Found </h2>';}?>
-							
-						</ul>
 					</div>
 				</div>
 			</div>

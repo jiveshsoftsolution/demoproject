@@ -52,4 +52,20 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
    
    }
 
+	   function get_birtday_teachers() {
+		      //$CI = & get_instance();
+		      //$CI->db->select('ems_class.class_name,ems_section.section_name,ems_class_section.*');
+		      //$CI->db->from('ems_class_section');
+		      //$CI->db->join('ems_class', 'ems_class.class_id = ems_class_section.class_id');
+		      //$CI->db->join('ems_section', 'ems_section.section_id = ems_class_section.section_id');
+		      //$classSection_query = $CI->db->get();
+		      //return $classSection_query->result();
+		      $today = date('m-d');
+		      $CI = & get_instance();
+		      $CI->db->select("st.*");
+		      $CI->db->from("ems_staff st");
+		      $CI->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
+		      $result_data = $CI->db->get();
+		      return $result_data->result();
+	   }
 ?>

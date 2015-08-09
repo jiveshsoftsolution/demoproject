@@ -9,6 +9,7 @@ class Student_attendance extends CI_Controller
         $this->load->helper('crud_model');
         $this->load->helper('student_model');
 	require_once APPPATH.'third_party/sms/sms.php';
+	$this->load->helper('student_model');
     }
 
     public function index() {}
@@ -22,8 +23,12 @@ class Student_attendance extends CI_Controller
         $session_Id = NULL;
         $class_section_Id = NULL;
         $this->template->getScript(); 
-		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
+	
+	$this->template->getAdminHeader(); 
+	$birthday_teacher_data = get_birtday_teachers();
+	$data['birthday_teacher_data']	= $birthday_teacher_data;	
+	
+	$this->load->view('admin_include/left_sidebar',$data);
         $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");
         $data['classSecton'] = getClass_section();
 
@@ -137,7 +142,12 @@ class Student_attendance extends CI_Controller
         $class_section_Id = NULL;
         $this->template->getScript(); 
 	$this->template->getAdminHeader(); 
-	$this->template->getAdminLeftBar();	
+	
+	
+	$birthday_teacher_data = get_birtday_teachers();
+	$data['birthday_teacher_data']	= $birthday_teacher_data;	
+	$this->load->view('admin_include/left_sidebar',$data);
+	
         $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");
         $data['classSecton'] = getClass_section();
 

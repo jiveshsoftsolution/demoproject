@@ -3,10 +3,10 @@
   <div class="container head_s_a">
     <div class="row sepH_b">
       <div class="nine columns">
-        <div id="logo"> <img src="<?php echo base_url().'/'.$schoolLogo;?>" alt="Pertho Admin" /> </div>
-        <div id="logo-name">
-          <h1 style="font-family:cursive,'Open Sans',sans-serif"><?php echo $schoolName; ?></h1>
-        </div>
+        <div id="logo"> <img src="<?php echo base_url().'/'.$schoolLogo;?>" alt="UDT eSchool" /> </div>
+        <!--<div id="logo-name">
+          <h1 style="font-family:cursive,'Open Sans',sans-serif"><?php //echo $schoolName; ?></h1>
+        </div>-->
       </div>
       <div class="three columns">
         <div class="user_box cf">

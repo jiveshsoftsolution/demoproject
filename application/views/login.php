@@ -17,10 +17,10 @@
 					<div class="login_box">
 						<div class="lb_content">
 							<div class="login_logo">
-								<div style="float:left;"><img src="<?php echo base_url()?>assets/assets/img/L_15236.gif" alt="" /></div>
-								<div class="login_logo_text">
+								<div style="float:left;"><img src="<?php echo base_url()?>assets/assets/img/school_logo.png" alt="" /></div>
+								<!--<div class="login_logo_text">
 									<h1>UDT eSchool</h1>
-								</div>
+								</div>-->
 							</div>
 							<div class="cf">
 								<h2 class="lb_ribbon lb_blue"><span>Login to School Portal</span><span style="display:none">New password</span></h2>

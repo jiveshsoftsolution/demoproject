@@ -23,21 +23,28 @@ class Dashboard extends CI_Controller
 	public function admin()
 	{
 		$data= array();
-		$data['ems_class'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");
-		$filterColumns = array('post_to_web'=>1);
+		$data['ems_class'] 	= retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");
+		$filterColumns 		= array('post_to_web'=>1);
 		$data['ems_admin_notice'] = $this->noticeModel->getClass_section_class_notice();;
-		$data['classSection'] = $this->classSection->getClass_section();
-		$classStrength =            $this->getClassStrength();
-		$classAttendanceStrength = $this->getTodayAbsentPresentLeaveStrengthOfStudent();
-		$data['classCategory']   =   $classStrength['classCategory'] ;
-		$data['classData']     =    $classStrength['classData'] ;
-		$data['absentStudent'] =   $classAttendanceStrength['absentStudent'];
-		$data['presentStudent'] =  $classAttendanceStrength['presentStudent'];
-		$data['leaveStudent'] =    $classAttendanceStrength['leaveStudent'];
-		$data['className'] =       $classAttendanceStrength['className'];
+		$data['classSection'] 	= $this->classSection->getClass_section();
+		$classStrength 		= $this->getClassStrength();
+		$classAttendanceStrength= $this->getTodayAbsentPresentLeaveStrengthOfStudent();
+		$data['classCategory']  = $classStrength['classCategory'] ;
+		$data['classData']     	= $classStrength['classData'] ;
+		$data['absentStudent'] 	= $classAttendanceStrength['absentStudent'];
+		$data['presentStudent'] = $classAttendanceStrength['presentStudent'];
+		$data['leaveStudent'] 	= $classAttendanceStrength['leaveStudent'];
+		$data['className'] 	= $classAttendanceStrength['className'];
+		
+		$birthday_student_data = $this->studentModel->get_birtday_students();
+		$this->session->set_userdata('birthday_student_data',$birthday_student_data);
+		
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;		
+		
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();
+		$this->load->view('admin_include/left_sidebar',$data);
 		$this->load->view('dashboard/admin_dashboard',$data);
 		$this->template->getFooter(); 
 	}
