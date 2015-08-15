@@ -49,10 +49,10 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['username'] = 'postgres';
+$db['default']['password'] = 'root';
 $db['default']['database'] = 'school_gyan';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
@@ -63,7 +63,23 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+$db['default']['port'] = 5432;
 
+$db['schooldb']['hostname'] = 'localhost';
+$db['schooldb']['username'] = 'root';
+$db['schooldb']['password'] = '';
+$db['schooldb']['database'] = 'school_gyan';
+$db['schooldb']['dbdriver'] = 'mysql';
+$db['schooldb']['dbprefix'] = '';
+$db['schooldb']['pconnect'] = TRUE;
+$db['schooldb']['db_debug'] = TRUE;
+$db['schooldb']['cache_on'] = FALSE;
+$db['schooldb']['cachedir'] = '';
+$db['schooldb']['char_set'] = 'utf8';
+$db['schooldb']['dbcollat'] = 'utf8_general_ci';
+$db['schooldb']['swap_pre'] = '';
+$db['schooldb']['autoinit'] = TRUE;
+$db['schooldb']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

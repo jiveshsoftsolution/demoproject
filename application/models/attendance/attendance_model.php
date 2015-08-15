@@ -128,7 +128,7 @@ class Attendance_model extends CI_Model  {
         $this->db->from('ems_class_section');
         $this->db->join('ems_class', 'ems_class.class_id = ems_class_section.class_id');
         $this->db->order_by('ems_class.class_name');
-        $this->db->group_by("ems_class_section.class_id");
+        $this->db->group_by("ems_class_section.class_id,ems_class.class_name");
         $class_query = $this->db->get();
         if ($class_query->num_rows >= 1) {
             $classResult = $class_query->result();

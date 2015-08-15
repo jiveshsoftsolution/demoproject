@@ -67,7 +67,7 @@ class Student_model extends CI_Model {
             $randomNuber = rand(10, 5000);
             $user_data['login_id'] = $user_login_type.$user_name_subStr.$user_id.$randomNuber;
 			$user_data['password'] = generate_password(8) ;
-                        $condition['student_Id'] = $student_Id;
+                        $condition['student_id'] = $student_id;
                         $condition['user_login_type'] = 'S';
                         $data['user'] = $user_data;
                         $data['condition'] = $condition;
@@ -102,7 +102,7 @@ return $password;
 				{
 					$this->db->select('count(ems_student_teacher_class.student_id) as total');
 					$this->db->from('ems_student_teacher_class');
-					$this->db->join('emsstudent', 'emsstudent.student_Id = ems_student_teacher_class.student_Id');
+					$this->db->join('emsstudent', 'emsstudent.student_d = ems_student_teacher_class.student_id');
 					$this->db->where('ems_student_teacher_class.class_section_id', $sectionRow->class_section_id);
 					$section_strength_query = $this->db->get();
 					if ($section_strength_query->num_rows >= 1) 
@@ -137,7 +137,7 @@ return $password;
 			{
 				$classArray[] = $classRow->class_name;
 				$Classstrength = 0;
-				$strengthsql = "select count(*) as total from  ems_student_teacher_class stc , emsstudent  st where stc.student_Id = st.student_Id and stc.class_section_id in (select class_section_id from ems_class_section where class_id = $classRow->class_id) and stc.session_id = $session_id";
+				$strengthsql = "select count(*) as total from  ems_student_teacher_class stc , emsstudent  st where stc.student_id = st.student_id and stc.class_section_id in (select class_section_id from ems_class_section where class_id = $classRow->class_id) and stc.session_id = $session_id";
 				$strength_query = $this->db->query($strengthsql);
 				if ($strength_query->num_rows >= 1)
 				{
@@ -161,14 +161,21 @@ return $password;
 		$this->db->join('ems_class_section', 'ems_class_section.class_section_id = ems_student_teacher_class.class_section_id');
 		$this->db->where('ems_class_section.class_section_id',$class_section_id);
 		$fee_query = $this->db->get();
-		echo $this->db->last_query();
 		echo '<pre>';print_r($fee_query->result());
 	}
 
 	public function fetch_single_student($student_id) 
 	{
-		$sql = "SELECT * FROM `emsstudent` , `emsparent` , `ems_student_address`,`ems_student_teacher_class` WHERE emsstudent.student_id = emsparent.student_id AND emsstudent.student_id = ems_student_address.student_id and emsstudent.student_id =  ems_student_teacher_class .student_id and emsstudent.student_id = $student_id";
-		$query = $this->db->query($sql);
+		//$sql = "SELECT * FROM `emsstudent` , `emsparent` , `ems_student_address`,`ems_student_teacher_class` WHERE emsstudent.student_id = emsparent.student_id AND emsstudent.student_id = ems_student_address.student_id and emsstudent.student_id =  ems_student_teacher_class .student_id and emsstudent.student_id = $student_id";
+		//$query = $this->db->query($sql);
+		$this->db->select("*");
+		$this->db->from('emsstudent');
+		$this->db->join('ems_student_address', 'ems_student_address.student_id = emsstudent.student_id');
+		$this->db->join('emsparent', 'emsparent.student_id = emsstudent.student_id');
+		$this->db->join('ems_student_teacher_class', 'ems_student_teacher_class.student_id = emsstudent.student_id');
+		$this->db->join('ems_class_section', 'ems_class_section.class_section_id = ems_student_teacher_class.class_section_id');
+		$this->db->where('emsstudent.student_id',$student_id);
+		$query = $this->db->get();
 		if ($query->num_rows()) 
 		{
 			return $query->row();
@@ -246,24 +253,25 @@ return $password;
 	}
     
     public function get_birtday_students(){
-	$today = date('m-d');
+	$today = date('Y-m-d');
 	$this->db->select("s.*,c.class_name,se.section_name");
 	$this->db->from("emsstudent s");
 	$this->db->join("ems_student_teacher_class stc","stc.student_id=s.student_id");
 	$this->db->join("ems_class_section cs","cs.class_section_id=stc.class_section_id");
 	$this->db->join("ems_class c","c.class_id= cs.class_id");
 	$this->db->join("ems_section se","se.section_id=cs.section_id");
-	$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
+	//$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
+	$this->db->where("dob",$today);
 	$result_data = $this->db->get();
 	return $result_data->result();
     }
     
-//    public function get_birtday_teachers(){
-//	$today = date('m-d');
-//	$this->db->select("st.*");
-//	$this->db->from("ems_staff st");
-//	$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
-//	$result_data = $this->db->get();
-//	return $result_data->result();
-//    }
+    public function get_student_attence_by_month($student_id=""){
+	$sql = "SELECT MONTH(attendance_date) AS month_no, COUNT(attendance_id) AS attendance_month_count
+		FROM ems_attendance where year(attendance_date)='".date('Y')."' and student_teacher_class_id='".$student_id."'
+		GROUP BY month(attendance_date)";
+	$result_data = $this->db->query($sql);
+	return $result_data->result();
+    }
+
 }

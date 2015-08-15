@@ -35,18 +35,18 @@ class Notice extends CI_Controller {
 	{
 		$data = array();
 		if($this->input->post('notice'))
-		$data['notice'] = $this->input->post('notice');
+			$data['notice'] = $this->input->post('notice');
 		if($this->input->post('notice_for'))
-		$data['notice_for'] = $this->input->post('notice_for');
+			$data['notice_for'] = $this->input->post('notice_for');
 		if($this->input->post('class_section_id'))
-		$data['class_section_id'] = $this->input->post('class_section_id');
+			$data['class_section_id'] = $this->input->post('class_section_id');
 		if($this->input->post('notice_subject'))
-		$data['notice_subject'] = $this->input->post('notice_subject');
+			$data['notice_subject'] = $this->input->post('notice_subject');
 		if($this->input->post('post_to_web')=='on')
-		$data['post_to_web'] = true;
+			$data['post_to_web'] = true;
 		else
-		$data['post_to_web'] = false;
-		$data['created_date'] = date('Y-m-d H:i:s');
+			$data['post_to_web'] = false;
+			$data['created_date'] = date('Y-m-d H:i:s');
 		insert($data , "ems_notice") ;
 		redirect('notice/notice/add_notice');
 	}
@@ -71,7 +71,6 @@ class Notice extends CI_Controller {
 		$conditions  = array();
 		$conditions['notice_id']  = $notice_id;
 		update($updatedata,$conditions,"ems_notice");		
-		echo $this->db->last_query(); die;
 	}
 }
 ?>

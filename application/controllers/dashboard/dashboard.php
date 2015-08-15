@@ -29,12 +29,12 @@ class Dashboard extends CI_Controller
 		$data['classSection'] 	= $this->classSection->getClass_section();
 		$classStrength 		= $this->getClassStrength();
 		$classAttendanceStrength= $this->getTodayAbsentPresentLeaveStrengthOfStudent();
-		$data['classCategory']  = $classStrength['classCategory'] ;
-		$data['classData']     	= $classStrength['classData'] ;
-		$data['absentStudent'] 	= $classAttendanceStrength['absentStudent'];
-		$data['presentStudent'] = $classAttendanceStrength['presentStudent'];
-		$data['leaveStudent'] 	= $classAttendanceStrength['leaveStudent'];
-		$data['className'] 	= $classAttendanceStrength['className'];
+		//$data['classCategory']  = $classStrength['classCategory'] ;
+		//$data['classData']     	= $classStrength['classData'] ;
+		//$data['absentStudent'] 	= $classAttendanceStrength['absentStudent'];
+		//$data['presentStudent'] = $classAttendanceStrength['presentStudent'];
+		//$data['leaveStudent'] 	= $classAttendanceStrength['leaveStudent'];
+		//$data['className'] 	= $classAttendanceStrength['className'];
 		
 		$birthday_student_data = $this->studentModel->get_birtday_students();
 		$this->session->set_userdata('birthday_student_data',$birthday_student_data);
@@ -131,9 +131,11 @@ class Dashboard extends CI_Controller
 	
 	public function student()
 	{
+		$student_sess_data = $this->session->userdata('student');
 		$data= array();
 		$data['classSection'] = getClass_section();
 		$data['classStrength'] = $this->studentModel->get_class_strength(1);
+		$this->studetModel->get_student_attence_by_month($student_sess_data['student_id']);
 		$this->template->getScript(); 
 		$this->template->getStudentHeader(); 
 		$this->template->getStudentLeftBar();

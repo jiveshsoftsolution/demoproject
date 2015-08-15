@@ -114,86 +114,37 @@ class Sms extends CI_Controller {
 		redirect(base_url().'index.php/sms/sms/general_sms');
 	}
 	
-	public function send_sms_old($mobile_no,$message_body)
-	{
-		//http://practicsoft.com/sms/SendSMSAPI.aspx?mo=8750953636&ms=Jivesh%20tiwari&r=2&s=RECHRG&u=10019&p=mani332211
-		//$url = "http://practicsoft.com/sms/SendSMSAPI.aspx?mo=\"$mobile_no\"&ms=\"$message_body\"&r=2&s=RECHRG&u=10019&p=mani332211";
-		
-		/* Script URL */
-		$url = 'http://practicsoft.com/sms/SendSMSAPI.aspx';
-
-		/* $_GET Parameters to Send */
-		$params = array('mo' => $mobile_no, 'ms' => $message_body,'r' => '2','s' => 'RECHRG','u' => '10019','p' => 'mani332211');
-
-		/* Update URL to container Query String of Paramaters */
-		$url .= '?' . http_build_query($params);
-
-		/* cURL Resource */
-		$ch = curl_init();
-
-		/* Set URL */
-		curl_setopt($ch, CURLOPT_URL, $url);
-
-		/* Tell cURL to return the output */
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		/* Tell cURL NOT to return the headers */
-		curl_setopt($ch, CURLOPT_HEADER, false);
-
-		/* Execute cURL, Return Data */
-		$data = curl_exec($ch) or die(curl_error($ch));
-
-		/* Check HTTP Code */
-		$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-		/* Close cURL Resource */
-		curl_close($ch);
-
-		//echo $status; 
-		/* 200 Response! 
-		if ($status == 200) {
-
-			var_dump($data);
-
-		} else {
-			var_dump($data);
-			var_dump($status);
-
-		}*/
-	}
-	public function send_sms($mobile_no,$message_body)
-	{
-		//http://173.45.76.226:81/send.aspx?username=&pass=&route=&senderid=&numbers=&message=
-		
-		/* Script URL */
-		$url = 'http://173.45.76.226:81/send.aspx';
-
-		/* $_GET Parameters to Send */
-		$params = array('username' => 'transdemo','pass' => 'transdemoishu','route' => 'trans1','senderid' => 'INVITE','numbers' => $mobile_no, 'message' => $message_body);
-
-		/* Update URL to container Query String of Paramaters */
-		$url .= '?' . http_build_query($params);
-
-		/* cURL Resource */
-		$ch = curl_init();
-
-		/* Set URL */
-		curl_setopt($ch, CURLOPT_URL, $url);
-
-		/* Tell cURL to return the output */
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		/* Tell cURL NOT to return the headers */
-		curl_setopt($ch, CURLOPT_HEADER, false);
-
-		/* Execute cURL, Return Data */
-		$data = curl_exec($ch) or die(curl_error($ch));
-
-		/* Check HTTP Code */
-		$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-		/* Close cURL Resource */
-		curl_close($ch);
+	
+	public function teacher_send_sms(){	
+		$data = array();
+		$sendSMSArray = array();
+		if($this->input->post('regards_id'))
+		{
+			$sendSMSArray['regards_id']  = $this->input->post('regards_id');
+		}
+		if($this->input->post('sender_id'))
+		{
+			$sendSMSArray['sender_id']  = $this->input->post('sender_id');
+		}
+		$content_message = "";
+		if($this->input->post('txt_message'))
+		{
+			$content_message  = "Dear Staff, ". $this->input->post('txt_message')." ". $sendSMSArray['regards_id']. " ". $sendSMSArray['sender_id'];
+			$data['message_content']  = $content_message;
+		}
+		$data['sender_id'] = 5;
+		foreach($this->input->post('sms_teacher_list')  as $key=>$value)
+		{	
+			$data['receiver_id'] = $key;			
+			$student_id = $key;
+			$mobile_no = $this->staffModel->get_mobile_no($student_id);
+			if(strlen($mobile_no)==10){	
+				$data['mobile_no'] = $mobile_no;
+				delevire_meesage($mobile_no,$content_message);
+				insert($data , "ems_sent_messages") ;
+			}			
+		} 
+		redirect(base_url().'index.php/sms/sms/general_sms');
 	}
 	
 	public function retrive_teacher_list()
@@ -233,7 +184,7 @@ class Sms extends CI_Controller {
 									foreach($teacher_list as $teacherlistData) 
 									{
 			$teacherlist_body .= "<tr>
-										<td class='essential'><input type='checkbox' id='chk_".$teacherlistData['staff_id']."' name='sms_student_list[".$teacherlistData['staff_id']."]'></td>
+										<td class='essential'><input type='checkbox' id='chk_".$teacherlistData['staff_id']."' name='sms_teacher_list[".$teacherlistData['staff_id']."]'></td>
 										<td>". $teacherlistData['staff_name']."</td>
 										<td>". $teacherlistData['mobile']."</td>
 									</tr>";

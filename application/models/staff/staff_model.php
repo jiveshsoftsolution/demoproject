@@ -81,15 +81,18 @@ class Staff_model extends CI_Model {
 		}		
 	}
 	
-	public function getStaffList($school_user_type_id="")
-	{
-		$this->db->select("ems_staff.*");
-		$this->db->from('ems_staff');
-		$this->db->join('ems_staff_address', 'ems_staff_address.staff_id = ems_staff.staff_id');
+	public function getStaffList($school_user_type_id=""){
+	    $this->db->select("ems_staff.*");
+	    $this->db->from('ems_staff');
+	    $this->db->join('ems_staff_address', 'ems_staff_address.staff_id = ems_staff.staff_id');
+	    if(!empty($school_user_type_id)){
 		$this->db->where('ems_staff.school_user_type_id',$school_user_type_id);
-		$this->db->order_by('ems_staff.staff_id');
-		$staff_query = $this->db->get();
-		return $staff_query->result();
+	    }else{
+		$this->db->where('ems_staff.school_user_type_id',null);
+	    }	    
+	    $this->db->order_by('ems_staff.staff_id');
+	    $staff_query = $this->db->get();
+	    return $staff_query->result();
 	}
 	
 	public function fetch_single_satff($staff_id) 

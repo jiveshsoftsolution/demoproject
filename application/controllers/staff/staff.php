@@ -35,7 +35,7 @@ class Staff extends CI_Controller
 	public function add_staff_information()
 	{
 		$all_data = array();
-        $login_student_data = array();
+		$login_student_data = array();
 		$staff_data = array();
 		$address_data = array();
 		$registration_message = array();
@@ -65,7 +65,7 @@ class Staff extends CI_Controller
 
 			 /* END */		
 			$staff_data['created_by'] = 11 ;
-			$staff_data['created_date'] = date('Y-m-s H:i:s') ;
+			$staff_data['created_date'] = date('Y-m-d H:i:s') ;
 			/* Too Do write a function in helper for image upload */
 			if (isset($_FILES['photo_url'])) 
 			{					
@@ -198,8 +198,8 @@ class Staff extends CI_Controller
 			$staff_data['email'] = addslashes($this->input->post('email'));
 
 			 /* END */		
-			$staff_data['created_by'] = 11 ;
-			$staff_data['created_date'] = date('Y-m-s H:i:s') ;
+			$staff_data['updated_by'] = 11 ;
+			$staff_data['updated_date'] = date('Y-m-d H:i:s') ;
 			/* Too Do write a function in helper for image upload */
 
 			if($_FILES['photo_url']['error'])
@@ -275,7 +275,9 @@ class Staff extends CI_Controller
 			$data['salutation'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");
 			$this->template->getScript(); 
 			$this->template->getAdminHeader(); 
-			$this->template->getAdminLeftBar();	
+			$birthday_teacher_data = get_birtday_teachers();
+			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$this->load->view('admin_include/left_sidebar',$data);				
 			$this->load->view('staff/staff_registration_edit',$data);
 			$this->template->getFooter(); 
 		}

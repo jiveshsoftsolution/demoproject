@@ -86,7 +86,7 @@
 									<td align="center"><img src="<?php if(count($student_data->mother_photo_url)==0 || empty($student_data->mother_photo_url)) echo base_url().'assets/assets/img/no_image.gif'; else echo base_url().'assets/parents_images/'.$student_data->mother_photo_url;?>" class="pic"></td>
 									<td class="content_actions">
 									<a href="<?php echo base_url()?>index.php/student/student/student_edit/<?php echo $student_data->student_id?>" class="sepV_a" title="Edit"><img src="<?php echo base_url()?>assets/assets/img/ico/pencil_gray.png" alt="" /></a>&nbsp;&nbsp;&nbsp;
-									<a href="#" title="Delete"><img src="<?php echo base_url()?>assets/assets/img/ico/trashcan_gray.png" alt="" /></a></td>
+									<!--<a href="#" title="Delete"><img src="<?php //echo base_url()?>assets/assets/img/ico/trashcan_gray.png" alt="" /></a></td>-->
 								</tr>
 							<?php } ?>
 							<?php } ?>

@@ -27,9 +27,7 @@ class User extends CI_Controller
 		  
 			if (isset($logindata['login_id']))
 			{
-//				$loginType =  explode("_",$logindata['login_id']);
-//				$loginTypeChar = $loginType[0];
-                $user_type  =   $this->loginModel->main_login($logindata);  
+				$user_type  =   $this->loginModel->main_login($logindata);
 			}
 			$currentSession = $this->sessionModel->getCurrent_Session();
                         if(isset($user_type['user_id']))
@@ -37,8 +35,7 @@ class User extends CI_Controller
 			switch ($user_type['login_type'])
 			{
 				case 'A':
-                   $admin_id = $user_type['user_id'];
-										
+					$admin_id = $user_type['user_id'];										
 					$query =  $this->loginModel->user_login($admin_id);
 				
 					if($query == 0)

@@ -19,7 +19,7 @@ class Admin extends CI_Controller
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$this->template->getAdminLeftBar();
-	    $this->load->view('admin/dashboard');
+		$this->load->view('admin/dashboard');
 		$this->template->getFooter(); 
 	}
 
@@ -28,7 +28,7 @@ class Admin extends CI_Controller
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$this->template->getAdminLeftBar();
-	    $this->load->view('admin/student/student_registration');
+		$this->load->view('admin/student/student_registration');
 		$this->template->getFooter();
 	}
 }

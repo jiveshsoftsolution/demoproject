@@ -317,33 +317,26 @@ class Student extends CI_Controller
 			$sdata['updated_date'] = date('Y-m-d H:i:s') ;
 			$sdata['student_id']  = $this->input->post('student_id');   
 			
-			/* Too Do write a function in helper for image upload */
-            //if($_FILES['hd_student_photo_url']['error'])
-			//{
-				//$sdata['photo_url'] = addslashes($this->input->post('hd_student_photo_url'));
-			//}
-		//	else
-			//{          
-				if (isset($_FILES['student_photo_url'])) 
+			/* Too Do write a function in helper for image upload */         
+			if (isset($_FILES['student_photo_url'])) 
+			{	
+				$allowedExts = array("gif", "jpeg", "jpg", "png");
+				$temp = explode(".", $_FILES["student_photo_url"]["name"]);
+				$extension = end($temp);
+				if ( in_array($extension, $allowedExts))
 				{	
-					$allowedExts = array("gif", "jpeg", "jpg", "png");
-					$temp = explode(".", $_FILES["student_photo_url"]["name"]);
-					$extension = end($temp);
-					if ( in_array($extension, $allowedExts))
-					{	
-						$pic_name = time() . rand(34, 68768) . '_' . $_FILES['student_photo_url']['name'];
-						$temp_gal = $_FILES['student_photo_url']['tmp_name'];
-						$path = './assets/students_images/' . $pic_name;
-						$destination = getcwd() . '/' . $path;
-						move_uploaded_file($temp_gal, $destination);
-						$sdata['photo_url'] = $pic_name;                                        
-					}
-					else
-					{
-						$upload_error = "Invalid File.";
-					}
+					$pic_name = time() . rand(34, 68768) . '_' . $_FILES['student_photo_url']['name'];
+					$temp_gal = $_FILES['student_photo_url']['tmp_name'];
+					$path = './assets/students_images/' . $pic_name;
+					$destination = getcwd() . '/' . $path;
+					move_uploaded_file($temp_gal, $destination);
+					$sdata['photo_url'] = $pic_name;                                        
 				}
-			//}
+				else
+				{
+					$upload_error = "Invalid File.";
+				}
+			}
 			
 			 /*End*/
 			$data['student'] = $sdata;
@@ -353,32 +346,25 @@ class Student extends CI_Controller
 			$pdata['father_middle_name'] = $this->input->post('father_middle_name');
 			$pdata['father_last_name'] = $this->input->post('father_last_name');
 			
-			/*if($_FILES['hd_father_photo_url']['error'])
-			{
-				$pdata['father_photo_url'] = addslashes($this->input->post('hd_father_photo_url'));
-			}
-			else
-			{*/
-				if (isset($_FILES['father_photo_url'])) 
-				{ 	
-					$allowedExts = array("gif", "jpeg", "jpg", "png");
-					$temp = explode(".", $_FILES["father_photo_url"]["name"]);
-					$extension = end($temp);
-					if (in_array($extension, $allowedExts))
-					{				   	
-						$pic_name =  time() . rand(34, 68768) . '_' . $_FILES['father_photo_url']['name'];
-						$temp_gal = $_FILES['father_photo_url']['tmp_name'];
-						$path = './assets/parents_images/' .$pic_name;
-						$destination = getcwd() . '/' . $path;
-						move_uploaded_file($temp_gal, $destination);
-						$pdata['father_photo_url'] = $pic_name;				
-					}
-					else
-					{
-						$upload_error = "Invalid File.";
-					}
+			if (isset($_FILES['father_photo_url'])) 
+			{ 	
+				$allowedExts = array("gif", "jpeg", "jpg", "png");
+				$temp = explode(".", $_FILES["father_photo_url"]["name"]);
+				$extension = end($temp);
+				if (in_array($extension, $allowedExts))
+				{				   	
+					$pic_name =  time() . rand(34, 68768) . '_' . $_FILES['father_photo_url']['name'];
+					$temp_gal = $_FILES['father_photo_url']['tmp_name'];
+					$path = './assets/parents_images/' .$pic_name;
+					$destination = getcwd() . '/' . $path;
+					move_uploaded_file($temp_gal, $destination);
+					$pdata['father_photo_url'] = $pic_name;				
 				}
-			//}		
+				else
+				{
+					$upload_error = "Invalid File.";
+				}
+			}
 			$pdata['mother_salutation_id'] = $this->input->post('mother_salutation_id');
 			$pdata['mother_first_name'] = $this->input->post('mother_first_name');
 			$pdata['mother_middle_name'] = $this->input->post('mother_middle_name');
@@ -386,34 +372,25 @@ class Student extends CI_Controller
 			$pdata['mail_to'] = $this->input->post('mail_to');    
 			$pdata['parent_mobile'] = $this->input->post('parent_mobile');
 			
-			/*if($_FILES['hd_mother_photo_url']['error'])
-			{
-				$pdata['mother_photo_url'] = addslashes($this->input->post('hd_mother_photo_url'));
-			}
-			else
-			{*/
-				if (isset($_FILES['mother_photo_url'])) 
-				{ 
-					// Mother Photo			
-					$allowedExts = array("gif", "jpeg", "jpg", "png");
-					$temp = explode(".", $_FILES["mother_photo_url"]["name"]);
-					$extension = end($temp);
-					if ( in_array($extension, $allowedExts))
-					{
-						$pic_name =  time() . rand(34, 68768) . '_' . $_FILES['mother_photo_url']['name'];
-						$temp_gal = $_FILES['mother_photo_url']['tmp_name'];
-						$path = './assets/parents_images/' . $pic_name;
-						$destination = getcwd() . '/' . $path;
-						move_uploaded_file($temp_gal, $destination);
-						$pdata['mother_photo_url'] = $pic_name;				
-					}
-					else
-					{
-						$upload_error = "Invalid File.";
-					}
-							
+			if (isset($_FILES['mother_photo_url'])) 
+			{ 		
+				$allowedExts = array("gif", "jpeg", "jpg", "png");
+				$temp = explode(".", $_FILES["mother_photo_url"]["name"]);
+				$extension = end($temp);
+				if ( in_array($extension, $allowedExts))
+				{
+					$pic_name =  time() . rand(34, 68768) . '_' . $_FILES['mother_photo_url']['name'];
+					$temp_gal = $_FILES['mother_photo_url']['tmp_name'];
+					$path = './assets/parents_images/' . $pic_name;
+					$destination = getcwd() . '/' . $path;
+					move_uploaded_file($temp_gal, $destination);
+					$pdata['mother_photo_url'] = $pic_name;				
 				}
-			//}
+				else
+				{
+					$upload_error = "Invalid File.";
+				}	
+			}
 			$data['parent'] = $pdata;
 
 			$adata['address1'] = $this->input->post('address1');
@@ -431,10 +408,8 @@ class Student extends CI_Controller
 			$csdata['house_id'] = 3232;
 			$data['student_teacher_class'] = $csdata;
 			$this->studentModel->updat_emsstudent($data);
-
 			$registerdata['registerInfo'] = "Student Updated Successfully!";
 			redirect(base_url() . "index.php/student/student/student_list/".$csdata['class_section_id'].'/'.$csdata['session_id']);
-
 		}
 		else
 		{
@@ -453,8 +428,6 @@ class Student extends CI_Controller
 			$this->load->view('student/student_registration_edit',$data);
 			$this->template->getFooter(); 
 		}
-
-	}	       
-        
+	}
 }
 ?>
