@@ -117,7 +117,7 @@ class Dashboard extends CI_Controller
 		$this->template->getScript(); 
 		$this->template->getTeacherHeader(); 		
 		$teacgerDetail = $this->session->userdata('teacher');
-		$data['period'] = $this->teacher_timetable($teacgerDetail['staff_id']);
+		$data['period'] = $this->teacher_timetable($teacgerDetail['staff_id']); 
 		$birthday_teacher_data = get_birtday_teachers();
 		$data['birthday_teacher_data']	= $birthday_teacher_data;
 		$this->load->view('teacher_include/left_sidebar',$data);

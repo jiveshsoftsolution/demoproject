@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/school_gyan/';
+//$config['base_url']	= 'http://localhost/school_gyan/';
+$config['base_url']	= 'http://45.40.162.168/eschool/';
 
 /*
 |--------------------------------------------------------------------------
