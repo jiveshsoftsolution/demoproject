@@ -6,7 +6,7 @@
 			<div class="box_c_heading cf box_actions green" >
 				<p>Profile</p>
 			</div>
-			<div class="box_c_content" style="min-height:305px;line-height:30px">
+			<div class="box_c_content" style="height:350px;line-height:28px">
 				<ul class="sepH_b filter_content" >
 					<li>
 						<div class="user_avatar" style="vertical-align:top"> 

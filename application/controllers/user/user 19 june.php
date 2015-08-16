@@ -104,7 +104,7 @@ class User extends CI_Controller
 					}
 					else
 					{
-					//                       $student = $this->studentModel->getSingleStudent($currentSession[0]->session_id,$query[0]->student_Id);
+					//                       $student = $this->studentModel->getSingleStudent($currentSession[0]->session_id,$query[0]->student_id);
 					if (isset($recordsFound['result']))
 					{
 

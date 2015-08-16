@@ -2,8 +2,7 @@
 
 class Dashboard extends CI_Controller 
 {
-	public function __construct() 
-	{
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('dashboard/dashboard_model','dashboard');
 		$this->load->helper('student_model');
@@ -20,8 +19,8 @@ class Dashboard extends CI_Controller
 
 	public function index() {}
 
-	public function admin()
-	{
+	public function admin()	{
+		$logInUser = loggedUser();
 		$data= array();
 		$data['ems_class'] 	= retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");
 		$filterColumns 		= array('post_to_web'=>1);
@@ -29,12 +28,12 @@ class Dashboard extends CI_Controller
 		$data['classSection'] 	= $this->classSection->getClass_section();
 		$classStrength 		= $this->getClassStrength();
 		$classAttendanceStrength= $this->getTodayAbsentPresentLeaveStrengthOfStudent();
-		//$data['classCategory']  = $classStrength['classCategory'] ;
-		//$data['classData']     	= $classStrength['classData'] ;
-		//$data['absentStudent'] 	= $classAttendanceStrength['absentStudent'];
-		//$data['presentStudent'] = $classAttendanceStrength['presentStudent'];
-		//$data['leaveStudent'] 	= $classAttendanceStrength['leaveStudent'];
-		//$data['className'] 	= $classAttendanceStrength['className'];
+		$data['classCategory']  = $classStrength['classCategory'] ;
+		$data['classData']     	= $classStrength['classData'] ;
+		$data['absentStudent'] 	= $classAttendanceStrength['absentStudent'];
+		$data['presentStudent'] = $classAttendanceStrength['presentStudent'];
+		$data['leaveStudent'] 	= $classAttendanceStrength['leaveStudent'];
+		$data['className'] 	= $classAttendanceStrength['className'];
 		
 		$birthday_student_data = $this->studentModel->get_birtday_students();
 		$this->session->set_userdata('birthday_student_data',$birthday_student_data);
@@ -49,8 +48,7 @@ class Dashboard extends CI_Controller
 		$this->template->getFooter(); 
 	}
 
-	public function getClassStrength()
-	{
+	public function getClassStrength(){
 		$classCategory = "";
 		$classData = "";
 		$count = 0;
@@ -108,6 +106,9 @@ class Dashboard extends CI_Controller
 		$data= array();
 		$data['classSection'] = getClass_section();
 		$data['classStrength'] = $this->studentModel->get_class_strength(1);
+		$data['present_count_month'] = $this->studentModel->get_student_present_status_by_month($parent['student_teacher_class_id']);
+		$data['absent_count_month'] = $this->studentModel->get_student_absent_status_by_month($parent['student_teacher_class_id']);
+		$data['leave_count_month'] = $this->studentModel->get_student_leave_status_by_month($parent['student_teacher_class_id']);
 		$this->template->getScript(); 
 		$this->template->getTeacherHeader(); 
 		$this->template->getTeacherLeftBar();
@@ -135,7 +136,11 @@ class Dashboard extends CI_Controller
 		$data= array();
 		$data['classSection'] = getClass_section();
 		$data['classStrength'] = $this->studentModel->get_class_strength(1);
-		$this->studetModel->get_student_attence_by_month($student_sess_data['student_id']);
+		$data['present_count_month'] = $this->studentModel->get_student_present_status_by_month($student_sess_data['student_teacher_class_id']);
+		$data['absent_count_month'] = $this->studentModel->get_student_absent_status_by_month($student_sess_data['student_teacher_class_id']);
+		$data['leave_count_month'] = $this->studentModel->get_student_leave_status_by_month($student_sess_data['student_teacher_class_id']);
+		$birthday_student_data = $this->studentModel->get_birtday_students();
+		$this->session->set_userdata('birthday_student_data',$birthday_student_data);
 		$this->template->getScript(); 
 		$this->template->getStudentHeader(); 
 		$this->template->getStudentLeftBar();
@@ -148,9 +153,14 @@ class Dashboard extends CI_Controller
 	
 	public function parents()
 	{
+		$parent = $this->session->userdata('user');
 		$data= array();
 		$data['classSection'] = getClass_section();
 		$data['classStrength'] = $this->studentModel->get_class_strength(1);
+		$data['present_count_month'] = $this->studentModel->get_student_present_status_by_month($parent['student_teacher_class_id']);
+		$data['absent_count_month'] = $this->studentModel->get_student_absent_status_by_month($parent['student_teacher_class_id']);
+		$data['leave_count_month'] = $this->studentModel->get_student_leave_status_by_month($parent['student_teacher_class_id']);
+		$data['student_notice'] =  $this->noticeModel->get_student_notice(9);
 		$this->template->getScript(); 
 		$this->template->getParentHeader(); 
 		$this->template->getParentLeftBar();

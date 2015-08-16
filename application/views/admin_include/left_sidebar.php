@@ -58,6 +58,7 @@
 							<ul class="overview_list">
 								<marquee direction="up" onMouseOver="this.setAttribute('scrollamount', 0, 0);" onMouseOut="this.setAttribute('scrollamount', 6, 0);"  height="290px">
 								    <?php $birthday_student_data = $this->session->userdata('birthday_student_data');
+									if(count($birthday_student_data)!=0){
 									    foreach($birthday_student_data as $birth_s_data){
 								    ?>
 									<li>
@@ -67,7 +68,13 @@
 											<span class="ov_text"><?php echo $birth_s_data->class_name."-".$birth_s_data->section_name;?></span>
 										</a>
 									</li>
-								    <?php } ?>
+								    <?php }} else{ ?>
+									<li>
+									    <a href="#" style="padding: 8px 15px 8px">
+										<span class="ov_nb"><?php echo "No any birthday for the day!"?></span>
+									    </a>
+									    </li>
+									<?php }?>
 								</marquee>
 							</ul>
 						</div>
@@ -83,16 +90,23 @@
 							<p class="inner_heading sepH_c">Date: <?php echo date('d M, Y')?></p>
 							<ul class="overview_list">
 								<marquee direction="up" onMouseOver="this.setAttribute('scrollamount', 0, 0);" onMouseOut="this.setAttribute('scrollamount', 6, 0);"  height="290px">
-									<?php 
+									<?php
+									if(count($birthday_teacher_data)!=0){
 									    foreach($birthday_teacher_data as $birthday_t_data){
 									?>
 									    <li>
-										    <a href="#">
-											    <img src="<?php echo base_url()?>assets/students_images/resize_image/3.jpg" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/dollar.png)" alt="" />
-											    <span class="ov_nb"><?php echo $birthday_t_data->first_name?></span>
-											    <span class="ov_text">8750</span>
-										    </a>
+										<a href="#">
+											<img src="<?php echo base_url()?>assets/teachers_images/<?php echo $birthday_t_data->photo_url?>" style="background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" />
+											<span class="ov_nb"><?php echo $birthday_t_data->first_name?></span>
+											<span class="ov_text"><?php echo $birthday_t_data->mobile?></span>
+										</a>
 									    </li>
+									<?php } } else{ ?>
+									<li>
+									    <a href="#" style="padding: 8px 15px 8px ">
+										<span class="ov_nb"><?php echo "No any birthday for the day!"?></span>
+									    </a>
+									</li>
 									<?php }?>
 								</marquee>
 							</ul>

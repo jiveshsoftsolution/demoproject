@@ -51,7 +51,7 @@ INSERT INTO `emsparent` (`parent_id`, `student_id`, `father_salutation_id`, `fat
 
 -- Dumping structure for table school_gyan.emsstudent
 CREATE TABLE IF NOT EXISTS `emsstudent` (
-  `student_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL AUTO_INCREMENT,
   `salutation_id` int(11) DEFAULT NULL,
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(250) DEFAULT NULL,
@@ -69,12 +69,12 @@ CREATE TABLE IF NOT EXISTS `emsstudent` (
   `updated_date` datetime DEFAULT NULL,
   `created_by_type` int(11) DEFAULT NULL,
   `updated_by_type` int(11) DEFAULT NULL,
-  PRIMARY KEY (`student_Id`)
+  PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table school_gyan.emsstudent: ~9 rows (approximately)
 /*!40000 ALTER TABLE `emsstudent` DISABLE KEYS */;
-INSERT INTO `emsstudent` (`student_Id`, `salutation_id`, `first_name`, `middle_name`, `last_name`, `email`, `gender`, `dob`, `login_id`, `password`, `photo_url`, `admission_number`, `created_by`, `created_date`, `updated_by`, `updated_date`, `created_by_type`, `updated_by_type`) VALUES
+INSERT INTO `emsstudent` (`student_id`, `salutation_id`, `first_name`, `middle_name`, `last_name`, `email`, `gender`, `dob`, `login_id`, `password`, `photo_url`, `admission_number`, `created_by`, `created_date`, `updated_by`, `updated_date`, `created_by_type`, `updated_by_type`) VALUES
 	(1, 1, 'Amit', '', 'Tiwari', NULL, 'M', '2012-12-12 00:00:00', 'S_Amit', '123789', NULL, NULL, 11, NULL, 11, '2014-06-28 16:05:13', NULL, NULL),
 	(2, 1, 'Rahul', '', 'Gupta', NULL, 'M', '2012-12-12 00:00:00', 'S_ftf', '123789', NULL, NULL, 11, NULL, 1, '2015-05-27 20:15:46', NULL, 0),
 	(3, 1, 'Piyush', '', 'Pandey', NULL, 'F', '2012-12-12 00:00:00', 'S_gh', '123789', NULL, NULL, 11, NULL, NULL, NULL, NULL, NULL),

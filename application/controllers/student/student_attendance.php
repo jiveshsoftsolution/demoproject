@@ -81,8 +81,8 @@ class Student_attendance extends CI_Controller
     }
 
     public function add_attendance_information() 
-	{
-		$logInUser = loggedUser();
+    {
+	$logInUser = loggedUser();
         $userDetail = $this->session->userdata('user');
        
         $attendance_data = array();
@@ -227,7 +227,7 @@ class Student_attendance extends CI_Controller
 		    $student_record = retrieve_records($filterColumns, $offset = NULL, $limit = NULL, $sort = NULL, "emsstudent");
 		    
 		    $data['sender_id'] = $logInUser['user_id'];
-		    $data['receiver_id'] = $student_record[0]->student_Id;
+		    $data['receiver_id'] = $student_record[0]->student_id;
 		    $msg_student_id = $key;					
 		    $content_message = "Dear Parent, Your child ".$student_record[0]->first_name." is absent today. Hope everything is fine. Regards eSchool";
 		    $data['message_content']  = $content_message;

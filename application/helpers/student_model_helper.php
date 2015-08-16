@@ -55,11 +55,11 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	   function get_profile(){}
 
 	   function get_birtday_teachers() {
-		      $today = date('Y-m-d');
+		      $today = date('m-d');
 		      $CI = & get_instance();
 		      $CI->db->select("st.*");
 		      $CI->db->from("ems_staff st");
-		      $CI->db->where("dob",$today);
+		      $CI->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
 		      $result_data = $CI->db->get();
 		      return $result_data->result();
 	   }

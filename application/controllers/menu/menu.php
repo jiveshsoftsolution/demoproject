@@ -22,13 +22,13 @@ class Menu extends CI_Controller
 		
 	}
         
-    public function student_access($session_id , $student_Id)	
+    public function student_access($session_id , $student_id)	
     {
 		$data = array();
 		$this->template->getScript(); 
-		$studentMenu	= $this->menuModel->getStudentMenuAccess($student_Id);
+		$studentMenu	= $this->menuModel->getStudentMenuAccess($student_id);
 		$data['studentMenu'] = $studentMenu ;
-		$data['student_Id'] = $student_Id;
+		$data['student_id'] = $student_id;
 		$this->template->getAdminHeader(); 
 		$this->template->getAdminLeftBar();
 		$this->load->view('student_menu/student_menu_access_right', $data);
@@ -38,16 +38,16 @@ class Menu extends CI_Controller
 	public function addEdit_student_access()	
 	{
 		$sub_menu_id = 1;
-		$student_Id = 2;
-		if($this->input->post('student_Id'))
+		$student_id = 2;
+		if($this->input->post('student_id'))
 		{
-			$student_Id = $this->input->post('student_Id');
+			$student_id = $this->input->post('student_id');
 		}
 		if($this->input->post('sub_menu_id'))
 		{
 			$sub_menu_id = $this->input->post('sub_menu_id');
 		}
-		$data = array('sub_menu_id' => $sub_menu_id,'user_id' => $student_Id);              
+		$data = array('sub_menu_id' => $sub_menu_id,'user_id' => $student_id);              
 
 		$studentMenu	= $this->menuModel->addEdit_student_assecc($data);
 		if($studentMenu)

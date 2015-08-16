@@ -79,9 +79,9 @@ class Login_model extends CI_Model {
 				$studentData = array();
               if ($student_id != NULL) 
 			  {
-				$this->db->select('emsstudent.first_name,emsstudent.middle_name,emsstudent.last_name,emsstudent.student_Id,ems_student_teacher_class.class_section_id,ems_student_teacher_class.student_teacher_class_id');
+				$this->db->select('emsstudent.first_name,emsstudent.middle_name,emsstudent.last_name,emsstudent.student_id,ems_student_teacher_class.class_section_id,ems_student_teacher_class.student_teacher_class_id');
 				$this->db->from('ems_student_teacher_class');
-				$this->db->join('emsstudent', 'emsstudent.student_Id = ems_student_teacher_class.student_Id');
+				$this->db->join('emsstudent', 'emsstudent.student_id = ems_student_teacher_class.student_id');
 				$this->db->where('ems_student_teacher_class.session_id', $session_id);                    
 				$this->db->where('emsstudent.student_id', $student_id);
 				//$this->db->where('emsstudent.password', $luser['password']);
@@ -95,7 +95,7 @@ class Login_model extends CI_Model {
 			   'first_name'=> $studentRow->first_name,
 			   'middle_name'=> $studentRow->middle_name,
 			   'last_name'=> $studentRow->last_name,
-			   'student_id'=> $studentRow->student_Id,
+			   'student_id'=> $studentRow->student_id,
 			   'class_section_id'=> $studentRow->class_section_id,
 			   'student_teacher_class_id'=>$studentRow->student_teacher_class_id
 			  );

@@ -10,7 +10,8 @@
       </div>
       <div class="three columns">
         <div class="user_box cf">
-          <div class="user_avatar"> <img src="<?php echo base_url()?>assets/assets/img/user_female.png" alt="" /> </div>
+          <div class="user_avatar">
+	    <img src="<?php echo base_url()?>assets/students_images/<?php echo $photo_url;?>" style="height: 40px;width:50px !important" style="background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" /></div>
           <div class="user_info user_sep">
             <p class="sepH_a"> <strong> Welcome </strong>&nbsp;<?php echo $studentName; ?> ! </p>
             <span> <a href="#" class="sep">Settings</a> <a href="<?php echo base_url()?>index.php/login/logout">Log out</a> </span> </div>

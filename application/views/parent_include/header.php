@@ -3,14 +3,15 @@
   <div class="container head_s_a">
        <div class="row sepH_b">
       <div class="nine columns">
-        <div id="logo"> <img src="<?php echo base_url().'/'.$schoolLogo;?>" alt="Pertho Admin" /> </div>
+        <div id="logo"> <img src="<?php echo base_url().'/'.$schoolLogo;?>" alt="UDT@eSchool" /> </div>
         <!--<div id="logo-name">
           <h1 style="font-family:cursive,'Open Sans',sans-serif"><?php //echo $schoolName; ?></h1>
         </div>-->
       </div>
       <div class="three columns">
         <div class="user_box cf">
-          <div class="user_avatar"> <img src="<?php echo base_url()?>assets/assets/img/user_female.png" alt="" /> </div>
+          <div class="user_avatar">
+	    <img src="<?php echo base_url()?>assets/parents_images/<?php echo $photo_url;?>" style="height: 40px;width:50px !important" style="background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" /></div>
           <div class="user_info user_sep">
             <p class="sepH_a"> <strong> Welcome </strong>&nbsp;<?php echo $userName; ?> ! </p>
             <span> <a href="#" class="sep">Settings</a> <a href="<?php echo base_url()?>index.php/login/logout">Log out</a> </span> </div>

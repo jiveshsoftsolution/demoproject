@@ -172,7 +172,7 @@ class Online_exam extends CI_Controller
 		
 	    //Student Menu Access Right
 		$student = $this->session->userdata('student');
-		$studentMenu	= $this->menuModel->getStudentMenuAccess($student[0]->student_Id);
+		$studentMenu	= $this->menuModel->getStudentMenuAccess($student[0]->student_id);
 		$data['studentMenu'] = $studentMenu ;
 		$this->template->getStudentHeader($data); 
 		//End Of Student Menu

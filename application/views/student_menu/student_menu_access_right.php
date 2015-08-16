@@ -15,7 +15,7 @@
 								</div> 
 							<?php } else { ?>
 							<form action="<?php echo base_url()?>index.php/student/student_attendance/add_attendance_information" method="post">
-								<input type="hidden" name="student_Id" id="student_Id" value="<?php echo $student_Id; ?>"/>
+								<input type="hidden" name="student_id" id="student_id" value="<?php echo $student_id; ?>"/>
 								<table class="access_right">
 									<thead>
 										<tr>
@@ -62,8 +62,8 @@
 	function update_student_access(obj)
 	{
 		var sub_menu_id = $(obj).attr('value');
-		var student_Id =  document.getElementById('student_Id').value;
-		var dataString = "student_Id="+ student_Id+'&sub_menu_id='+sub_menu_id;
+		var student_id =  document.getElementById('student_id').value;
+		var dataString = "student_id="+ student_id+'&sub_menu_id='+sub_menu_id;
 		var urldata = '<?php echo base_url()?>';
 		$.ajax({
 		url:urldata+'index.php/menu/menu/addEdit_student_access/',

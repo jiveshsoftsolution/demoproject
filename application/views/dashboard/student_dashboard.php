@@ -78,26 +78,26 @@
 			   
 				xAxis: {
 					categories: [
-						'Jan',
-						'Feb',
-						'Mar',
-						'Apr',
-						'May',
-						'Jun',
-						'Jul',
-						'Aug',
-						'Sep',
-						'Oct',
-						'Nov',
-						'Dec',
-						''
+						'<?php echo date("F Y")?>',
+						//'Feb',
+						//'Mar',
+						//'Apr',
+						//'May',
+						//'Jun',
+						//'Jul',
+						//'Aug',
+						//'Sep',
+						//'Oct',
+						//'Nov',
+						//'Dec'
 					]
 				},
 				yAxis: {
 					min: 0,
 					title: {
-						text: 'Students'
-					}
+						text: 'Attendance in days'
+					},
+					allowDecimals: false,
 				},
 				tooltip: {
 					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -115,15 +115,15 @@
 				},
 				series: [{
 					name: 'Present',
-					data: [22, 23, 24, 21, 22, 24, 23, 23, 24, 24, 23, 22,23]
+					data: [<?php echo $present_count_month->present_count?>]
 				},				   
 				{				
 					name: 'Absent',
-					data: [3, 4, 4, 2, 3, 3, 4, 2, 3, 2, 2, 3,4]				
+					data: [<?php echo $absent_count_month->absent_count?>]				
 				},
 				{				
 					name: 'Leave',
-					data: [2, 1, 1, 1, 3, 3, 2, 2, 3, 2, 2, 3,1]				
+					data: [<?php echo $leave_count_month->leave_count?>]				
 				}
 				]				
 			});
@@ -165,7 +165,7 @@
 			</div>
 			<div class="six columns">
 				<div class="box_c">
-					<div class="box_c_heading cf green">
+					<div class="box_c_heading cf green box_actions">
 						<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
 							<p>Attendance Record</p>
 					</div>

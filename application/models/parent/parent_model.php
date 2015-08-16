@@ -13,11 +13,11 @@ public function __construct()
         
         $classSection = array();
         $studentData = array();
-                                $this->db->select('emsstudent.first_name,emsstudent.middle_name,emsstudent.last_name,emsstudent.student_Id,emsstudent.email,ems_student_teacher_class.class_section_id,ems_student_teacher_class.student_teacher_class_id');
+                                $this->db->select('emsstudent.first_name,emsstudent.middle_name,emsstudent.last_name,emsstudent.student_id,emsstudent.email,ems_student_teacher_class.class_section_id,ems_student_teacher_class.student_teacher_class_id');
 				$this->db->from('ems_student_teacher_class');
-				$this->db->join('emsstudent', 'emsstudent.student_Id = ems_student_teacher_class.student_Id');
-                                $this->db->join('emsparent', 'emsparent.student_Id = ems_student_teacher_class.student_Id');
-//                                $this->db->join('emsparent', 'emsstudent.student_Id = emsparent.student_Id');
+				$this->db->join('emsstudent', 'emsstudent.student_id = ems_student_teacher_class.student_id');
+                                $this->db->join('emsparent', 'emsparent.student_id = ems_student_teacher_class.student_id');
+//                                $this->db->join('emsparent', 'emsstudent.student_id = emsparent.student_id');
 				$this->db->where('ems_student_teacher_class.session_id', $session_id);                    
 				$this->db->where('emsparent.parent_id', $parent_id);
 				//$this->db->where('emsstudent.password', $luser['password']);
@@ -38,8 +38,8 @@ public function __construct()
 						{
 							$studentName = $studentName." ".$studentRow->last_name;
 						}
-                               $classSection = $this->classSection->get_student_Class_Section($studentRow->student_Id);
-                                 $studentData[$studentRow->student_Id] = array(
+                               $classSection = $this->classSection->get_student_Class_Section($studentRow->student_id);
+                                 $studentData[$studentRow->student_id] = array(
 			   'studentName'=> $studentName,
 			       
 			   'classSection'=>$classSection['class_name'] . '-'. $classSection['section_name']

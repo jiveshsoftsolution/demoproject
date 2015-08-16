@@ -47,7 +47,8 @@ class template
 			$data['schoolLogo'] = "";
 		}
 		$user = $this->CI->session->userdata('user');
-		$data['userName'] = $user['userName'];
+		$data['userName'] 	= $user['userName'];
+		$data['photo_url'] 	= $user['photo_url'];
 		$data['adminMenu']	= $this->CI->menuModel->getUserTypeMenu('A');
 		$this->CI->load->view('admin_include/header',$data);
 	}
@@ -69,6 +70,7 @@ class template
 		$student = $this->CI->session->userdata('student');
 		$data['studentMenu'] = $this->CI->menuModel->getStudentMenuAccess($student['student_id']);
 		$data['studentName'] = $student['studentName'];
+		$data['photo_url'] = $student['photo_url'];
 		$this->CI->load->view('student_include/header',$data);
 	}
 
@@ -107,6 +109,8 @@ class template
 		$parent = $this->CI->session->userdata('user');
 		$data['userName'] = $parent['userName'];
 		$data['email'] = $parent['email'];
+		$data['photo_url'] = $parent['photo_url'];
+		$data['child_name'] = $parent['child_name'];
 		$data['parentMenu'] = $this->CI->menuModel->getUserTypeMenu('p');
 		$this->CI->load->view('parent_include/header',$data);
 	}
@@ -143,6 +147,8 @@ class template
 		$studentClassSection = $this->CI->classSectionModel->get_student_Class_Section($studentInfo['student_id']);
 		$this->studentLeftbar['studentName'] = $studentInfo['studentName'];
 		$this->studentLeftbar['email'] = $studentInfo['email'];
+		$this->studentLeftbar['photo_url'] = $studentInfo['photo_url'];
+		$this->studentLeftbar['roll_number'] = $studentInfo['roll_number'];		
 		$this->studentLeftbar['fatherName'] = $studentInfo['fatherName'];
 		$this->studentLeftbar['classSection'] = $studentClassSection['class_name'] . '-' . $studentClassSection['section_name'];
 		$this->CI->load->view('student_include/left_sidebar', $this->studentLeftbar);
@@ -163,6 +169,11 @@ class template
 		$parent = $this->CI->session->userdata('user');
 		$this->parentLeftbar['userName'] = $parent['userName'];
 		$this->parentLeftbar['email'] = $parent['email'];
+		$this->parentLeftbar['photo_url'] = $parent['photo_url'];
+		$this->parentLeftbar['child_name'] = $parent['child_name'];
+		$this->parentLeftbar['mobile'] = $parent['mobile'];
+		$this->parentLeftbar['class_section_id'] = $parent['class_section_id'];
+		$this->parentLeftbar['student_photo_url'] = $parent['student_photo_url'];
 		$currentSession =  $this->CI->sessionModel->getCurrent_Session();
 		$studentData =  $this->CI->parentModel->getParentWard($parent['user_id'], $currentSession[0]->session_id);
 		$this->parentLeftbar['wardData'] = $studentData;

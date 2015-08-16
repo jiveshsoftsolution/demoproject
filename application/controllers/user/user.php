@@ -16,15 +16,12 @@ class User extends CI_Controller
 	{	$data['errorInfo'] = "";
 		$logindata = array();
 		$loginTypeChar = "";
-		if($this->input->post())
-		{
+		if($this->input->post()){
                         
 			if ($this->input->post('login_id'))
 				$logindata['login_id'] = $this->input->post('login_id');
-
 			if ($this->input->post('password'))
 				$logindata['password'] = $this->input->post('password');
-		  
 			if (isset($logindata['login_id']))
 			{
 				$user_type  =   $this->loginModel->main_login($logindata);
@@ -32,86 +29,60 @@ class User extends CI_Controller
 			$currentSession = $this->sessionModel->getCurrent_Session();
                         if(isset($user_type['user_id']))
                         {
-			switch ($user_type['login_type'])
-			{
+				switch ($user_type['login_type'])
+				{
 				case 'A':
 					$admin_id = $user_type['user_id'];										
 					$query =  $this->loginModel->user_login($admin_id);
-				
-					if($query == 0)
-					{
+					if($query == 0){
 						$this->loadLogin();
-					}
-					else
-					{
-                                            
-					$userdata = array('is_logged_in' => true,'user_type' => 'A','user'=>$query);
-					$this->session->set_userdata($userdata);
-					redirect('dashboard/dashboard/admin', 'refresh');
+					}else {                                            
+						$userdata = array('is_logged_in' => true,'user_type' => 'A','user'=>$query);
+						$this->session->set_userdata($userdata);
+						redirect('dashboard/dashboard/admin', 'refresh');
 					}
 				break;
 				case 'C':
 					$query =  $this->loginModel->user_login($user_type['user_id']);
-					if($query == 0)
-					{
+					if($query == 0){
 						$this->loadLogin();
-					}
-					else
-					{
+					}else{
 						$userdata = array('is_logged_in' => true,'user_type' => 'C','user'=>$query);
 						$this->session->set_userdata($userdata);
 						redirect('dashboard/dashboard/coordinator', 'refresh');
 					}
 				break;
 				case 'T':
-					 $teacher_id = $user_type['user_id']; 
-                                       $query =  $this->loginModel->teacher_login($teacher_id);
-					if($query == 0)
-					{
-					$this->loadLogin();
-					}
-					else
-					{
-					$userdata = array('is_logged_in' => true,'user_type' => 'T','user'=>$query);
-					$this->session->set_userdata($userdata);
-					redirect('dashboard/dashboard/teacher', 'refresh');
+					$teacher_id = $user_type['user_id']; 
+                                        $query =  $this->loginModel->teacher_login($teacher_id);
+					if($query == 0){
+						$this->loadLogin();
+					}else {
+						$userdata = array('is_logged_in' => true,'user_type' => 'T','user'=>$query);
+						$this->session->set_userdata($userdata);
+						redirect('dashboard/dashboard/teacher', 'refresh');
 					}
 				break;
 				case 'P':
-			             $parent_id =  $user_type['user_id'];
-                                     $query =  $this->loginModel->parent_login($parent_id);
-                                        
-					if($query == 0)
-					{
+			                $parent_id =  $user_type['user_id'];
+                                        $query =  $this->loginModel->parent_login($parent_id);
+					if($query == 0)	{
 						$this->loadLogin();
-					}
-					else
-					{
-						
-                                            $userdata = array('is_logged_in' => true,'user_type' => 'P','user'=>$query);
-                                           
+					}else{						
+						$userdata = array('is_logged_in' => true,'user_type' => 'P','user'=>$query);                                           
 						$this->session->set_userdata($userdata);
 						redirect('dashboard/dashboard/parents', 'refresh');
 					}
 				break;
-				case 'S':
-					
+				case 'S':					
                                         $student_id = $user_type['user_id'];
                                         $query =  $this->loginModel->student_login($student_id,$currentSession[0]->session_id);
-					if($query == 0)
-					{
+					if($query == 0){
 						$this->loadLogin();
 					}
-					else
-					{
-					//                       $student = $this->studentModel->getSingleStudent($currentSession[0]->session_id,$query[0]->student_Id);
-					if (isset($recordsFound['result']))
-					{
-
-					}
-					else
-					{
-					}
+					else{
+						if (isset($recordsFound['result'])){}
+						else{}
 						$userdata = array('is_logged_in' => true,'user_type' => 'S','student'=>$query);
 						$this->session->set_userdata($userdata);
 						redirect('dashboard/dashboard/student', 'refresh');
@@ -119,26 +90,21 @@ class User extends CI_Controller
 				break;
 				case 'H':
 					$query =  $this->loginModel->teacher_login($user_type['user_id']);
-					if($query == 0)
-					{
+					if($query == 0){
 						$this->loadLogin();
-					}
-					else
-					{
+					}else{
 						$userdata = array('is_logged_in' => true,'user_type' => 'H');
 						$this->session->set_userdata($userdata);
 						redirect('dashboard/dashboard/principal', 'refresh');
 					}
 				break;
 				default:
-				//Your account has been made,
-				//please verify it by clicking the activation link that has been send to your email.
-				$this->loadLogin();
-				break;
+					$this->loadLogin();
+					break;
 			}
-                }
-                $data['errorInfo'] = "Invalid Username Or Password";
-                $this->load->view('login',$data);
+			}
+			$data['errorInfo'] = "Invalid Username Or Password";
+			$this->load->view('login',$data);
 		}
 		else
 		{
@@ -154,9 +120,9 @@ class User extends CI_Controller
 
 	public function user_registration()
 	{
-		$data = array();
+		$data 			= array();
 		$this->template->getHeader(); 
-		$data['salutation'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");;
+		$data['salutation'] 	= retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");;
 		$data['userType'] 	= retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_user_type");;
 		$this->load->view('user/user_registration' ,$data);
 		$this->template->getFooter(); 

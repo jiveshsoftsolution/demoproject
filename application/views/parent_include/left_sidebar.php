@@ -6,31 +6,22 @@
 			<div class="box_c_heading cf box_actions green" >
 				<p>Profile</p>
 			</div>
-			<div class="box_c_content" style="min-height:301px;line-height:30px">
-				<ul class="sepH_b filter_content" >
-					<li>
-						<div class="user_avatar" style="vertical-align:top"> 
-							<img src="<?php echo base_url()?>assets/parents_images/resize_image/1.jpg" alt="" style="height:115px;border: 4px solid #00A8E1;" /> 
-							<div style="margin-left: 135px; margin-bottom:40px; margin-top: -80px;"><strong style="font-weight:600"> <?php echo $userName; ?></strong></div>
-						</div>
-					</li>
-					<li><label><strong style="font-weight:600">Email :</strong></label> <?php echo $email; ?></li>
-                                        <?php
-                                   
-                                        foreach($wardData as $studentRow){
-                                           
-                                            ?>
-                                        <li><label><strong style="font-weight:600">Ward Name :</strong></label> <?php echo $studentRow['studentName']; ?></li>
-					<li><label><strong style="font-weight:600">Class Section :</strong></label> <?php echo $studentRow['classSection']; ?></li>
-                                        <?php
-                                        }
-                                        ?>
-					
-				</ul>
-			</div>
+			<div class="box_c_content" style="line-height:29px;height: 350px">
+			    <ul class="sepH_b filter_content" >
+				   <li>
+					  <div class="user_avatar" style="vertical-align:top"> 							
+						 <img src="<?php echo base_url()?>assets/parents_images/<?php echo $photo_url;?>" style="height:160px;width:180px; border: 4px solid #00A8E1; background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" />
+					  </div>
+				   </li>
+				   <li><label><strong style="font-weight:600"><?php echo ucwords($userName); ?></strong></label></li>
+				   <li><label><strong style="font-weight:600">Email :</strong></label> <?php echo $email; ?></li>
+				   <li><label><strong style="font-weight:600">Mobile :</strong></label> <?php echo $mobile; ?></li>
+				   <li><label><strong style="font-weight:600">Child Name :</strong></label> <?php echo ucwords($child_name); ?></li>
+			    </ul>
+		     </div>
 		</div>					
 		<div>
-			<div class="box_c">
+			<!--<div class="box_c">
 				<div class="box_c_heading cf box_actions green" >
 					<p>Attendance</p>
 				</div>
@@ -48,7 +39,7 @@
 								</li>
 						</ul>
 				</div>
-			</div>
+			</div>-->
 		</div>					
 	</div>				
              
