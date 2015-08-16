@@ -46,7 +46,7 @@ class Login_model extends CI_Model {
 		if($teacher->last_name){
 		   $teacherName = $teacherName." ".$teacher->last_name;
 		}
-		$teacherData = array('staff_id' => $teacher->staff_id,'userName' => $teacherName,'email' => $teacher->email);
+		$teacherData = array('staff_id' => $teacher->staff_id,'userName' => $teacherName,'email' => $teacher->email,'photo_url'=>$teacher->photo_url);
 		return $teacherData;
 	    }
 	}else{
@@ -54,46 +54,46 @@ class Login_model extends CI_Model {
 	}
     }
     
-        function student_login($student_id = NULL,$session_id = null) 
-	{
-	    $studentData = array();
-            if ($student_id != NULL && $session_id != NULL){
-		$this->db->select('emsstudent.photo_url,ems_student_teacher_class.roll_number,emsparent.father_first_name,emsparent.father_middle_name,emsparent.father_last_name,emsstudent.first_name,emsstudent.middle_name,emsstudent.last_name,emsstudent.student_id,emsstudent.email,ems_student_teacher_class.class_section_id,ems_student_teacher_class.student_teacher_class_id');
-		$this->db->from('ems_student_teacher_class');
-		$this->db->join('emsstudent', 'emsstudent.student_id = ems_student_teacher_class.student_id');
-		$this->db->join('emsparent', 'emsparent.student_id = ems_student_teacher_class.student_id');
-		$this->db->where('ems_student_teacher_class.session_id', $session_id);                    
-		$this->db->where('emsstudent.student_id', $student_id);
-		$query = $this->db->get();
-		if ($query->num_rows >= 1){   
-		    $studentResult = $query->result();
-		    foreach($studentResult as $studentRow){
-			$fatherName = "";
-			$fatherName = $studentRow->father_first_name;
-			if($studentRow->father_middle_name)
-			{
-			    $fatherName = $fatherName." ".$studentRow->father_middle_name;
-			}
-			if($studentRow->father_last_name)
-			{
-			    $fatherName = $fatherName." ".$studentRow->father_last_name;
-			}			
-			$studentName = "";
-			$studentName = $studentRow->first_name;
-			if($studentRow->middle_name)
-			{
-			    $studentName = $studentName." ".$studentRow->middle_name;
-			}
-			if($studentRow->last_name)
-			{
-			    $studentName = $studentName." ".$studentRow->last_name;
-			}
-                            
-			$studentData = array('studentName'=> $studentName,'email'=> $studentRow->email,'fatherName'=> $fatherName,'student_id'=> $studentRow->student_id,'class_section_id'=> $studentRow->class_section_id,'student_teacher_class_id'=>$studentRow->student_teacher_class_id,'photo_url'=>$studentRow->photo_url,'roll_number'=>$studentRow->roll_number);
+    function student_login($student_id = NULL,$session_id = null) 
+    {
+	$studentData = array();
+	if ($student_id != NULL && $session_id != NULL){
+	    $this->db->select('emsstudent.photo_url,ems_student_teacher_class.roll_number,emsparent.father_first_name,emsparent.father_middle_name,emsparent.father_last_name,emsstudent.first_name,emsstudent.middle_name,emsstudent.last_name,emsstudent.student_id,emsstudent.email,ems_student_teacher_class.class_section_id,ems_student_teacher_class.student_teacher_class_id');
+	    $this->db->from('ems_student_teacher_class');
+	    $this->db->join('emsstudent', 'emsstudent.student_id = ems_student_teacher_class.student_id');
+	    $this->db->join('emsparent', 'emsparent.student_id = ems_student_teacher_class.student_id');
+	    $this->db->where('ems_student_teacher_class.session_id', $session_id);                    
+	    $this->db->where('emsstudent.student_id', $student_id);
+	    $query = $this->db->get();
+	    if ($query->num_rows >= 1){   
+		$studentResult = $query->result();
+		foreach($studentResult as $studentRow){
+		    $fatherName = "";
+		    $fatherName = $studentRow->father_first_name;
+		    if($studentRow->father_middle_name)
+		    {
+			$fatherName = $fatherName." ".$studentRow->father_middle_name;
 		    }
-		    return $studentData;
-		}else{
-	            return 0;
+		    if($studentRow->father_last_name)
+		    {
+			$fatherName = $fatherName." ".$studentRow->father_last_name;
+		    }			
+		    $studentName = "";
+		    $studentName = $studentRow->first_name;
+		    if($studentRow->middle_name)
+		    {
+			$studentName = $studentName." ".$studentRow->middle_name;
+		    }
+		    if($studentRow->last_name)
+		    {
+			$studentName = $studentName." ".$studentRow->last_name;
+		    }
+			
+		    $studentData = array('studentName'=> $studentName,'email'=> $studentRow->email,'fatherName'=> $fatherName,'student_id'=> $studentRow->student_id,'class_section_id'=> $studentRow->class_section_id,'student_teacher_class_id'=>$studentRow->student_teacher_class_id,'photo_url'=>$studentRow->photo_url,'roll_number'=>$studentRow->roll_number);
+		}
+		return $studentData;
+	    }else{
+		return 0;
             }
         }
     }

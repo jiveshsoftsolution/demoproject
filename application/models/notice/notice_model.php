@@ -35,7 +35,7 @@ class Notice_model extends CI_Model
 		$this->db->or_where('ems_notice.notice_for', $notice_for_all); 
 		$this->db->order_by('ems_notice.post_to_web', "DESC");
 		$this->db->order_by("ems_notice.updated_date", "DESC");
-		$student_notice_query = $this->db->get();		
+		$student_notice_query = $this->db->get();
 		$tdata = array();
 		if ($student_notice_query->num_rows() > 0) {
 			    return $student_notice_query->result();

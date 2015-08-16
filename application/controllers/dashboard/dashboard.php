@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('season/season_model','seasonModel');
 		$this->load->model('timetable/timetable_model','timetableModel');
 		$this->load->model('notice/notice_model', 'noticeModel');
+		$this->load->model('staff/staff_model', 'staffModel');
 	}
 
 	public function index() {}
@@ -102,18 +103,24 @@ class Dashboard extends CI_Controller
 	}
 
 	public function teacher()
-	{
-		$data= array();
+	{	$data = array();
+		$teacher = $this->session->userdata('user');
+		$data['userName'] = $teacher['userName'];
+		$data['email'] = $teacher['email'];
+		$data['photo_url'] = $teacher['photo_url'];		
 		$data['classSection'] = getClass_section();
 		$data['classStrength'] = $this->studentModel->get_class_strength(1);
-		$data['present_count_month'] = $this->studentModel->get_student_present_status_by_month($parent['student_teacher_class_id']);
-		$data['absent_count_month'] = $this->studentModel->get_student_absent_status_by_month($parent['student_teacher_class_id']);
-		$data['leave_count_month'] = $this->studentModel->get_student_leave_status_by_month($parent['student_teacher_class_id']);
+		$data['staff_notice'] =$this->noticeModel->get_student_notice(NULL);
+		$data['present_count_month'] = $this->staffModel->get_staff_present_status_by_month($teacher['staff_id']);
+		$data['absent_count_month'] = $this->staffModel->get_staff_absent_status_by_month($teacher['staff_id']);
+		$data['leave_count_month'] = $this->staffModel->get_staff_leave_status_by_month($teacher['staff_id']);
 		$this->template->getScript(); 
-		$this->template->getTeacherHeader(); 
-		$this->template->getTeacherLeftBar();
+		$this->template->getTeacherHeader(); 		
 		$teacgerDetail = $this->session->userdata('teacher');
 		$data['period'] = $this->teacher_timetable($teacgerDetail['staff_id']);
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;
+		$this->load->view('teacher_include/left_sidebar',$data);
 		$this->load->view('dashboard/teacher_dashboard',$data);
 		$this->template->getTeacherFooter(); 
 	}
@@ -160,7 +167,7 @@ class Dashboard extends CI_Controller
 		$data['present_count_month'] = $this->studentModel->get_student_present_status_by_month($parent['student_teacher_class_id']);
 		$data['absent_count_month'] = $this->studentModel->get_student_absent_status_by_month($parent['student_teacher_class_id']);
 		$data['leave_count_month'] = $this->studentModel->get_student_leave_status_by_month($parent['student_teacher_class_id']);
-		$data['student_notice'] =  $this->noticeModel->get_student_notice(9);
+		$data['student_notice'] =  $this->noticeModel->get_student_notice($parent['class_section_id']);
 		$this->template->getScript(); 
 		$this->template->getParentHeader(); 
 		$this->template->getParentLeftBar();

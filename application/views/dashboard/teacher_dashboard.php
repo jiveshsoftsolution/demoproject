@@ -149,12 +149,12 @@
 					<div class="box_c_content" style=" overflow:scroll; height:350px; ">
 						<p class="inner_heading sepH_c">Latest info</p>
 						<ul class="overview_list">
-						<?php if(!isset($ems_admin_notice['result'])){ foreach($student_notice as $studentNoticeData) {?>
+						<?php if(!isset($ems_admin_notice['result'])){ foreach($staff_notice as $staffNoticeData) {?>
 							<li>
 								<a href="#">
 									<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/happy-face.png)" alt="" />
-									<span class="ov_nb"><?php if(isset($studentNoticeData->notice_subject)){echo $studentNoticeData->notice_subject; }?></span>
-									<span class="ov_text"><?php if(isset($studentNoticeData->notice)){echo $studentNoticeData->notice;} ?></span>
+									<span class="ov_nb"><?php if(isset($staffNoticeData->notice_subject)){echo $staffNoticeData->notice_subject; }?></span>
+									<span class="ov_text"><?php if(isset($staffNoticeData->notice)){echo $staffNoticeData->notice;} ?></span>
 								</a>
 							</li>
 							<?php  } }else { echo '<h2 align ="center">Notice Not Found </h2>';}?>

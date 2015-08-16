@@ -88,6 +88,7 @@ class template
 			$data['schoolLogo'] = "";
 		}
 		$teacher = $this->CI->session->userdata('user');
+		$data['photo_url'] = $teacher['photo_url'];
 		$data['userName'] = $teacher['userName'];
 		$data['teacherMenu'] = $this->CI->menuModel->getUserTypeMenu('T');
 		$this->CI->load->view('teacher_include/header',$data);
@@ -159,6 +160,7 @@ class template
 		$teacher = $this->CI->session->userdata('user');
 		$this->teacherLeftbar['userName'] = $teacher['userName'];
 		$this->teacherLeftbar['email'] = $teacher['email'];
+		$this->teacherLeftbar['photo_url'] = $teacher['photo_url'];
 		$teacherPaper =  $this->CI->paperModel->get_teacher_paper_subject($teacher['staff_id']);
 		$this->teacherLeftbar['teacherPaper'] = $teacherPaper;
 		$this->CI->load->view('teacher_include/left_sidebar', $this->teacherLeftbar);
