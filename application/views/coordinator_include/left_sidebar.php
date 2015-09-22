@@ -25,7 +25,7 @@
 
 					<ul class="overview_list" >
 
-							<div id="today_st_attendance" style="height:240px;margin:0 auto" class="chart_flw" title="Pie chart"></div>
+							<div id="today_st_attendance" style="height:auto;margin:0 auto" class="chart_flw" title="Pie chart"></div>
 
 						<li>
 

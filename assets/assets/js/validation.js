@@ -1166,3 +1166,31 @@ function validate_staff_registration()
 	} */	
 	return flag;
 }
+
+function validate_add_feedback()
+{	
+	var flag =  true;
+	if($("#feedback_subject").val()=="")	
+	{		
+		flag = false;
+		$("#sp_feedback_subject").css('display','block');	
+		$("#feedback_subject").css('border-color','#FF0000');	
+	}	
+	else
+	{		
+		$("#sp_feedback_subject").css('display','none');
+		$("#feedback_subject").css('border-color','#BBBBBB');
+	}
+	if($("#feedback_description").val()=="")	
+	{		
+		flag = false;
+		$("#sp_feedback_description").css('display','block');	
+		$("#feedback_description").css('border-color','#FF0000');	
+	}	
+	else
+	{		
+		$("#sp_feedback_description").css('display','none');
+		$("#feedback_description").css('border-color','#BBBBBB');
+	} 
+	return flag;
+}

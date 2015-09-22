@@ -31,7 +31,7 @@
 				     <div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
 				     <p>Student's Birthday</p>
 			     </div>
-			    <div class="box_c_content" style="height:330px;margin:0 auto">
+			    <div class="box_c_content" style="height:auto;margin:0 auto">
 				     <p class="inner_heading sepH_c">Date: <?php echo date('d M, Y')?></p>
 				     <ul class="overview_list">
 					     <marquee direction="up" onMouseOver="this.setAttribute('scrollamount', 0, 0);" onMouseOut="this.setAttribute('scrollamount', 6, 0);"  height="290px">

@@ -122,7 +122,7 @@ class Dashboard extends CI_Controller
 		$data['birthday_teacher_data']	= $birthday_teacher_data;
 		$this->load->view('teacher_include/left_sidebar',$data);
 		$this->load->view('dashboard/teacher_dashboard',$data);
-		$this->template->getTeacherFooter(); 
+		$this->template->getFooter();
 	}
 	
 	public function coordinator()
@@ -155,7 +155,7 @@ class Dashboard extends CI_Controller
 		$data['period'] = $this->student_timetable($studentDetail['class_section_id']);
 		$data['student_notice'] =  $this->noticeModel->get_student_notice($studentDetail['class_section_id']);
 		$this->load->view('dashboard/student_dashboard',$data);
-		$this->template->getStudentFooter(); 
+		$this->template->getFooter();
 	}
 	
 	public function parents()
@@ -172,7 +172,7 @@ class Dashboard extends CI_Controller
 		$this->template->getParentHeader(); 
 		$this->template->getParentLeftBar();
 		$this->load->view('dashboard/parent_dashboard',$data);
-		$this->template->getStudentFooter(); 
+		$this->template->getFooter();
 	}
 	
 	public function principal()
