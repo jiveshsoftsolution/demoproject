@@ -1,4 +1,8 @@
 <script type="text/javascript">
+	$(document).ready(function(){
+		if($("#notice_for_id").val()==2)
+		$("#div_class_section").css("display","block");
+	});
 	function update_notice_status(obj)
 	{
 		var checkbox_id = $(obj).attr('id');
@@ -27,7 +31,7 @@
 				  <p>Add Notice</p>
 				</div>
 				<div class="box_c_content">
-					<form action="<?php echo base_url()?>index.php/notice/notice/insert_notice" id="frm_add_notice" class="nice" method="post" onsubmit="return validate_add_notice();">
+					<form action="<?php echo base_url()?>index.php/notice/notice/edit_notice" id="frm_edit_notice" class="nice" method="post" onsubmit="return validate_add_notice();">
 					   <h3>Add Notice</h3>   
 						<div class="formRow">
 							<div class="row">
@@ -35,39 +39,40 @@
 									<label for="notice_for">Notice For.</label>
 									<select name="notice_for" id="notice_for_id" class="small"  >
 										<option value="-1">Select Notice For</option>
-										<option value="1">All</option>
-										<option value="2">Student</option>
-										<option value="3">Admin</option>
-										<option value="4">Teacher</option>
+										<option value="1" <?php if($edit_notice->notice_for==1) echo "selected='selected'" ?>>All</option>
+										<option value="2" <?php if($edit_notice->notice_for==2) echo "selected='selected'" ?>>Student</option>
+										<option value="3" <?php if($edit_notice->notice_for==3) echo "selected='selected'" ?>>Admin</option>
+										<option value="4" <?php if($edit_notice->notice_for==4) echo "selected='selected'" ?>>Teacher</option>
 									</select>
 									<span id="sp_notice_for" class="error">Select Notice For.</span>
+									<input type="hidden" name="notice_id" id="notice_id" value="<?php echo $edit_notice->notice_id?>">
 								</div>					
 								<div class="three columns" style="display: none" id="div_class_section">						  
 								   	<label for="class_section_id" >Select Class Section</label>
 									<select name="class_section_id" id="class_section_id" class="small" >
 										<option value="0">All</option>
 										<?php foreach($class_section as $class_sectionData) {?>
-										<option value="<?php echo $class_sectionData->class_section_id?>"><?php echo $class_sectionData->class_name.' - '.$class_sectionData->section_name;?></option>
+										<option value="<?php echo $class_sectionData->class_section_id?>" <?php if($class_sectionData->class_section_id==$edit_notice->class_section_id) echo "selected='selected'"?>><?php echo $class_sectionData->class_name.' - '.$class_sectionData->section_name;?></option>
 										<?php  } ?>
 									</select>
 									<span id="sp_class_section_id" class="error">Select Class Section.</span>
 								</div>
 								<div class="six columns" style="margin-top:30px">
-								  <input type="checkbox" id="post_to_web" name="post_to_web">
+								  <input type="checkbox" id="post_to_web" name="post_to_web" <?php if($edit_notice->post_to_web)  echo "checked"?>>
 								  <label for="post_to_web">New</label>
 								</div>
-							</div>											
+							</div>	
 						</div>          
 						<div class="formRow">
 							<div class="row">
 								<div class="six columns">
 									<label for="notice">Notice Heading.</label>
-									<textarea id="notice_headding" name="notice_subject" class="input-text large"  placeholder="Notice Heading"></textarea>
+									<textarea id="notice_headding" name="notice_subject" class="input-text large"  placeholder="Notice Heading"><?php echo $edit_notice->notice_subject?></textarea>
 									<span id="sp_notice_headding" class="error">Enter Notice Heading.</span>
 								</div>
 								<div class="six columns">
 									<label for="notice">Notice.</label>
-									<textarea id="notice" name="notice" class="input-text large" placeholder="Notice"></textarea>
+									<textarea id="notice" name="notice" class="input-text large" placeholder="Notice"><?php echo $edit_notice->notice ?></textarea>
 									<span id="sp_notice" class="error">Enter Notice.</span>
 								</div>
 							</div>											

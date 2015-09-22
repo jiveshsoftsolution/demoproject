@@ -1263,7 +1263,7 @@ var base_path = 'http://localhost/school_gyan/assets/assets/';
 			);
 
 		},
-		
+		/*
 		fees_chart : function() {
 
 			var fees_chart_data = [
@@ -1313,7 +1313,7 @@ var base_path = 'http://localhost/school_gyan/assets/assets/';
 
 			);
 
-		},
+		},*/
 
 		pl_plot1: function() {
 

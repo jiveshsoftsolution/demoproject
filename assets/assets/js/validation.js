@@ -203,17 +203,6 @@ function validate_student_registration(){
 	{	
 		$("#sp_last_name").css('display','none');
 		$("#last_name").css('border-color','#BBBBBB');	
-	}
-	if($("#gender").val()==-1)	
-	{	
-		flag = false;	
-		$("#sp_gender").css('display','block');	
-		$("#gender").css('border-color','#FF0000');	
-	}	
-	else
-	{	
-		$("#sp_gender").css('display','none');	
-		$("#gender").css('border-color','#BBBBBB');
 	}	
 	/*if($("#dob").val()=="")	
 	{		
@@ -557,49 +546,36 @@ function validate_add_notice()
 	if($("#notice").val()=="")
 	{		
 		flag = false;	
-		$("#sp_notice").css('display','block');	
+		$("#sp_notice").css('display','block','important');	
 		$("#notice").css('border-color','#FF0000');	
 	}	
 	else	
 	{		
 		$("#sp_notice").css('display','none');	
 		$("#notice").css('border-color','#BBBBBB');	
-	} 
-	if($("#notice_for").val()=="")
+	}
+	if($("#notice_for_id").val()=="-1")
 	{		
 		flag = false;	
-		$("#sp_notice_for").css('display','block');	
-		$("#notice_for").css('border-color','#FF0000');	
+		$("#sp_notice_for").css('display','block','important');	
+		$("#notice_for_id").css('border-color','#FF0000');	
 	}	
 	else	
 	{		
 		$("#sp_notice_for").css('display','none');	
-		$("#notice_for").css('border-color','#BBBBBB');	
-	} 
-	
-	if($("#class_section_id").val()==-1)
+		$("#notice_for_id").css('border-color','#BBBBBB');	
+	}
+	if(($("#notice_headding").val()).length<=1)
 	{		
 		flag = false;	
-		$("#sp_class_section_id").css('display','block');	
-		$("#class_section_id").css('border-color','#FF0000');	
+		$("#sp_notice_headding").css('display','block');	
+		$("#notice_headding").css('border-color','#FF0000');	
 	}	
 	else	
 	{		
-		$("#sp_class_section_id").css('display','none');	
-		$("#class_section_id").css('border-color','#BBBBBB');	
+		$("#sp_notice_headding").css('display','none');	
+		$("#notice_headding").css('border-color','#BBBBBB');	
 	} 
-	if($("#class_id").val()==-1)
-	{		
-		flag = false;	
-		$("#sp_class_id").css('display','block');	
-		$("#class_id").css('border-color','#FF0000');	
-	}	
-	else	
-	{		
-		$("#sp_class_id").css('display','none');	
-		$("#class_id").css('border-color','#BBBBBB');	
-	} 
-	
 	return flag;
 }
 

@@ -50,10 +50,10 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-//$db['default']['password'] = '';
-//$db['default']['database'] = 'school_gyan';
-$db['default']['password'] = 'Udt@3241';
-$db['default']['database'] = 'eschool';
+$db['default']['password'] = '';
+$db['default']['database'] = 'school_gyan';
+//$db['default']['password'] = 'Udt@3241';
+//$db['default']['database'] = 'eschool';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

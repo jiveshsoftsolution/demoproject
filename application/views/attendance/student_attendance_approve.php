@@ -4,7 +4,7 @@
 	  <div class="box_c">
 		<div class="box_c_heading cf red">
 		  <div class="box_c_ico"><img src="<?php echo base_url();?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
-		  <p>Student Attendace</p>
+		  <p>Approve Student Attendace</p>
 		</div>
 		<div class="box_c_content">
 		  <form action="<?php echo base_url()?>index.php/student/student_attendance/approve_attendance" id="frm_student_attendance_view" class="nice" method="post" onsubmit="return validate_add_exam_marks();">
@@ -12,9 +12,8 @@
 			<div class="formRow">
 				<div class="row">
 					<div class="three columns">
-						<label for="session_id">Class Section</label>
+						<label for="session_id">Session</label>
 						<select id="session_id" name="session_id" class="small">
-						<option  value="0">Select Session </option>
 						<?php foreach($session as $sRow) {?>						
 						<option <?php if($sRow->session_id == $session_id) echo"selected='selected'"?> value="<?php echo $sRow->session_id; ?>"> <?php echo $sRow->session_name; ?> </option>
 						<?php } ?>

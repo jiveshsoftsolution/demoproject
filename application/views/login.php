@@ -24,7 +24,7 @@
 							</div>
 							<div class="cf">
 								<h2 class="lb_ribbon lb_blue"><span>Login to School Portal</span><span style="display:none">New password</span></h2>
-								<a href="#" class="right small sl_link"> <span>Forgot your password?</span> <span style="display:none">Back to login form</span> </a> 
+								<a href="<?php echo base_url()?>index.php/login/forgot_password" class="right small sl_link"> <span>Forgot your password?</span> <span style="display:none">Back to login form</span> </a> 
 							</div>
 							<div class="row m_cont">
 								<div class="eight columns centered">

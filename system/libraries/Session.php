@@ -408,7 +408,7 @@ class CI_Session {
 		// Kill the cookie
 		setcookie(
 					$this->sess_cookie_name,
-					addslashes(serialize(array())),
+					serialize(array()),
 					($this->now - 31500000),
 					$this->cookie_path,
 					$this->cookie_domain,

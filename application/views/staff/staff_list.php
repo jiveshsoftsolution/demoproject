@@ -57,7 +57,7 @@
 									<th>DOB</th>
 									<th>Phone No.</th>
 									<th>Mobile No.</th>									
-									<th>Expertise</th>
+									<th>Card No</th>
 									<th>Photo</th>
 									<th>Actions</th>
 								</tr>
@@ -70,7 +70,7 @@
 									<td><?php echo date('d-m-Y',strtotime($staff_data->dob));?></td>
 									<td><?php echo $staff_data->phone?></td>									
 									<td><?php echo $staff_data->mobile;?></td>
-									<td align="center">Add Expertise</td>
+									<td><?php echo $staff_data->card_no;?></td>
 									<td align="center"><img src="<?php if(count($staff_data->photo_url)==0 || empty($staff_data->photo_url)) echo base_url().'assets/assets/img/no_image.gif'; else echo base_url().'assets/teachers_images/'.$staff_data->photo_url;?>" class="pic"></td>									
 									<td class="content_actions">
 										<a href="<?php echo base_url()?>index.php/staff/staff/staff_edit/<?php echo $staff_data->staff_id?>" class="sepV_a" title="Edit"><img src="<?php echo base_url()?>assets/assets/img/ico/pencil_gray.png" alt="" /></a>&nbsp;&nbsp;&nbsp;

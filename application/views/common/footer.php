@@ -17,7 +17,7 @@
 		<script src="<?php echo base_url();?>assets/chartjs/modules/exporting.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-
+			//get_class_section();
 				//* common functions
 				prth_common.init();
 				prth_dialogs.init();
@@ -28,7 +28,7 @@
 				//prth_charts.pl_plot1();
 				prth_charts.new_admission();
 				//prth_charts.pl_plot3();
-				prth_charts.fees_chart();
+				//prth_charts.fees_chart();
 
 				prth_nested_accordion.init();
 				if(!jQuery.browser.mobile) {
@@ -77,18 +77,13 @@
 			}); 
 		</script>
 		<script type="text/javascript">
-			$("#notice_for_id").change(function(){ 
-				var request = $.ajax({
-				url: "<?php echo base_url(); ?>index.php/notice/notice/notice_class_section/"+this.value,
-				/* data: "cat_id="+this.value,*/
-				type: "post",
-				dataType: "html",
-				success: function(data) {
-				//data is the html of the page where the request is made.
-				$('#class_section').html(data);
-				}
-				});
-			}); 
+			$("#notice_for_id").change(function(){
+				if($("#notice_for_id").val()==2)
+					$("#div_class_section").css("display","block");
+				else
+					$("#div_class_section").css("display","none");	
+			
+			});
 		</script>
 	</body>
 </html>

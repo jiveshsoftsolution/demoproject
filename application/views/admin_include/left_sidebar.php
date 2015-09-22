@@ -97,7 +97,7 @@
 									    <li>
 										<a href="#">
 											<img src="<?php echo base_url()?>assets/teachers_images/<?php echo $birthday_t_data->photo_url?>" style="background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" />
-											<span class="ov_nb"><?php echo $birthday_t_data->first_name?></span>
+											<span class="ov_nb"><?php echo ucfirst($birthday_t_data->first_name)." ".trim($birthday_t_data->middle_name)." ".$birthday_t_data->last_name?></span>
 											<span class="ov_text"><?php echo $birthday_t_data->mobile?></span>
 										</a>
 									    </li>

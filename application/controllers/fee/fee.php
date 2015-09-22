@@ -26,10 +26,11 @@ class Fee extends CI_Controller {
 	public function insert_fee_type()
 	{
 		$data = array();
-		if($this->input->post('fee_type_name'))
-		$data['fee_type_name'] = addslashes($this->input->post('fee_type_name'));
-		$this->input->post('refundable') ? $data['refundable'] = true : $data['refundable'] = false;
-		$this->input->post('is_active') ? $data['is_active'] = true : $data['is_active'] = false;
+		if($this->input->post('fee_type_name')){
+			$data['fee_type_name'] = addslashes($this->input->post('fee_type_name'));
+		}		
+		//$this->input->post('refundable') ? $data['refundable'] = true : $data['refundable'] = false;
+		$this->input->post('is_active') ? $data['is_active'] = '1' : $data['is_active'] = '0';
 		insert($data , "ems_fee_type") ;
 		redirect('fee/fee/add_fee_type');
 	}
@@ -74,7 +75,7 @@ class Fee extends CI_Controller {
 	
 	public function add_fee_submisssion()
 	{
-		$data = array();
+		$data = array(); 
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$this->template->getAdminLeftBar();	
@@ -90,5 +91,70 @@ class Fee extends CI_Controller {
 	{
 		$this->studentModel->get_student_name($class_section_id);
 	}
+	
+	public function fee_submission($session_id=NULL,$class_section_id=NULL)
+	{
+		$data = array();
+		$this->template->getScript(); 
+		$this->template->getAdminHeader(); 
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
+		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
+		$data['class_section'] = $this->classSection->getClass_section();
+		$data['student_data'] = $this->studentModel->get_student_list_by_class_section($class_section_id);
+		$this->load->view('admin_include/left_sidebar',$data);
+		$this->load->view('fee/fee_submission',$data);
+		$this->template->getFooter(); 	
+	}
+	
+	public function fee_submission_add(){
+		if($this->input->post()){
+			$data 				= array();
+			$now				= date('Y-m-d H:i:s');
+			$data['session_id'] 		= $this->input->post("session_id");			
+			$data['student_id'] 		= $this->input->post("student_id");
+			$data['class_section_id'] 	= $this->input->post("class_section_id");
+			$session_id 			= $data['session_id'];
+			$class_section_id 		= $data['class_section_id'];
+			$data['roll_number'] 		= $this->input->post("roll_number");
+			$data['tuition_fee'] 		= $this->input->post("tuition_fee");
+			$data['transport_fee'] 		= $this->input->post("transport_fee");
+			$data['miscellaneous_fee'] 	= $this->input->post("miscellaneous_fee");
+			$data['total_fee'] 		= $this->input->post("total_fee");
+			$fee_months			= $this->input->post("month");
+			$data['submission_date'] 	= $now;
+			$data['created_date'] 		= $now;
+			$count = 0;
+			foreach($fee_months as $months){
+				$data['month_id'] 	= $months;
+				$count ++;
+				insert($data , "ems_fee_submission") ;
+			}
+			$this->session->set_userdata("month_count",$count);
+		}
+		redirect("fee/fee/fee_submission/$session_id/$class_section_id");
+	}
+	
+	
+	public function get_fee_receipt($student_id){
+		$data = array();
+		$data['school_data']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_school_profile");
+		$data['student_fee_data'] = $this->feeModel->get_fee_receipt($student_id);
+		$data['class_section'] = $this->classSection->getClass_section();
+		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
+		$this->template->getScript();
+		$this->load->view('fee/fee_receipt',$data);
+	}
+	
+	public function get_fee_report($student_id){
+		$data = array();
+		$data['student_fee_data'] = $this->feeModel->get_fee_report($student_id);
+		$data['class_section'] = $this->classSection->getClass_section();
+		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
+		$this->template->getScript();
+		$this->load->view('fee/fee_report',$data);
+	}
+	
 }
 ?>

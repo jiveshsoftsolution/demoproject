@@ -342,6 +342,7 @@ class Dashboard extends CI_Controller
 			else
 			{
 				$classAttendance['classAttendance']  = $this->attendanceModel->get_classSection_attendance_strength($attendance_class_id,1);
+				//$classAttendance['classAttendance']  = $this->attendanceModel->get_class_attendance_strength(1,$attendance_class_id);
 				foreach($classAttendance['classAttendance'] as $key=>$value)
 				{
 					$className = $key;

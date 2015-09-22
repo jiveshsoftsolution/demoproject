@@ -12,9 +12,8 @@
 			<div class="formRow">
 				<div class="row">
 					<div class="three columns">
-						<label for="session_id">Class Section</label>
+						<label for="session_id">Session</label>
 						<select id="session_id" name="session_id" class="small">
-						<option  value="0">Select Session </option>
 						<?php foreach($session as $sRow) {?>						
 						<option <?php if($sRow->session_id == $session_id) echo"selected='selected'"?> value="<?php echo $sRow->session_id; ?>"> <?php echo $sRow->session_name; ?> </option>
 						<?php } ?>

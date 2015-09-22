@@ -48,10 +48,7 @@ $(function () {
                 type: 'column'
             },
             title: {
-                text: 'Monthly Average Rainfall'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: 'Student Strength'
             },
             xAxis: {
                 categories: [ <?php if(isset($classStrength))echo $classCategory; else if($classSectionCategory) echo $classSectionCategory; ?> ]
@@ -60,7 +57,8 @@ $(function () {
                 min: 0,
                 title: {
                     text: 'Students'
-                }
+                },
+		allowDecimals: false
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',

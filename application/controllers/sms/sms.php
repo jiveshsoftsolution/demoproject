@@ -8,6 +8,7 @@ class Sms extends CI_Controller {
 		parent::__construct();
 		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->model('student/student_model', 'studentModel');
+		$this->load->model('staff/staff_model', 'staffModel');
                 $this->load->model('sms/sms_model', 'smsModel');
 		$this->load->helper('crud_model');
 		$this->load->helper('student_model');
@@ -106,8 +107,7 @@ class Sms extends CI_Controller {
 			$mobile_no = $this->studentModel->get_mobile_no($student_id);
 			if(strlen($mobile_no)==10){	
 				$data['mobile_no'] = $mobile_no;
-				//$this->send_sms($mobile_no,$content_message);
-				delevire_meesage("8750953636",$content_message);
+				delevire_meesage($mobile_no,$content_message);
 				insert($data , "ems_sent_messages") ;
 			}			
 		} 
@@ -136,8 +136,8 @@ class Sms extends CI_Controller {
 		foreach($this->input->post('sms_teacher_list')  as $key=>$value)
 		{	
 			$data['receiver_id'] = $key;			
-			$student_id = $key;
-			$mobile_no = $this->staffModel->get_mobile_no($student_id);
+			$staff_id = $key;
+			$mobile_no = $this->staffModel->get_mobile_no($staff_id);
 			if(strlen($mobile_no)==10){	
 				$data['mobile_no'] = $mobile_no;
 				delevire_meesage($mobile_no,$content_message);

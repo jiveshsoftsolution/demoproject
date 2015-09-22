@@ -72,4 +72,22 @@ class Fee_model extends CI_Model {
 		return $class_section_Data;
 	}
 	
+	public function get_fee_receipt($student_id=NULL){
+	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
+	    $this->db->from('ems_fee_submission fs');
+	    $this->db->join('emsstudent s','s.student_id=fs.student_id');
+	    $this->db->where('DATE(fs.created_date)',date('Y-m-d'));
+	    $this->db->order_by('fs.created_date DESC');
+	    $this->db->limit($this->session->userdata('month_count'));
+	    $student_fee_data  =	$this->db->get();
+	    return $student_fee_data->result();
+	}
+		
+	public function get_fee_report($student_id=NULL){
+	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
+	    $this->db->from('ems_fee_submission fs');
+	    $this->db->join('emsstudent s','s.student_id=fs.student_id');
+	    $student_fee_data  =	$this->db->get();	
+	    return $student_fee_data->result();
+	}
 }

@@ -24,8 +24,8 @@ class Student extends CI_Controller
 	public function student_registraton()
 	{
 		if (!isLoggedIn('student/student/student_registraton')) {
-            redirect(site_url('accessdenied'), 'refresh');
-        }
+			redirect(site_url('accessdenied'), 'refresh');
+		}
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
@@ -49,7 +49,9 @@ class Student extends CI_Controller
 		}
 		$state = array();
 		$filterColumns['country_id'] = $country_id;
-		$state = retrieve_records($filterColumns, $offset=NULL, $limit=NULL, $sort=NULL, "ems_state");
+		$sort['column'] = 'state_name';
+		$sort['order'] = 'ASC';
+		$state = retrieve_records($filterColumns, $offset=NULL, $limit=NULL, $sort, "ems_state");
 		echo  json_encode($state);
 	}
 
@@ -61,7 +63,9 @@ class Student extends CI_Controller
 		}
 		$city = array();
 		$filterColumns["state_id"]  = $state_id;
-		$city = retrieve_records($filterColumns, $offset=NULL, $limit=NULL, $sort=NULL, "ems_city");
+		$sort['column'] = 'city_name';
+		$sort['order'] = 'ASC';
+		$city = retrieve_records($filterColumns, $offset=NULL, $limit=NULL, $sort, "ems_city");
 		echo  json_encode($city);
 	}
 
@@ -80,20 +84,20 @@ class Student extends CI_Controller
 		
 		/*Student Data */
 		if($this->input->post('salutation_id'))
-		$student_data['salutation_id'] = addslashes($this->input->post('salutation_id'));
+		$student_data['salutation_id'] = $this->input->post('salutation_id');
 		if($this->input->post('first_name'))
-		$student_data['first_name'] = addslashes($this->input->post('first_name'));
+		$student_data['first_name'] = $this->input->post('first_name');
 		if($this->input->post('middle_name'))
-		$student_data['middle_name'] = addslashes($this->input->post('middle_name'));
+		$student_data['middle_name'] = $this->input->post('middle_name');
 		if($this->input->post('last_name'))
-		$student_data['last_name'] = addslashes($this->input->post('last_name'));
+		$student_data['last_name'] = $this->input->post('last_name');
 		if($this->input->post('gender'))
-		$student_data['gender'] = addslashes($this->input->post('gender'));
+		$student_data['gender'] = $this->input->post('gender');
 		if($this->input->post('dob'))
-		$student_data['dob'] = addslashes($this->input->post('dob'));
+		$student_data['dob'] = $this->input->post('dob');
 
 		/* Too Do for genrate loginId and Password */
-		$student_data['login_id'] = "S_".addslashes($this->input->post('first_name'));
+		$student_data['login_id'] = "S_".$this->input->post('first_name');
 		$student_data['password'] = "123789" ;
 		/* END */		
                  
@@ -125,7 +129,7 @@ class Student extends CI_Controller
                         
 		/*Login of student Data*/
 		/* Too Do for genrate loginId and Password */
-			$login_student_data['login_id'] = "S_".addslashes($this->input->post('first_name'));
+			$login_student_data['login_id'] = "S_".$this->input->post('first_name');
 			$login_student_data['password'] = "123789" ;
 			$login_student_data['user_login_type'] = "S" ;
 		/* END */		
@@ -136,27 +140,27 @@ class Student extends CI_Controller
 	     
 		/*Parents Data*/  
 			if($this->input->post('father_salutation_id'))
-			$parents_data['father_salutation_id'] = addslashes($this->input->post('father_salutation_id'));
+			$parents_data['father_salutation_id'] = $this->input->post('father_salutation_id');
 			if($this->input->post('father_first_name'))
-			$parents_data['father_first_name'] = addslashes($this->input->post('father_first_name'));
+			$parents_data['father_first_name'] = $this->input->post('father_first_name');
 			if($this->input->post('father_middle_name'))
-			$parents_data['father_middle_name'] = addslashes($this->input->post('father_middle_name'));
+			$parents_data['father_middle_name'] = $this->input->post('father_middle_name');
 			if($this->input->post('father_last_name'))
-			$parents_data['father_last_name'] = addslashes($this->input->post('father_last_name'));
+			$parents_data['father_last_name'] = $this->input->post('father_last_name');
 			
 			if($this->input->post('mother_salutation_id'))
-			$parents_data['mother_salutation_id'] = addslashes($this->input->post('mother_salutation_id'));
+			$parents_data['mother_salutation_id'] = $this->input->post('mother_salutation_id');
 			if($this->input->post('mother_first_name'))
-			$parents_data['mother_first_name'] = addslashes($this->input->post('mother_first_name'));
+			$parents_data['mother_first_name'] = $this->input->post('mother_first_name');
 			if($this->input->post('mother_middle_name'))
-			$parents_data['mother_middle_name'] = addslashes($this->input->post('mother_middle_name'));
+			$parents_data['mother_middle_name'] = $this->input->post('mother_middle_name');
 			if($this->input->post('mother_last_name'))
-			$parents_data['mother_last_name'] = addslashes($this->input->post('mother_last_name'));
+			$parents_data['mother_last_name'] = $this->input->post('mother_last_name');
 			
 			if($this->input->post('parent_mobile'))
-			$parents_data['parent_mobile'] = addslashes($this->input->post('parent_mobile'));
+			$parents_data['parent_mobile'] = $this->input->post('parent_mobile');
 			if($this->input->post('mail_to'))
-			$parents_data['mail_to'] = addslashes($this->input->post('mail_to'));
+			$parents_data['mail_to'] = $this->input->post('mail_to');
 			/* Too Do for genrate loginId and Password */
 			$parents_data['login_id'] = "testId";
 			$parents_data['password'] = "123789" ;
@@ -200,7 +204,7 @@ class Student extends CI_Controller
                         
 		/*Login of Parent Data*/
 		/* Too Do for genrate loginId and Password */
-			$login_parent_data['login_id'] = "P_".addslashes($this->input->post('father_first_name'));
+			$login_parent_data['login_id'] = "P_".$this->input->post('father_first_name');
 			$login_parent_data['password'] = "123789" ;
 			$login_parent_data['user_login_type'] = "P" ;
 			/* END */
@@ -211,27 +215,29 @@ class Student extends CI_Controller
 			    
 		/* Address Data */
 			if($this->input->post('address1'))
-			$address_data['address1'] = addslashes($this->input->post('address1'));
+			$address_data['address1'] = $this->input->post('address1');
 			if($this->input->post('address2'))
-			$address_data['address2'] = addslashes($this->input->post('address2'));
+			$address_data['address2'] = $this->input->post('address2');
 			if($this->input->post('address3'))
-			$address_data['address3'] = addslashes($this->input->post('address3'));
+			$address_data['address3'] = $this->input->post('address3');
 			if($this->input->post('country_id'))
-			$address_data['country_id'] = addslashes($this->input->post('country_id'));
+			$address_data['country_id'] = $this->input->post('country_id');
 			if($this->input->post('state_id'))
-			$address_data['state_id'] = addslashes($this->input->post('state_id'));
+			$address_data['state_id'] = $this->input->post('state_id');
 			if($this->input->post('city_id'))
-			$address_data['city_id'] = addslashes($this->input->post('city_id'));
+			$address_data['city_id'] = $this->input->post('city_id');
 			if($this->input->post('pincode'))
-			$address_data['pincode'] = addslashes($this->input->post('pincode'));
+			$address_data['pincode'] = $this->input->post('pincode');
 			$all_data['address_record'] = $address_data;
 		/* End Address Record*/
 			
 		/* Class Section Data */
 			if($this->input->post('class_section_id'))
-			$class_section_data['class_section_id'] = addslashes($this->input->post('class_section_id'));
+			$class_section_data['class_section_id'] = $this->input->post('class_section_id');
 			if($this->input->post('session_id'))
-			$class_section_data['session_id'] = addslashes($this->input->post('session_id'));
+			$class_section_data['session_id'] = $this->input->post('session_id');
+			if($this->input->post('card_no'))
+			$class_section_data['card_no'] = $this->input->post('card_no');
 			if($this->input->post('roll_number'))
 			$class_section_data['roll_number'] = 123456;
 			if($this->input->post('house_id'))
@@ -404,6 +410,7 @@ class Student extends CI_Controller
 			
 			$csdata['class_section_id'] = $this->input->post('class_section_id');
 			$csdata['session_id'] = $this->input->post('session_id');
+			$csdata['card_no'] = $this->input->post('card_no');
 			$csdata['roll_number'] = 3323;
 			$csdata['house_id'] = 3232;
 			$data['student_teacher_class'] = $csdata;
@@ -428,6 +435,13 @@ class Student extends CI_Controller
 			$this->load->view('student/student_registration_edit',$data);
 			$this->template->getFooter(); 
 		}
+	}
+	
+	public function get_student_list_by_class_section(){
+		$student_data = array();
+		$class_section_id = $this->input->post("class_section_id");
+		$student_data = $this->studentModel->get_student_list_by_class_section($class_section_id);
+		echo json_encode($student_data); die;
 	}
 }
 ?>

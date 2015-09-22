@@ -7,7 +7,7 @@ $(function () {
                 type: 'column'
             },
             title: {
-                text: 'Today Attendance of Student'
+                text: 'Today Attendance Of Student'
             },
            
             xAxis: {
@@ -286,14 +286,7 @@ $(function () {
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
 					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-					<p>Class Strength
-						<select name="class_id" id="class_id" style="display:inline-table">
-							<option  value="-1">All Class </option><?php
-							foreach($ems_class as $classRow) {?>
-								<option  value="<?php echo $classRow->class_id; ?>"><?php echo $classRow->class_name;  ?> </option>
-							<?php } ?>
-						</select> 
-					</p>
+					<p>Class Strength</p>
 				</div>
 				<div class="box_c_content">
 					<div class="inner_block">
@@ -378,14 +371,7 @@ $(function () {
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
 					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-					<p>Class Strength
-						<select name="class_id" id="class_id" style="display:inline-table">
-							<option  value="-1">All Class </option><?php
-							foreach($ems_class as $classRow) {?>
-								<option  value="<?php echo $classRow->class_id; ?>"><?php echo $classRow->class_name;  ?> </option>
-							<?php } ?>
-						</select> 
-					</p>
+						<p>Class Strength</p>
 				</div>
 				<div class="box_c_content">
 					<div class="inner_block">

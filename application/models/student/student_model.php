@@ -102,7 +102,7 @@ return $password;
 				{
 					$this->db->select('count(ems_student_teacher_class.student_id) as total');
 					$this->db->from('ems_student_teacher_class');
-					$this->db->join('emsstudent', 'emsstudent.student_d = ems_student_teacher_class.student_id');
+					$this->db->join('emsstudent', 'emsstudent.student_id = ems_student_teacher_class.student_id');
 					$this->db->where('ems_student_teacher_class.class_section_id', $sectionRow->class_section_id);
 					$section_strength_query = $this->db->get();
 					if ($section_strength_query->num_rows >= 1) 
@@ -251,6 +251,15 @@ return $password;
 			}
 		
 	}
+    
+    public function get_student_list_by_class_section($class_section_id=""){
+	$this->db->select("s.student_id,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
+	$this->db->from("emsstudent s");
+	$this->db->join("ems_student_teacher_class stc","stc.student_id=s.student_id");
+	$this->db->where("stc.class_section_id",$class_section_id);
+	$result_data = $this->db->get();
+	return $result_data->result();
+    }
     
     public function get_birtday_students(){
 	$today = date('m-d');

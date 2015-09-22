@@ -207,7 +207,7 @@ class Student_attendance extends CI_Controller
             $student_teacher_class_id = array();
             foreach ($temp_data as $key => $value) 
 	    {
-                if ($value == "A" || $value == "L") 
+                if ($value == "A" || $value == "L" || $value == "P") 
 		{                    
                     $aproveStatus = $this->attendanceModel->checkStudentAttendanceStatus($key, date('Y-m-d'));
                     if ($aproveStatus > 0) 
@@ -228,15 +228,20 @@ class Student_attendance extends CI_Controller
 		    
 		    $data['sender_id'] = $logInUser['user_id'];
 		    $data['receiver_id'] = $student_record[0]->student_id;
-		    $msg_student_id = $key;					
-		    $content_message = "Dear Parent, Your child ".$student_record[0]->first_name." is absent today. Hope everything is fine. Regards eSchool";
+		    $msg_student_id = $key;
+		    if($value == "P"){
+			$content_message = "Dear Parent, Your child ".$student_record[0]->first_name." is present today. Regards eSchool";
+		    }else if($value == "A"){
+			$content_message = "Dear Parent, Your child ".$student_record[0]->first_name." is absent today. Regards eSchool";
+		    }else if($value == "L"){
+			$content_message = "Dear Parent, Your child ".$student_record[0]->first_name." is leave today. Regards eSchool";
+		    }
+		    
 		    $data['message_content']  = $content_message;
 		    $mobile_no = $this->studentModel->get_mobile_no($student_id);
-		    //$country_code_mobile_no = '91'.$mobile_no;
 		    if(strlen($mobile_no)==10){	
 			$data['mobile_no'] = $mobile_no;
-			//$this->send_sms($country_code_mobile_no,$content_message);
-			delevire_meesage("8750953636",$content_message);
+			delevire_meesage($mobile_no,$content_message);
 			insert($data , "ems_sent_messages") ;
 		    }					
                 }

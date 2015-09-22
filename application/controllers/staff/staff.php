@@ -43,25 +43,27 @@ class Staff extends CI_Controller
 		
 			/*Teacher Data */
 			if($this->input->post('salutation_id'))
-			$staff_data['salutation_id'] = addslashes($this->input->post('salutation_id'));
+			$staff_data['salutation_id'] = $this->input->post('salutation_id');
 			if($this->input->post('first_name'))
-			$staff_data['first_name'] = addslashes($this->input->post('first_name'));
+			$staff_data['first_name'] = $this->input->post('first_name');
 			if($this->input->post('middle_name'))
-			$staff_data['middle_name'] = addslashes($this->input->post('middle_name'));
+			$staff_data['middle_name'] = $this->input->post('middle_name');
 			if($this->input->post('last_name'))
-			$staff_data['last_name'] = addslashes($this->input->post('last_name'));
+			$staff_data['last_name'] = $this->input->post('last_name');
 			if($this->input->post('gender'))
-			$staff_data['gender'] = addslashes($this->input->post('gender'));
+			$staff_data['gender'] = $this->input->post('gender');
 			if($this->input->post('dob'))
-			$staff_data['dob'] = addslashes($this->input->post('dob'));
+			$staff_data['dob'] = $this->input->post('dob');
+			if($this->input->post('card_no'))
+			$staff_data['card_no'] = $this->input->post('card_no');
 			if($this->input->post('school_user_type_id'))
-			$staff_data['school_user_type_id'] = addslashes($this->input->post('school_user_type_id'));
+			$staff_data['school_user_type_id'] = $this->input->post('school_user_type_id');
 			if($this->input->post('phone'))
-			$staff_data['phone'] = addslashes($this->input->post('phone'));
+			$staff_data['phone'] = $this->input->post('phone');
 			if($this->input->post('mobile'))
-			$staff_data['mobile'] = addslashes($this->input->post('mobile'));
+			$staff_data['mobile'] = $this->input->post('mobile');
 			if($this->input->post('email'))
-			$staff_data['email'] = addslashes($this->input->post('email'));
+			$staff_data['email'] = $this->input->post('email');
 
 			 /* END */		
 			$staff_data['created_by'] = 11 ;
@@ -90,7 +92,7 @@ class Staff extends CI_Controller
                         
 			/*Login of student Data*/
 			/* Too Do for genrate loginId and Password */
-			$login_staff_data['login_id'] = "T_".addslashes($this->input->post('first_name'));
+			$login_staff_data['login_id'] = "T_".$this->input->post('first_name');
 			$login_staff_data['password'] = "123789" ;
             $login_staff_data['user_login_type'] = "T" ;
 			 /* END */		
@@ -102,19 +104,19 @@ class Staff extends CI_Controller
 			
             /* Address Data */
 			if($this->input->post('address1'))
-			$address_data['address1'] = addslashes($this->input->post('address1'));
+			$address_data['address1'] = $this->input->post('address1');
 			if($this->input->post('address2'))
-			$address_data['address2'] = addslashes($this->input->post('address2'));
+			$address_data['address2'] = $this->input->post('address2');
 			if($this->input->post('address3'))
-			$address_data['address3'] = addslashes($this->input->post('address3'));
+			$address_data['address3'] = $this->input->post('address3');
 			if($this->input->post('country_id'))
-			$address_data['country_id'] = addslashes($this->input->post('country_id'));
+			$address_data['country_id'] = $this->input->post('country_id');
 			if($this->input->post('state_id'))
-			$address_data['state_id'] = addslashes($this->input->post('state_id'));
+			$address_data['state_id'] = $this->input->post('state_id');
 			if($this->input->post('city_id'))
-			$address_data['city_id'] = addslashes($this->input->post('city_id'));
+			$address_data['city_id'] = $this->input->post('city_id');
 			if($this->input->post('pincode'))
-			$address_data['pincode'] = addslashes($this->input->post('pincode'));
+			$address_data['pincode'] = $this->input->post('pincode');
 			$all_data['address_record'] = $address_data;
 			/* End Address Record*/
 			//echo '<pre>'; print_r($all_data); die; exit;
@@ -175,27 +177,29 @@ class Staff extends CI_Controller
 		{
 			/*Teacher Data */
 			if($this->input->post('salutation_id'))
-			$staff_data['salutation_id'] = addslashes($this->input->post('salutation_id'));
+			$staff_data['salutation_id'] = $this->input->post('salutation_id');
 			if($this->input->post('hd_staff_id'))
-			$staff_data['staff_id'] = addslashes($this->input->post('hd_staff_id'));
+			$staff_data['staff_id'] = $this->input->post('hd_staff_id');
 			if($this->input->post('first_name'))
-			$staff_data['first_name'] = addslashes($this->input->post('first_name'));
+			$staff_data['first_name'] = $this->input->post('first_name');
 			if($this->input->post('middle_name'))
-			$staff_data['middle_name'] = addslashes($this->input->post('middle_name'));
+			$staff_data['middle_name'] = $this->input->post('middle_name');
 			if($this->input->post('last_name'))
-			$staff_data['last_name'] = addslashes($this->input->post('last_name'));
+			$staff_data['last_name'] = $this->input->post('last_name');
 			if($this->input->post('gender'))
-			$staff_data['gender'] = addslashes($this->input->post('gender'));
+			$staff_data['gender'] = $this->input->post('gender');
 			if($this->input->post('dob'))
-			$staff_data['dob'] = addslashes($this->input->post('dob'));
+			$staff_data['dob'] = $this->input->post('dob');
+			if($this->input->post('card_no'))
+			$staff_data['card_no'] = $this->input->post('card_no');
 			if($this->input->post('school_user_type_id'))
-			$staff_data['school_user_type_id'] = addslashes($this->input->post('school_user_type_id'));
+			$staff_data['school_user_type_id'] = $this->input->post('school_user_type_id');
 			if($this->input->post('phone'))
-			$staff_data['phone'] = addslashes($this->input->post('phone'));
+			$staff_data['phone'] = $this->input->post('phone');
 			if($this->input->post('mobile'))
-			$staff_data['mobile'] = addslashes($this->input->post('mobile'));
+			$staff_data['mobile'] = $this->input->post('mobile');
 			if($this->input->post('email'))
-			$staff_data['email'] = addslashes($this->input->post('email'));
+			$staff_data['email'] = $this->input->post('email');
 
 			 /* END */		
 			$staff_data['updated_by'] = 11 ;
@@ -232,7 +236,7 @@ class Staff extends CI_Controller
                         
 			/*Login of student Data*/
 			/* Too Do for genrate loginId and Password */
-			$login_staff_data['login_id'] = "T_".addslashes($this->input->post('first_name'));
+			$login_staff_data['login_id'] = "T_".$this->input->post('first_name');
 			$login_staff_data['password'] = "123789" ;
             $login_staff_data['user_login_type'] = "T" ;
 			 /* END */		
@@ -244,19 +248,19 @@ class Staff extends CI_Controller
 			
             /* Address Data */
 			if($this->input->post('address1'))
-			$address_data['address1'] = addslashes($this->input->post('address1'));
+			$address_data['address1'] = $this->input->post('address1');
 			if($this->input->post('address2'))
-			$address_data['address2'] = addslashes($this->input->post('address2'));
+			$address_data['address2'] = $this->input->post('address2');
 			if($this->input->post('address3'))
-			$address_data['address3'] = addslashes($this->input->post('address3'));
+			$address_data['address3'] = $this->input->post('address3');
 			if($this->input->post('country_id'))
-			$address_data['country_id'] = addslashes($this->input->post('country_id'));
+			$address_data['country_id'] = $this->input->post('country_id');
 			if($this->input->post('state_id'))
-			$address_data['state_id'] = addslashes($this->input->post('state_id'));
+			$address_data['state_id'] = $this->input->post('state_id');
 			if($this->input->post('city_id'))
-			$address_data['city_id'] = addslashes($this->input->post('city_id'));
+			$address_data['city_id'] = $this->input->post('city_id');
 			if($this->input->post('pincode'))
-			$address_data['pincode'] = addslashes($this->input->post('pincode'));
+			$address_data['pincode'] = $this->input->post('pincode');
 			$all_data['address_record'] = $address_data;
 			///* End Address Record*/
 			//echo '<pre>'; print_r($all_data); die; exit;

@@ -17,7 +17,8 @@ class Notice_model extends CI_Model
 		$this->db->join('ems_class_section', 'ems_class_section.class_section_id = ems_notice.class_section_id', 'left');
 		$this->db->join('ems_class', 'ems_class.class_id = ems_class_section.class_id', 'left');
 		$this->db->join('ems_section', 'ems_section.section_id = ems_class_section.section_id', 'left');
-		$this->db->order_by("ems_notice.notice_id", "desc");
+		$this->db->order_by("ems_notice.post_to_web", "desc");
+		$this->db->order_by("ems_notice.updated_date", "desc");
 		$classSection_query = $this->db->get();
 		return $classSection_query->result();
 	}	
@@ -45,7 +46,11 @@ class Notice_model extends CI_Model
 		    $tdata = array('status' => 'No result found', 'result' => $student_notice_query->num_rows());
 		}
 		return $tdata;
-   }
+	}
 
+	public function delete_notice($notice_id=""){
+		$ret = $this->db->delete('ems_notice',array("notice_id"=> $notice_id));
+		return $ret;
+	}
     
 }

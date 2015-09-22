@@ -133,4 +133,13 @@ class Staff_model extends CI_Model {
 	$result_data = $this->db->query($sql);
 	return $result_data->result()[0];
     }
+    public function get_mobile_no($staff_id="")
+    {
+	    $this->db->select('*');
+	    $this->db->from('ems_staff');
+	    $this->db->where('staff_id',$staff_id);
+	    $query = $this->db->get();
+	    $staff_mobile = $query->result(); 
+	    return $staff_mobile[0]->mobile;
+    }
 }
