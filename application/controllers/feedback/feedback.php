@@ -99,21 +99,45 @@ class Feedback extends CI_Controller {
 	}
 	
 	public function feedback_list(){
-		$data = array();
-		$this->template->getScript(); 
-		$this->template->getAdminHeader();
-		
-		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
-		$this->load->view('admin_include/left_sidebar',$data);
-		
-		$data['feedback'] = $this->feedbackModel->get_feedback_list();
-		$this->load->view('feedback/feedback_list',$data);
-		$this->template->getFooter(); 	
+		$start_date = date('Y-m-d');
+		$end_date = date('Y-m-d');
+		if($this->input->post()){
+			$data = array();
+			$start_date = $this->input->post('start_date');
+			$end_date = $this->input->post('end_date');
+			$this->template->getScript(); 
+			$this->template->getAdminHeader();
+			
+			$birthday_teacher_data = get_birtday_teachers();
+			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$this->load->view('admin_include/left_sidebar',$data);
+			
+			$data['feedback'] = $this->feedbackModel->get_feedback_list($start_date,$end_date);
+			$this->load->view('feedback/feedback_list',$data);
+			$this->template->getFooter(); 	
+		}else{
+			$data = array();
+			$this->template->getScript(); 
+			$this->template->getAdminHeader();
+			
+			$birthday_teacher_data = get_birtday_teachers();
+			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$this->load->view('admin_include/left_sidebar',$data);
+			
+			$data['feedback'] = $this->feedbackModel->get_feedback_list($start_date,$end_date);
+			$this->load->view('feedback/feedback_list',$data);
+			$this->template->getFooter(); 	
+		}		
 	}
 	
-	public function read_mark_feedback(){
-		
+	public function mark_read_feedback(){
+		$feedback_id 			= $this->input->post("feedback_id");
+		$data 				= array();
+		$data['as_read'] 		= '1';
+		$conditions  			= array();
+		$conditions['feedback_id']  	= $this->input->post('feedback_id');
+		update($data,$conditions,"ems_feedback");
+		echo $feedback_id; die;
 	}
 }
 ?>

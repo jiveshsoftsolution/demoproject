@@ -1,40 +1,55 @@
+<script type="text/javascript">
+    function make_mark_read(feedback_id){
+	var dataString = "feedback_id="+ feedback_id;
+	var urldata = '<?php echo base_url()?>';
+	$.ajax({
+		url:urldata+'index.php/feedback/feedback/mark_read_feedback/',
+		data:dataString,
+		type:'POST',
+		success:function(response){}
+	}).done(function( data ) {
+		var base_path ="<?php echo base_url()?>";
+		var img_path ="<img src='"+base_path+"assets/assets/img/check-mark-icon.png' />";
+		$("#td_"+data).html(img_path);
+		
+	});
+    }
+</script>
 <div class="nine columns">
     <div class="row">
         <div class="twelve columns">
-			<div class="box_c">
-				<div class="box_c_heading cf red">
-				  <div class="box_c_ico"><img src="<?php echo base_url();?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
-				  <p>Add Feedback</p>
-				</div>
-				<div class="box_c_content">
-					<form action="<?php echo base_url()?>index.php/feedback/feedback/insert_feedback" id="frm_add_feedback" class="nice" method="post" onsubmit="return validate_add_feedback();">
-					   <h3>Add Feedback</h3>             
-						<div class="formRow">
-							<div class="row">
-								<div class="twelve columns">
-									<label for="feedback_subject">Subject</label>
-									<input id="feedback_subject" name="feedback_subject" class="input-text large"  placeholder="Subject">
-									<span id="sp_feedback_subject" class="error">Enter Feedback Subject.</span>
-								</div>
-							</div>											
-						</div>
-						<div class="formRow">
-							<div class="row">
-								<div class="twelve columns">
-									<label for="feedback_description">Description.</label>
-									<textarea id="feedback_description" name="feedback_description" class="input-text large"  placeholder="Description" style="width:100%;height:250px"></textarea>
-									<span id="sp_feedback_description" class="error">Enter Feedback Description.</span>
-								</div>
-							</div>											
-						</div>
-						<div class="formRow cf">
-							  <input type="submit" class="button small" value="Submit">
-						</div>
-					</form>
-				</div>
-			</div>
+	    <div class="box_c">
+		<div class="box_c_heading cf">
+		    <div class="box_c_ico"><img src="<?php echo base_url();?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
+		    <p>Feedback</p>
 		</div>
+		<div class="box_c_content">
+		    <form action="<?php echo base_url()?>index.php/feedback/feedback/feedback_list" id="frm_add_feedback" class="nice" method="post" onsubmit="return validate_add_feedback();">
+		        <h3>Filter Feedback</h3>             
+			<div class="formRow">
+			    <div class="row">
+				<div  class="four columns">
+				    <label for="datepicker-example1" style="padding:0">Start Date</label>
+				    <input type="text" id="datepicker-example1" name="start_date" class="input-text" placeholder="Start Date" value="<?php echo date('Y-m-d')?>"/>
+				    <span id="sp_dob" class="error">Enter Start Date.</span>
+				</div>
+				<div  class="four columns">
+				    <label for="datepicker-example2" style="padding:0">End Date</label>
+				    <input type="text" id="datepicker-example2" name="end_date" class="input-text" placeholder="End Date" value="<?php echo date('Y-m-d')?>"/>
+				    <span id="sp_dob" class="error">Enter End Date.</span>
+				</div>
+				<div  class="four columns">
+				</div>
+			    </div>
+			</div>
+			<div class="formRow cf">
+			    <input type="submit" class="button small" value="Submit">
+			</div>
+		    </form>
+		</div>
+	    </div>
 	</div>
+    </div>
 </div>
 <div class="nine columns">
 	<div class="row">
@@ -68,8 +83,8 @@
 								<?php $i = 1; foreach($feedback as $feedback_data) { ?>
 									<tr>
 										<td class="essential"><?php echo $i++;?></td>
-										<td><?php echo ucfirst($feedback_data['feedback_subject']);?></td>
-										<td><?php echo ucfirst($feedback_data['feedback_description']);?></td>
+										<td><?php if(strlen($feedback_data['feedback_subject'])>50) echo substr(ucfirst($feedback_data['feedback_subject']),0,50)."..."; else echo substr(ucfirst($feedback_data['feedback_subject']),0,50); ?></td>
+										<td style="word-wrap: break-word !important"><?php if(strlen($feedback_data['feedback_subject'])>50) echo substr(ucfirst($feedback_data['feedback_description']),0,150)."..."; else  echo substr(ucfirst($feedback_data['feedback_description']),0,150);?></td>
 										<td><?php echo ucwords($feedback_data['created_by']);?></thd>
 										<td><?php
 										    if($feedback_data['user_type']=="A"){
@@ -85,9 +100,14 @@
 										    }
 										    ?></td>
 										<td><?php echo date("m-d-Y",strtotime($feedback_data['created_date']));?></td>
-										<td class="content_actions">
-											<a href="<?php echo base_url()?>feedback/feedback/read_mark_feedback/<?php echo $feedback_data['feedback_id']?>" class="sepV_a" title="Edit">
-											<img src="<?php echo base_url()?>assets/assets/img/check-mark-icon.png" alt="" /></a>&nbsp;&nbsp;&nbsp;
+										<td class="content_actions" id="td_<?php echo $feedback_data['feedback_id']?>">
+										    <?php if(!$feedback_data['as_read']) { ?>
+											<a href="javascript:void(0)" onclick="make_mark_read(<?php echo $feedback_data['feedback_id']?>)" id="read_<?php echo $feedback_data['feedback_id']?>" class="sepV_a" title="Edit">
+											    Mark as read
+											</a>
+										    <?php } else {?>
+											<img src="<?php echo base_url()?>assets/assets/img/check-mark-icon.png" alt="" />
+										    <?php } ?>
 										</td>
 									</tr>
 								<?php } ?>

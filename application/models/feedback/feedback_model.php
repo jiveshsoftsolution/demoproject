@@ -9,17 +9,19 @@ class Feedback_model extends CI_Model
 		$this->load->database();
 	}
 	
-	public function get_feedback_list(){
+	public function get_feedback_list($start_date,$end_date){
 		$this->db->select("*");
 		$this->db->from("ems_feedback");
-		$this->db->where("as_read","1");
-		$ret = $this->db->get(); 
+		$this->db->where("DATE(created_date)>=",$start_date);
+		$this->db->where("DATE(created_date)<=",$end_date);
+		$ret = $this->db->get();
 		$data = array();
 		$count = 0 ;
 		foreach($ret->result() as $row){
 			$data[$count]['feedback_id'] 			=  $row->feedback_id;
 			$data[$count]['feedback_subject'] 		=  $row->feedback_subject;
-			$data[$count]['feedback_description'] 		=  $row->feedback_description;
+			$data[$count]['feedback_description'] 		=  $row->feedback_description;			
+			$data[$count]['as_read'] 			=  $row->as_read;
 			$data[$count]['user_type'] 			=  $row->user_type;
 			$data[$count]['created_date'] 			=  $row->created_date;
 			$user_id = $row->user_id;
@@ -46,8 +48,8 @@ class Feedback_model extends CI_Model
 				if($ret_data->num_rows()>=1)
 				$data[$count]['created_by'] 		=   $ret_data->result()[0]->staff_name;
 			}
-		}
-		$count++;
+			$count++;
+		}		
 		return $data;
 	}
     
