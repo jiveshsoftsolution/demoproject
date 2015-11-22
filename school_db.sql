@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server version:               5.6.17 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Version:             9.1.0.4867
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,7 +10,12 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table school_gyan.emsparent
+-- Dumping database structure for eschool
+CREATE DATABASE IF NOT EXISTS `eschool` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `eschool`;
+
+
+-- Dumping structure for table eschool.emsparent
 CREATE TABLE IF NOT EXISTS `emsparent` (
   `parent_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
@@ -32,16 +37,24 @@ CREATE TABLE IF NOT EXISTS `emsparent` (
   `password` varchar(30) DEFAULT NULL,
   `parent_email` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.emsparent: ~0 rows (approximately)
+-- Dumping data for table eschool.emsparent: ~9 rows (approximately)
 /*!40000 ALTER TABLE `emsparent` DISABLE KEYS */;
 INSERT INTO `emsparent` (`parent_id`, `student_id`, `father_salutation_id`, `father_first_name`, `father_middle_name`, `father_last_name`, `mother_salutation_id`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `father_photo_url`, `mother_photo_url`, `mother_salutation`, `father_salutation`, `mail_to`, `parent_mobile`, `login_id`, `password`, `parent_email`) VALUES
-	(17, 2, 1, 'F', '1212', '2121', 2, 'M', '12', '12', '143967252338061_Ganatantra-Divas-Images.jpg', '14396725232832_happy-republic-day-2014.jpg', NULL, NULL, 'jiveshp12@gmail.com', '1211211', 'testId', '123789', NULL);
+	(21, 6, 1, 'A1', NULL, 'A1', 2, 'A1', NULL, 'A1', NULL, NULL, NULL, NULL, 'jiveshp12@gmail.com', '8750953636', 'testId', '123789', NULL),
+	(22, 7, 1, 'B1', NULL, 'B1', 2, 'B1', NULL, 'B1', NULL, NULL, NULL, NULL, NULL, '8750953636', 'testId', '123789', NULL),
+	(23, 8, 1, 'C1', NULL, 'C1', 2, 'C1', NULL, 'C1', NULL, NULL, NULL, NULL, 'C1', '8750953636', 'testId', '123789', NULL),
+	(24, 9, 1, 'D1', NULL, 'D1', 2, 'D1', NULL, 'D1', NULL, NULL, NULL, NULL, 'D1', '8750953636', 'testId', '123789', NULL),
+	(25, 10, 1, 'E1', NULL, 'E1', 2, 'E1', NULL, 'E1', NULL, NULL, NULL, NULL, 'E1', '8750953636', 'testId', '123789', NULL),
+	(26, 11, 1, 'N.', 'P.', 'Tiwari', 1, 'Sumitra', '', 'Tiwari', 'F99.jpg', 'M99.jpg', NULL, NULL, 'admin@gmail.com', '87509536369999', 'testId', '123789', NULL),
+	(27, 12, 1, 'A', NULL, 'Tiwari', 1, 'sg', NULL, 'sgfgfs', NULL, NULL, NULL, NULL, 'admin@gmail.com', '9211776541', 'testId', '123789', NULL),
+	(28, 13, 1, 'Sandeep', '', 'Mishra', 2, 'Shivangi', '', 'Mishra', '144153072319602_father pic.jpg', '144153072426497_mother pic.jpg', NULL, NULL, 'amitinu59@gmail.com', '9555791720', 'testId', '123789', NULL),
+	(29, 14, 1, 'sandeep', NULL, 'singh', 2, 'shichha', NULL, 'singh', NULL, NULL, NULL, NULL, 'prisandeep@gmail.com', '99444444444', 'testId', '123789', NULL);
 /*!40000 ALTER TABLE `emsparent` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.emsstudent
+-- Dumping structure for table eschool.emsstudent
 CREATE TABLE IF NOT EXISTS `emsstudent` (
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
   `salutation_id` int(11) DEFAULT NULL,
@@ -64,15 +77,12 @@ CREATE TABLE IF NOT EXISTS `emsstudent` (
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.emsstudent: ~2 rows (approximately)
+-- Dumping data for table eschool.emsstudent: ~0 rows (approximately)
 /*!40000 ALTER TABLE `emsstudent` DISABLE KEYS */;
-INSERT INTO `emsstudent` (`student_id`, `salutation_id`, `first_name`, `middle_name`, `last_name`, `email`, `gender`, `dob`, `login_id`, `password`, `photo_url`, `admission_number`, `created_by`, `created_date`, `updated_by`, `updated_date`, `created_by_type`, `updated_by_type`) VALUES
-	(1, 1, '', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 1, 'amit', '', 'mishra', NULL, 'M', '2015-08-26 00:00:00', 'S_amit', '123789', '143967252361234_download.jpg', NULL, 1, '2015-08-15 22:41:43', 1, '2015-08-15 23:02:03', 0, 0);
 /*!40000 ALTER TABLE `emsstudent` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_attendance
+-- Dumping structure for table eschool.ems_attendance
 CREATE TABLE IF NOT EXISTS `ems_attendance` (
   `attendance_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_teacher_class_id` int(11) DEFAULT NULL,
@@ -84,111 +94,162 @@ CREATE TABLE IF NOT EXISTS `ems_attendance` (
   `approve_date` datetime DEFAULT NULL,
   `approve_time` time DEFAULT NULL,
   `is_send` tinyint(1) NOT NULL DEFAULT '0',
+  `card_no` varchar(50) DEFAULT NULL,
   `attendance_status` varchar(5) NOT NULL,
   `attendance_approve_by_type` varchar(5) NOT NULL,
   `attendance_taken_by` int(11) DEFAULT NULL,
   `attendance_approve_by` int(11) DEFAULT NULL,
-  `attendance_taken_by_type` int(11) DEFAULT NULL,
+  `attendance_taken_by_type` varchar(5) DEFAULT NULL,
   `attendance_updated_by` int(11) DEFAULT NULL,
-  `attendance_updated_by_type` int(11) DEFAULT NULL,
+  `attendance_updated_by_type` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`attendance_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=573 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_attendance: 4 rows
+-- Dumping data for table eschool.ems_attendance: 117 rows
 /*!40000 ALTER TABLE `ems_attendance` DISABLE KEYS */;
-INSERT INTO `ems_attendance` (`attendance_id`, `student_teacher_class_id`, `type`, `attendance_date`, `attendance_time`, `attendance_update_date`, `attendance_update_time`, `approve_date`, `approve_time`, `is_send`, `attendance_status`, `attendance_approve_by_type`, `attendance_taken_by`, `attendance_approve_by`, `attendance_taken_by_type`, `attendance_updated_by`, `attendance_updated_by_type`) VALUES
-	(28, 42, 'morning', '2015-08-17 05:20:34', '2015-08-17 05:20:37', '2015-08-16 05:20:38', '05:20:39', '2015-08-16 05:20:40', '05:20:41', 0, 'A', '12', 1, 1, 1, 1, 1),
-	(29, 42, 'morning', '2015-08-18 05:20:34', '2015-08-18 05:20:37', '2015-08-16 05:20:38', '05:20:39', '2015-08-16 05:20:40', '05:20:41', 0, 'L', '12', 1, 1, 1, 1, 1),
-	(30, 42, 'morning', '2015-08-18 05:20:34', '2015-08-18 05:20:37', '2015-08-16 05:20:38', '05:20:39', '2015-08-16 05:20:40', '05:20:41', 0, 'L', '12', 1, 1, 1, 1, 1),
-	(27, 42, 'morning', '2015-08-16 05:20:34', '2015-08-16 05:20:37', '2015-08-16 05:20:38', '05:20:39', '2015-08-16 05:20:40', '05:20:41', 0, 'P', '12', 1, 1, 1, 1, 1);
 /*!40000 ALTER TABLE `ems_attendance` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_city
+-- Dumping structure for table eschool.ems_city
 CREATE TABLE IF NOT EXISTS `ems_city` (
   `city_id` int(11) NOT NULL AUTO_INCREMENT,
   `city_name` varchar(50) NOT NULL,
   `state_id` varchar(50) NOT NULL,
   PRIMARY KEY (`city_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_city: 3 rows
+-- Dumping data for table eschool.ems_city: 70 rows
 /*!40000 ALTER TABLE `ems_city` DISABLE KEYS */;
 INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
-	(1, 'Allahabad', '1'),
-	(2, 'Lucknow', '1'),
-	(3, 'Varansi', '2');
+	(8, 'Agra', '37'),
+	(7, 'Ghaziabad', '37'),
+	(6, 'Lucknow', '37'),
+	(5, 'Kanpur', '37'),
+	(9, 'Varanasi', '37'),
+	(10, 'Meerut', '37'),
+	(11, 'Allahabad', '37'),
+	(12, 'Bareilly', '37'),
+	(13, 'Aligarh', '37'),
+	(14, 'Moradabad', '37'),
+	(15, 'Saharanpur', '37'),
+	(16, 'Gorakhpur', '37'),
+	(17, 'Noida', '37'),
+	(18, 'Jhansi', '37'),
+	(19, 'Muzaffarnagar', '37'),
+	(20, 'Mathura', '37'),
+	(21, 'Badaun', '37'),
+	(22, 'Rampur', '37'),
+	(23, 'Shahjahanpur', '37'),
+	(24, 'Farrukhabad', '37'),
+	(25, 'Mau', '37'),
+	(26, 'Hapur', '37'),
+	(27, 'Faizabad', '37'),
+	(28, 'Etawah', '37'),
+	(29, 'Mirzapur', '37'),
+	(30, 'Bulandshahr', '37'),
+	(31, 'Bhimnagar', '37'),
+	(32, 'Amroha', '37'),
+	(33, 'Hardoi', '37'),
+	(34, 'Fatehpur', '37'),
+	(35, 'Raebareli', '37'),
+	(36, 'Orai', '37'),
+	(37, 'Sitapur', '37'),
+	(38, 'Bahraich', '37'),
+	(39, 'Ghaziabad', '37'),
+	(40, 'Unnao', '37'),
+	(41, 'Jaunpur', '37'),
+	(42, 'Lakhimpur Kheri', '37'),
+	(43, 'Hathras', '37'),
+	(44, 'Banda', '37'),
+	(45, 'Pilibhit', '37'),
+	(46, 'Mughalsarai	', '37'),
+	(47, 'Barabanki', '37'),
+	(48, 'Bulandshahr', '37'),
+	(49, 'Gonda', '37'),
+	(50, 'Mainpuri', '37'),
+	(51, 'Lalitpur', '37'),
+	(52, 'Etah', '37'),
+	(53, 'Deoria', '37'),
+	(54, 'Ujhan', '37'),
+	(55, 'Ghazipur', '37'),
+	(56, 'Sultanpur', '37'),
+	(57, 'Azamgarh', '37'),
+	(58, 'Bijnor', '37'),
+	(59, 'Sahaswan', '37'),
+	(60, 'Basti', '37'),
+	(61, 'Chandausi', '37'),
+	(62, 'Ambedkar Nagar', '37'),
+	(63, 'Ballia', '37'),
+	(64, 'Mubarakpur', '37'),
+	(65, 'Gautam Budh Nagar', '37'),
+	(66, 'Firozabad', '37'),
+	(67, 'Shamli', '37'),
+	(68, 'Aligarh', '37'),
+	(69, 'Kanshi Ram Nagar', '37'),
+	(70, 'East Delhi', '9'),
+	(71, 'West Delhi', '9'),
+	(72, 'North Delhi', '9'),
+	(73, 'South Delhi', '9'),
+	(74, 'Pratapgarh', '37');
 /*!40000 ALTER TABLE `ems_city` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_class
+-- Dumping structure for table eschool.ems_class
 CREATE TABLE IF NOT EXISTS `ems_class` (
   `class_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_class: ~12 rows (approximately)
+-- Dumping data for table eschool.ems_class: ~14 rows (approximately)
 /*!40000 ALTER TABLE `ems_class` DISABLE KEYS */;
 INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
-	(1, 'I'),
-	(2, 'II'),
-	(3, 'III'),
-	(4, 'IV'),
-	(5, 'V'),
-	(6, 'VI'),
-	(7, 'VII'),
-	(8, 'VIII'),
-	(9, 'IX'),
-	(10, 'X'),
-	(11, 'XI'),
-	(12, 'XII');
+	(1, 'LKG'),
+	(2, 'UKG'),
+	(3, 'I'),
+	(4, 'II'),
+	(5, 'III'),
+	(6, 'IV'),
+	(7, 'V'),
+	(8, 'VI'),
+	(9, 'VII'),
+	(10, 'VIII'),
+	(11, 'IX'),
+	(12, 'X'),
+	(13, 'XI'),
+	(14, 'XII');
 /*!40000 ALTER TABLE `ems_class` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_class_section
+-- Dumping structure for table eschool.ems_class_section
 CREATE TABLE IF NOT EXISTS `ems_class_section` (
   `class_section_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
   `sequence` int(11) DEFAULT NULL,
   PRIMARY KEY (`class_section_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_class_section: ~12 rows (approximately)
+-- Dumping data for table eschool.ems_class_section: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_class_section` DISABLE KEYS */;
-INSERT INTO `ems_class_section` (`class_section_id`, `class_id`, `section_id`, `sequence`) VALUES
-	(1, 1, 2, 1),
-	(2, 2, 2, 2),
-	(3, 3, 2, 3),
-	(4, 4, 2, 4),
-	(5, 5, 2, 5),
-	(6, 6, 2, 6),
-	(7, 7, 2, 7),
-	(8, 8, 2, 8),
-	(9, 9, 2, 9),
-	(10, 10, 2, 10),
-	(11, 11, 2, 11),
-	(12, 12, 2, 12);
 /*!40000 ALTER TABLE `ems_class_section` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_country
+-- Dumping structure for table eschool.ems_country
 CREATE TABLE IF NOT EXISTS `ems_country` (
   `country_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_name` varchar(50) NOT NULL,
   PRIMARY KEY (`country_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_country: 2 rows
+-- Dumping data for table eschool.ems_country: 1 rows
 /*!40000 ALTER TABLE `ems_country` DISABLE KEYS */;
 INSERT INTO `ems_country` (`country_id`, `country_name`) VALUES
-	(1, 'INDIA'),
-	(2, 'Singapore');
+	(1, 'INDIA');
 /*!40000 ALTER TABLE `ems_country` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_daily_timetable
+-- Dumping structure for table eschool.ems_daily_timetable
 CREATE TABLE IF NOT EXISTS `ems_daily_timetable` (
   `daily_timetable_id` int(55) NOT NULL AUTO_INCREMENT,
   `session_id` int(55) NOT NULL,
@@ -205,30 +266,24 @@ CREATE TABLE IF NOT EXISTS `ems_daily_timetable` (
   PRIMARY KEY (`daily_timetable_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_daily_timetable: ~3 rows (approximately)
+-- Dumping data for table eschool.ems_daily_timetable: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_daily_timetable` DISABLE KEYS */;
-INSERT INTO `ems_daily_timetable` (`daily_timetable_id`, `session_id`, `season_id`, `teacher_id`, `paper_id`, `class_section_id`, `period_id`, `week_day`, `created_by`, `created_date`, `updated_by`, `updated_date`) VALUES
-	(1, 1, NULL, 1, 1, 6, 1, 'monday', 0, '0000-00-00 00:00:00', NULL, NULL),
-	(2, 1, NULL, 1, 2, 6, 1, 'wednesday', 11, '2014-04-05 18:26:41', NULL, NULL),
-	(3, 1, 1, 0, 2, 2, 7, 'monday', 11, '2014-05-24 11:43:43', NULL, NULL);
 /*!40000 ALTER TABLE `ems_daily_timetable` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_exam
+-- Dumping structure for table eschool.ems_exam
 CREATE TABLE IF NOT EXISTS `ems_exam` (
   `exam_id` int(11) NOT NULL AUTO_INCREMENT,
   `exam_name` varchar(50) NOT NULL,
   PRIMARY KEY (`exam_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_exam: 1 rows
+-- Dumping data for table eschool.ems_exam: 0 rows
 /*!40000 ALTER TABLE `ems_exam` DISABLE KEYS */;
-INSERT INTO `ems_exam` (`exam_id`, `exam_name`) VALUES
-	(1, 'Half Yearly');
 /*!40000 ALTER TABLE `ems_exam` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_exam_period
+-- Dumping structure for table eschool.ems_exam_period
 CREATE TABLE IF NOT EXISTS `ems_exam_period` (
   `exam_period_id` int(11) NOT NULL AUTO_INCREMENT,
   `exam_id` int(11) NOT NULL,
@@ -238,14 +293,12 @@ CREATE TABLE IF NOT EXISTS `ems_exam_period` (
   PRIMARY KEY (`exam_period_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_exam_period: 1 rows
+-- Dumping data for table eschool.ems_exam_period: 0 rows
 /*!40000 ALTER TABLE `ems_exam_period` DISABLE KEYS */;
-INSERT INTO `ems_exam_period` (`exam_period_id`, `exam_id`, `session_id`, `start_date`, `end_date`) VALUES
-	(1, 1, 1, '2015-05-23 18:39:21', '2015-05-23 18:39:22');
 /*!40000 ALTER TABLE `ems_exam_period` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_exam_schedule
+-- Dumping structure for table eschool.ems_exam_schedule
 CREATE TABLE IF NOT EXISTS `ems_exam_schedule` (
   `exam_schedule_id` int(11) NOT NULL AUTO_INCREMENT,
   `exam_period_id` int(11) NOT NULL,
@@ -257,14 +310,12 @@ CREATE TABLE IF NOT EXISTS `ems_exam_schedule` (
   PRIMARY KEY (`exam_schedule_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_exam_schedule: 1 rows
+-- Dumping data for table eschool.ems_exam_schedule: 0 rows
 /*!40000 ALTER TABLE `ems_exam_schedule` DISABLE KEYS */;
-INSERT INTO `ems_exam_schedule` (`exam_schedule_id`, `exam_period_id`, `exam_date`, `time_from`, `time_to`, `paper_id`, `sequence`) VALUES
-	(1, 1, '2015-05-23 18:39:29', '18:39:30', '18:39:32', 1, 1);
 /*!40000 ALTER TABLE `ems_exam_schedule` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_exam_to_marks
+-- Dumping structure for table eschool.ems_exam_to_marks
 CREATE TABLE IF NOT EXISTS `ems_exam_to_marks` (
   `exam_period_id` int(11) NOT NULL,
   `paper_id` int(11) NOT NULL,
@@ -272,14 +323,30 @@ CREATE TABLE IF NOT EXISTS `ems_exam_to_marks` (
   PRIMARY KEY (`exam_period_id`,`paper_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_exam_to_marks: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_exam_to_marks: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_exam_to_marks` DISABLE KEYS */;
-INSERT INTO `ems_exam_to_marks` (`exam_period_id`, `paper_id`, `max_marks`) VALUES
-	(0, 1, 50);
 /*!40000 ALTER TABLE `ems_exam_to_marks` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_fee_amount
+-- Dumping structure for table eschool.ems_feedback
+CREATE TABLE IF NOT EXISTS `ems_feedback` (
+  `feedback_id` int(11) NOT NULL AUTO_INCREMENT,
+  `feedback_subject` varchar(200) DEFAULT NULL,
+  `feedback_description` text,
+  `as_read` enum('0','1') DEFAULT '0',
+  `user_id` int(11) DEFAULT NULL,
+  `user_type` enum('A','S','T','P') DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`feedback_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table eschool.ems_feedback: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ems_feedback` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ems_feedback` ENABLE KEYS */;
+
+
+-- Dumping structure for table eschool.ems_fee_amount
 CREATE TABLE IF NOT EXISTS `ems_fee_amount` (
   `amount_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_section_id` varchar(50) NOT NULL,
@@ -291,16 +358,37 @@ CREATE TABLE IF NOT EXISTS `ems_fee_amount` (
   PRIMARY KEY (`amount_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_fee_amount: ~2 rows (approximately)
+-- Dumping data for table eschool.ems_fee_amount: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_fee_amount` DISABLE KEYS */;
-INSERT INTO `ems_fee_amount` (`amount_id`, `class_section_id`, `session_id`, `month_id`, `created_date`, `amount`, `fee_type_id`) VALUES
-	(5, '19,20', 1, '1,2', '2014-04-09 22:55:07', 100, 1),
-	(6, '19,20,38', 2, '1,2,5', '2014-04-10 00:36:33', 1000, 1);
 /*!40000 ALTER TABLE `ems_fee_amount` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_fee_submission
+-- Dumping structure for table eschool.ems_fee_submission
 CREATE TABLE IF NOT EXISTS `ems_fee_submission` (
+  `submission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) DEFAULT NULL,
+  `class_section_id` int(11) DEFAULT NULL,
+  `session_id` int(11) DEFAULT NULL,
+  `roll_number` int(11) DEFAULT NULL,
+  `submission_date` date DEFAULT NULL,
+  `month_id` varchar(50) DEFAULT NULL,
+  `tuition_fee` int(11) DEFAULT NULL,
+  `transport_fee` int(11) DEFAULT NULL,
+  `miscellaneous_fee` int(11) DEFAULT NULL,
+  `total_fee` int(11) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`submission_id`),
+  KEY `submission_id` (`submission_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table eschool.ems_fee_submission: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ems_fee_submission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ems_fee_submission` ENABLE KEYS */;
+
+
+-- Dumping structure for table eschool.ems_fee_submission_old
+CREATE TABLE IF NOT EXISTS `ems_fee_submission_old` (
   `submission_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
@@ -312,38 +400,27 @@ CREATE TABLE IF NOT EXISTS `ems_fee_submission` (
   PRIMARY KEY (`submission_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_fee_submission: ~0 rows (approximately)
-/*!40000 ALTER TABLE `ems_fee_submission` DISABLE KEYS */;
-INSERT INTO `ems_fee_submission` (`submission_id`, `student_id`, `session_id`, `month_id`, `amount`, `balance`, `fine`, `submitted_date`) VALUES
-	(1, 1, 1, 1, 300, 600, NULL, '2014-03-02 23:08:22');
-/*!40000 ALTER TABLE `ems_fee_submission` ENABLE KEYS */;
+-- Dumping data for table eschool.ems_fee_submission_old: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ems_fee_submission_old` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ems_fee_submission_old` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_fee_type
+-- Dumping structure for table eschool.ems_fee_type
 CREATE TABLE IF NOT EXISTS `ems_fee_type` (
   `fee_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `fee_type_name` varchar(200) NOT NULL,
-  `refundable` tinyint(1) NOT NULL,
+  `refundable` enum('0','1') NOT NULL DEFAULT '0',
+  `is_active` enum('0','1') NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`fee_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_fee_type: ~8 rows (approximately)
+-- Dumping data for table eschool.ems_fee_type: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_fee_type` DISABLE KEYS */;
-INSERT INTO `ems_fee_type` (`fee_type_id`, `fee_type_name`, `refundable`, `created_date`, `is_active`) VALUES
-	(1, 'Tuition Fee', 0, '2014-02-23 10:40:26', 0),
-	(2, 'Supw', 0, '2014-02-23 10:41:08', 0),
-	(3, 'tyyy', 1, '2014-02-23 10:45:07', 1),
-	(4, 'tyyy', 1, '2014-02-23 10:45:15', 1),
-	(5, 'tyyy', 0, '2014-02-23 10:46:02', 1),
-	(7, 'Sports Fee', 0, '2014-03-03 22:35:22', 1),
-	(8, 'new exam', 0, '2014-04-09 20:17:00', 0),
-	(9, 'new Exam 1', 1, '2014-04-09 20:17:35', 1);
 /*!40000 ALTER TABLE `ems_fee_type` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_grade_to_marks
+-- Dumping structure for table eschool.ems_grade_to_marks
 CREATE TABLE IF NOT EXISTS `ems_grade_to_marks` (
   `grade_id` int(11) NOT NULL,
   `min_limit` float NOT NULL,
@@ -352,24 +429,12 @@ CREATE TABLE IF NOT EXISTS `ems_grade_to_marks` (
   PRIMARY KEY (`grade_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_grade_to_marks: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_grade_to_marks: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_grade_to_marks` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_grade_to_marks` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_landmark
-CREATE TABLE IF NOT EXISTS `ems_landmark` (
-  `landmark_id` int(11) NOT NULL AUTO_INCREMENT,
-  `landmark_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`landmark_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- Dumping data for table school_gyan.ems_landmark: 0 rows
-/*!40000 ALTER TABLE `ems_landmark` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ems_landmark` ENABLE KEYS */;
-
-
--- Dumping structure for table school_gyan.ems_login
+-- Dumping structure for table eschool.ems_login
 CREATE TABLE IF NOT EXISTS `ems_login` (
   `user_login_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_login_type` varchar(20) NOT NULL COMMENT 'A="Admin" S="Student" T="Techer C="Coordinator""',
@@ -377,19 +442,16 @@ CREATE TABLE IF NOT EXISTS `ems_login` (
   `password` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL COMMENT 'PK of ems_student, ems_parent, ems_teacher, ems_user',
   PRIMARY KEY (`user_login_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_login: ~3 rows (approximately)
+-- Dumping data for table eschool.ems_login: ~1 rows (approximately)
 /*!40000 ALTER TABLE `ems_login` DISABLE KEYS */;
 INSERT INTO `ems_login` (`user_login_id`, `user_login_type`, `login_id`, `password`, `user_id`) VALUES
-	(2, 'A', 'Admin', 'admin', 1),
-	(40, 'S', 'Sami23735', 'Q!ig2FeO', 2),
-	(41, 'P', 'PF171478', 'l0W7Ibzu', 17),
-	(42, 'T', 'Taa532101', '5ftRiYEN', 53);
+	(1, 'A', 'Admin', 'admin', 1);
 /*!40000 ALTER TABLE `ems_login` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_marks
+-- Dumping structure for table eschool.ems_marks
 CREATE TABLE IF NOT EXISTS `ems_marks` (
   `marks_id` int(11) NOT NULL AUTO_INCREMENT,
   `exam_period_id` int(11) NOT NULL,
@@ -399,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `ems_marks` (
   PRIMARY KEY (`marks_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_marks: 6 rows
+-- Dumping data for table eschool.ems_marks: 6 rows
 /*!40000 ALTER TABLE `ems_marks` DISABLE KEYS */;
 INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
 	(23, 1, 20, 1, 50),
@@ -411,25 +473,23 @@ INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`
 /*!40000 ALTER TABLE `ems_marks` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_menu
+-- Dumping structure for table eschool.ems_menu
 CREATE TABLE IF NOT EXISTS `ems_menu` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(100) NOT NULL,
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_menu: ~14 rows (approximately)
+-- Dumping data for table eschool.ems_menu: ~12 rows (approximately)
 /*!40000 ALTER TABLE `ems_menu` DISABLE KEYS */;
 INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
 	(1, 'General SMS'),
 	(2, 'Attendance'),
+	(3, 'Fee'),
+	(4, 'Feedback'),
 	(5, 'Registration'),
 	(6, 'Notice'),
-	(7, 'Class'),
-	(8, 'Sesssion'),
-	(9, 'Subject'),
 	(14, 'Profile'),
-	(23, 'Fees'),
 	(24, 'Exam'),
 	(210, 'Online Exam'),
 	(211, 'Access Right'),
@@ -438,14 +498,14 @@ INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
 /*!40000 ALTER TABLE `ems_menu` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_month
+-- Dumping structure for table eschool.ems_month
 CREATE TABLE IF NOT EXISTS `ems_month` (
   `month_id` int(11) NOT NULL AUTO_INCREMENT,
   `month` varchar(50) NOT NULL,
   PRIMARY KEY (`month_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_month: ~12 rows (approximately)
+-- Dumping data for table eschool.ems_month: ~12 rows (approximately)
 /*!40000 ALTER TABLE `ems_month` DISABLE KEYS */;
 INSERT INTO `ems_month` (`month_id`, `month`) VALUES
 	(1, 'January'),
@@ -463,44 +523,26 @@ INSERT INTO `ems_month` (`month_id`, `month`) VALUES
 /*!40000 ALTER TABLE `ems_month` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_news_events
-CREATE TABLE IF NOT EXISTS `ems_news_events` (
-  `news_id` int(11) NOT NULL AUTO_INCREMENT,
-  `news_title` text NOT NULL,
-  `news_description` varchar(500) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Dumping data for table school_gyan.ems_news_events: ~0 rows (approximately)
-/*!40000 ALTER TABLE `ems_news_events` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ems_news_events` ENABLE KEYS */;
-
-
--- Dumping structure for table school_gyan.ems_notice
+-- Dumping structure for table eschool.ems_notice
 CREATE TABLE IF NOT EXISTS `ems_notice` (
   `notice_id` int(11) NOT NULL AUTO_INCREMENT,
   `notice` text NOT NULL,
   `notice_for` int(11) NOT NULL,
   `class_section_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `post_to_web` tinyint(1) NOT NULL,
+  `post_to_web` enum('0','1') NOT NULL DEFAULT '0',
   `notice_subject` varchar(500) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
   `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`notice_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_notice: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_notice: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_notice` DISABLE KEYS */;
-INSERT INTO `ems_notice` (`notice_id`, `notice`, `notice_for`, `class_section_id`, `class_id`, `created_date`, `post_to_web`, `notice_subject`, `updated_date`) VALUES
-	(2, 'Today is holiday', 2, 1, NULL, '2014-06-28 21:52:41', 1, 'Holiday News', '2015-06-17 00:03:09'),
-	(10, 'New1', 1, NULL, NULL, '2015-06-16 20:37:41', 1, 'New1', '2015-06-17 00:07:41');
 /*!40000 ALTER TABLE `ems_notice` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_online_exam
+-- Dumping structure for table eschool.ems_online_exam
 CREATE TABLE IF NOT EXISTS `ems_online_exam` (
   `online_exam_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_section_id` int(11) NOT NULL,
@@ -512,12 +554,12 @@ CREATE TABLE IF NOT EXISTS `ems_online_exam` (
   PRIMARY KEY (`online_exam_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_online_exam: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_online_exam: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_online_exam` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_online_exam` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_online_exam_que_marks
+-- Dumping structure for table eschool.ems_online_exam_que_marks
 CREATE TABLE IF NOT EXISTS `ems_online_exam_que_marks` (
   `que_marks_id` int(11) NOT NULL AUTO_INCREMENT,
   `online_exam_id` int(11) NOT NULL,
@@ -528,12 +570,12 @@ CREATE TABLE IF NOT EXISTS `ems_online_exam_que_marks` (
   PRIMARY KEY (`que_marks_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_online_exam_que_marks: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_online_exam_que_marks: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_online_exam_que_marks` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_online_exam_que_marks` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_online_exam_student_ans
+-- Dumping structure for table eschool.ems_online_exam_student_ans
 CREATE TABLE IF NOT EXISTS `ems_online_exam_student_ans` (
   `que_marks_id` int(11) NOT NULL,
   `student_teacher_class_id` int(11) NOT NULL,
@@ -543,12 +585,12 @@ CREATE TABLE IF NOT EXISTS `ems_online_exam_student_ans` (
   PRIMARY KEY (`que_marks_id`,`student_teacher_class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_online_exam_student_ans: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_online_exam_student_ans: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_online_exam_student_ans` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_online_exam_student_ans` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_online_question_ans
+-- Dumping structure for table eschool.ems_online_question_ans
 CREATE TABLE IF NOT EXISTS `ems_online_question_ans` (
   `que_ans_id` int(11) NOT NULL AUTO_INCREMENT,
   `que_marks_id` int(11) NOT NULL,
@@ -561,12 +603,12 @@ CREATE TABLE IF NOT EXISTS `ems_online_question_ans` (
   PRIMARY KEY (`que_ans_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_online_question_ans: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_online_question_ans: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_online_question_ans` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_online_question_ans` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_paper
+-- Dumping structure for table eschool.ems_paper
 CREATE TABLE IF NOT EXISTS `ems_paper` (
   `paper_id` int(11) NOT NULL AUTO_INCREMENT,
   `paper_name` varchar(50) NOT NULL,
@@ -579,12 +621,12 @@ CREATE TABLE IF NOT EXISTS `ems_paper` (
   PRIMARY KEY (`paper_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_paper: 0 rows
+-- Dumping data for table eschool.ems_paper: 0 rows
 /*!40000 ALTER TABLE `ems_paper` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_paper` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_paper_details
+-- Dumping structure for table eschool.ems_paper_details
 CREATE TABLE IF NOT EXISTS `ems_paper_details` (
   `paper_id` int(11) NOT NULL,
   `class_section_id` int(11) NOT NULL,
@@ -593,12 +635,12 @@ CREATE TABLE IF NOT EXISTS `ems_paper_details` (
   PRIMARY KEY (`paper_id`,`class_section_id`,`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_paper_details: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_paper_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_paper_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_paper_details` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_parent_detail
+-- Dumping structure for table eschool.ems_parent_detail
 CREATE TABLE IF NOT EXISTS `ems_parent_detail` (
   `parent_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
@@ -609,12 +651,12 @@ CREATE TABLE IF NOT EXISTS `ems_parent_detail` (
   PRIMARY KEY (`parent_detail_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_parent_detail: 0 rows
+-- Dumping data for table eschool.ems_parent_detail: 0 rows
 /*!40000 ALTER TABLE `ems_parent_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_parent_detail` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_period_time
+-- Dumping structure for table eschool.ems_period_time
 CREATE TABLE IF NOT EXISTS `ems_period_time` (
   `period_id` int(11) NOT NULL AUTO_INCREMENT,
   `period_num` int(11) NOT NULL,
@@ -624,18 +666,14 @@ CREATE TABLE IF NOT EXISTS `ems_period_time` (
   `end_time` datetime DEFAULT NULL,
   `season_id` int(11) NOT NULL,
   PRIMARY KEY (`period_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_period_time: 3 rows
+-- Dumping data for table eschool.ems_period_time: 0 rows
 /*!40000 ALTER TABLE `ems_period_time` DISABLE KEYS */;
-INSERT INTO `ems_period_time` (`period_id`, `period_num`, `description`, `session_id`, `start_time`, `end_time`, `season_id`) VALUES
-	(8, 12, 'jivesh', 2, '2014-02-02 00:00:00', '2014-02-02 00:00:00', 5),
-	(7, 0, 'sssasa', 1, '2014-02-02 00:00:00', '2014-02-02 00:00:00', 1),
-	(6, 1, 'qw', 1, '2014-02-02 00:00:00', '2014-02-02 00:00:00', 1);
 /*!40000 ALTER TABLE `ems_period_time` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_result
+-- Dumping structure for table eschool.ems_result
 CREATE TABLE IF NOT EXISTS `ems_result` (
   `result_id` int(11) NOT NULL AUTO_INCREMENT,
   `session_id` int(11) NOT NULL,
@@ -646,27 +684,29 @@ CREATE TABLE IF NOT EXISTS `ems_result` (
   PRIMARY KEY (`result_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_result: 0 rows
+-- Dumping data for table eschool.ems_result: 0 rows
 /*!40000 ALTER TABLE `ems_result` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_result` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_salutation
+-- Dumping structure for table eschool.ems_salutation
 CREATE TABLE IF NOT EXISTS `ems_salutation` (
   `salutation_id` int(11) NOT NULL AUTO_INCREMENT,
   `salutation` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`salutation_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_salutation: 2 rows
+-- Dumping data for table eschool.ems_salutation: 4 rows
 /*!40000 ALTER TABLE `ems_salutation` DISABLE KEYS */;
 INSERT INTO `ems_salutation` (`salutation_id`, `salutation`) VALUES
 	(1, 'Mr.'),
-	(2, 'Mrs.');
+	(2, 'Mrs.'),
+	(3, 'Prof.'),
+	(4, 'Dr.');
 /*!40000 ALTER TABLE `ems_salutation` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_schedule
+-- Dumping structure for table eschool.ems_schedule
 CREATE TABLE IF NOT EXISTS `ems_schedule` (
   `schdule_id` int(11) NOT NULL AUTO_INCREMENT,
   `day` varchar(10) NOT NULL,
@@ -684,43 +724,44 @@ CREATE TABLE IF NOT EXISTS `ems_schedule` (
   PRIMARY KEY (`schdule_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_schedule: 0 rows
+-- Dumping data for table eschool.ems_schedule: 0 rows
 /*!40000 ALTER TABLE `ems_schedule` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_schedule` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_school_profile
+-- Dumping structure for table eschool.ems_school_profile
 CREATE TABLE IF NOT EXISTS `ems_school_profile` (
   `school_id` int(11) NOT NULL AUTO_INCREMENT,
-  `school_name` longtext,
+  `school_name` varchar(500) DEFAULT NULL,
+  `school_address` text,
   `school_logo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_school_profile: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_school_profile: ~1 rows (approximately)
 /*!40000 ALTER TABLE `ems_school_profile` DISABLE KEYS */;
-INSERT INTO `ems_school_profile` (`school_id`, `school_name`, `school_logo`) VALUES
-	(2, 'UDT eSchool', 'assets/assets/img/school_logo.png'),
-	(3, 'UDT eSchool', 'assets/assets/img/L_15236.gif');
+INSERT INTO `ems_school_profile` (`school_id`, `school_name`, `school_address`, `school_logo`) VALUES
+	(2, 'UDT eSchool', 'New Delhi-1110004', 'assets/assets/img/school_logo.png');
 /*!40000 ALTER TABLE `ems_school_profile` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_school_user_type
+-- Dumping structure for table eschool.ems_school_user_type
 CREATE TABLE IF NOT EXISTS `ems_school_user_type` (
   `school_user_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_type` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`school_user_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_school_user_type: 2 rows
+-- Dumping data for table eschool.ems_school_user_type: 3 rows
 /*!40000 ALTER TABLE `ems_school_user_type` DISABLE KEYS */;
 INSERT INTO `ems_school_user_type` (`school_user_type_id`, `user_type`) VALUES
 	(1, 'Teacher'),
-	(2, 'Principal');
+	(2, 'Principal'),
+	(3, 'Other Category');
 /*!40000 ALTER TABLE `ems_school_user_type` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_season
+-- Dumping structure for table eschool.ems_season
 CREATE TABLE IF NOT EXISTS `ems_season` (
   `season_id` int(11) NOT NULL AUTO_INCREMENT,
   `season_name` varchar(100) NOT NULL,
@@ -729,21 +770,21 @@ CREATE TABLE IF NOT EXISTS `ems_season` (
   PRIMARY KEY (`season_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_season: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_season: ~1 rows (approximately)
 /*!40000 ALTER TABLE `ems_season` DISABLE KEYS */;
 INSERT INTO `ems_season` (`season_id`, `season_name`, `start_date`, `end_date`) VALUES
 	(1, 'winter', '2015-07-03 22:40:38', '2016-08-02 22:40:39');
 /*!40000 ALTER TABLE `ems_season` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_section
+-- Dumping structure for table eschool.ems_section
 CREATE TABLE IF NOT EXISTS `ems_section` (
   `section_id` int(11) NOT NULL AUTO_INCREMENT,
   `section_name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`section_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_section: ~6 rows (approximately)
+-- Dumping data for table eschool.ems_section: ~6 rows (approximately)
 /*!40000 ALTER TABLE `ems_section` DISABLE KEYS */;
 INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
 	(2, 'A'),
@@ -755,7 +796,7 @@ INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
 /*!40000 ALTER TABLE `ems_section` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_sent_messages
+-- Dumping structure for table eschool.ems_sent_messages
 CREATE TABLE IF NOT EXISTS `ems_sent_messages` (
   `sms_id` int(11) NOT NULL AUTO_INCREMENT,
   `message_content` varchar(500) NOT NULL DEFAULT '0',
@@ -764,18 +805,14 @@ CREATE TABLE IF NOT EXISTS `ems_sent_messages` (
   `mobile_no` varchar(50) NOT NULL DEFAULT '0',
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`sms_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_sent_messages: ~2 rows (approximately)
+-- Dumping data for table eschool.ems_sent_messages: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_sent_messages` DISABLE KEYS */;
-INSERT INTO `ems_sent_messages` (`sms_id`, `message_content`, `sender_id`, `receiver_id`, `mobile_no`, `created_date`) VALUES
-	(1, 'This is a test transaction sms', 1, 9, '8750953636', '2015-06-27 16:34:40'),
-	(2, 'This is a test transaction sms', 1, 10, '8750953636', '2015-06-27 16:34:40'),
-	(3, 'Dear Parent, Your child Amit is absent today. Hope everything is fine. Regards eSchool', 1, 10, '8750953636', '2015-07-27 00:23:01');
 /*!40000 ALTER TABLE `ems_sent_messages` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_session
+-- Dumping structure for table eschool.ems_session
 CREATE TABLE IF NOT EXISTS `ems_session` (
   `session_id` int(11) NOT NULL AUTO_INCREMENT,
   `session_name` varchar(50) NOT NULL,
@@ -784,21 +821,21 @@ CREATE TABLE IF NOT EXISTS `ems_session` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_session: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_session: ~1 rows (approximately)
 /*!40000 ALTER TABLE `ems_session` DISABLE KEYS */;
 INSERT INTO `ems_session` (`session_id`, `session_name`, `start_date`, `end_date`) VALUES
-	(1, '2014-15', '2014-04-01 00:02:49', '2015-04-01 00:03:05');
+	(1, '2015-16', '2015-04-01 00:02:49', '2015-04-01 00:03:05');
 /*!40000 ALTER TABLE `ems_session` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_session_season
+-- Dumping structure for table eschool.ems_session_season
 CREATE TABLE IF NOT EXISTS `ems_session_season` (
   `session_id` int(11) NOT NULL,
   `season_id` int(11) NOT NULL,
   PRIMARY KEY (`session_id`,`season_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_session_season: ~2 rows (approximately)
+-- Dumping data for table eschool.ems_session_season: ~2 rows (approximately)
 /*!40000 ALTER TABLE `ems_session_season` DISABLE KEYS */;
 INSERT INTO `ems_session_season` (`session_id`, `season_id`) VALUES
 	(1, 1),
@@ -806,33 +843,38 @@ INSERT INTO `ems_session_season` (`session_id`, `season_id`) VALUES
 /*!40000 ALTER TABLE `ems_session_season` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_sms_api
+-- Dumping structure for table eschool.ems_sms_api
 CREATE TABLE IF NOT EXISTS `ems_sms_api` (
   `api_id` int(11) NOT NULL AUTO_INCREMENT,
   `api_url` varchar(500) NOT NULL,
   PRIMARY KEY (`api_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_sms_api: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_sms_api: ~1 rows (approximately)
 /*!40000 ALTER TABLE `ems_sms_api` DISABLE KEYS */;
+INSERT INTO `ems_sms_api` (`api_id`, `api_url`) VALUES
+	(1, 'http://alerts.sinfini.com/web2sms.php');
 /*!40000 ALTER TABLE `ems_sms_api` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_sms_template
+-- Dumping structure for table eschool.ems_sms_template
 CREATE TABLE IF NOT EXISTS `ems_sms_template` (
   `template_id` int(11) NOT NULL AUTO_INCREMENT,
   `template_content` varchar(200) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `api_id` int(11) DEFAULT NULL COMMENT 'identify the api for the template',
   PRIMARY KEY (`template_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_sms_template: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_sms_template: ~2 rows (approximately)
 /*!40000 ALTER TABLE `ems_sms_template` DISABLE KEYS */;
+INSERT INTO `ems_sms_template` (`template_id`, `template_content`, `is_active`, `api_id`) VALUES
+	(1, 'Tomorrow will be holiday', 1, 1),
+	(2, 'Tomorrow will be College Annual Function Day', 1, 1);
 /*!40000 ALTER TABLE `ems_sms_template` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_staff
+-- Dumping structure for table eschool.ems_staff
 CREATE TABLE IF NOT EXISTS `ems_staff` (
   `staff_id` int(11) NOT NULL AUTO_INCREMENT,
   `salutation_id` int(11) DEFAULT NULL,
@@ -853,16 +895,14 @@ CREATE TABLE IF NOT EXISTS `ems_staff` (
   `updated_by` int(11) DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`staff_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_staff: 1 rows
+-- Dumping data for table eschool.ems_staff: 0 rows
 /*!40000 ALTER TABLE `ems_staff` DISABLE KEYS */;
-INSERT INTO `ems_staff` (`staff_id`, `salutation_id`, `first_name`, `middle_name`, `last_name`, `gender`, `dob`, `mobile`, `phone`, `school_user_type_id`, `email`, `photo_url`, `login_id`, `password`, `created_by`, `created_date`, `updated_by`, `updated_date`) VALUES
-	(53, 1, 'aa', NULL, 'aa', 'M', '2015-08-20 00:00:00', '1211', '3232', 1, '32323@gmail.com', '143968453149552_download (1).jpg', NULL, NULL, 11, '2015-08-16 02:22:11', NULL, NULL);
 /*!40000 ALTER TABLE `ems_staff` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_staff_address
+-- Dumping structure for table eschool.ems_staff_address
 CREATE TABLE IF NOT EXISTS `ems_staff_address` (
   `staff_address_id` int(11) NOT NULL AUTO_INCREMENT,
   `staff_id` int(11) NOT NULL,
@@ -874,33 +914,91 @@ CREATE TABLE IF NOT EXISTS `ems_staff_address` (
   `country_id` varchar(11) DEFAULT NULL,
   `pincode` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`staff_address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_staff_address: 1 rows
+-- Dumping data for table eschool.ems_staff_address: 0 rows
 /*!40000 ALTER TABLE `ems_staff_address` DISABLE KEYS */;
-INSERT INTO `ems_staff_address` (`staff_address_id`, `staff_id`, `address1`, `address2`, `address3`, `city_id`, `state_id`, `country_id`, `pincode`) VALUES
-	(34, 53, '12', NULL, '12', '2', '1', '1', '121');
 /*!40000 ALTER TABLE `ems_staff_address` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_state
+-- Dumping structure for table eschool.ems_staff_attendance
+CREATE TABLE IF NOT EXISTS `ems_staff_attendance` (
+  `attendance_id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `attendance_date` datetime DEFAULT NULL,
+  `attendance_time` datetime DEFAULT NULL,
+  `attendance_update_date` datetime DEFAULT NULL,
+  `attendance_update_time` time DEFAULT NULL,
+  `approve_date` datetime DEFAULT NULL,
+  `approve_time` time DEFAULT NULL,
+  `attendance_status` varchar(5) NOT NULL,
+  `attendance_approve_by_type` varchar(5) NOT NULL,
+  `attendance_taken_by` int(11) DEFAULT NULL,
+  `attendance_approve_by` int(11) DEFAULT NULL,
+  `attendance_taken_by_type` int(11) DEFAULT NULL,
+  `attendance_updated_by` int(11) DEFAULT NULL,
+  `attendance_updated_by_type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`attendance_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- Dumping data for table eschool.ems_staff_attendance: 0 rows
+/*!40000 ALTER TABLE `ems_staff_attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ems_staff_attendance` ENABLE KEYS */;
+
+
+-- Dumping structure for table eschool.ems_state
 CREATE TABLE IF NOT EXISTS `ems_state` (
   `state_id` int(11) NOT NULL AUTO_INCREMENT,
   `state_name` varchar(50) NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`state_id`),
   UNIQUE KEY `state_id` (`state_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_state: 2 rows
+-- Dumping data for table eschool.ems_state: 36 rows
 /*!40000 ALTER TABLE `ems_state` DISABLE KEYS */;
 INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
-	(1, 'Utter Pradesh', 1),
-	(2, 'Madhya Pradesh', 1);
+	(5, 'Chandigarh', 1),
+	(4, 'Andaman and Nicobar', 1),
+	(6, 'Dadra and Nagar Haveli', 1),
+	(7, 'Daman and Diu', 1),
+	(8, 'Lakshadweep', 1),
+	(9, 'New Delhi', 1),
+	(10, 'Puducherry', 1),
+	(11, 'Andhra Pradesh', 1),
+	(12, 'Arunachal Pradesh', 1),
+	(13, 'Assam', 1),
+	(14, 'Bihar', 1),
+	(15, 'Chhattisgarh', 1),
+	(16, 'Goa', 1),
+	(17, 'Gujarat', 1),
+	(18, 'Haryana', 1),
+	(19, 'Himachal Pradesh', 1),
+	(20, 'Jammu and Kashmir', 1),
+	(21, 'Jharkhand', 1),
+	(22, 'Karnataka', 1),
+	(23, 'Kerala', 1),
+	(24, 'Madhya', 1),
+	(25, 'Maharashtra', 1),
+	(26, 'Manipur', 1),
+	(27, 'Meghalaya', 1),
+	(28, 'Mizoram', 1),
+	(29, 'Nagaland', 1),
+	(30, 'Odisha', 1),
+	(31, 'Punjab', 1),
+	(32, 'Rajasthan', 1),
+	(33, 'Sikkim', 1),
+	(34, 'Tamil Nadu', 1),
+	(35, 'Telangana', 1),
+	(36, 'Tripura', 1),
+	(37, 'Uttar Pradesh', 1),
+	(38, 'Uttarakhand', 1),
+	(39, 'West Bengal', 1);
 /*!40000 ALTER TABLE `ems_state` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_student_address
+-- Dumping structure for table eschool.ems_student_address
 CREATE TABLE IF NOT EXISTS `ems_student_address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
@@ -913,66 +1011,56 @@ CREATE TABLE IF NOT EXISTS `ems_student_address` (
   `pincode` varchar(6) DEFAULT NULL,
   `landmark_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_student_address: 1 rows
+-- Dumping data for table eschool.ems_student_address: 0 rows
 /*!40000 ALTER TABLE `ems_student_address` DISABLE KEYS */;
-INSERT INTO `ems_student_address` (`address_id`, `student_id`, `address1`, `address2`, `address3`, `city_id`, `state_id`, `country_id`, `pincode`, `landmark_id`) VALUES
-	(17, 2, '121', '21212', '12', 1, 1, 1, '121', NULL);
 /*!40000 ALTER TABLE `ems_student_address` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_student_optional_paper
+-- Dumping structure for table eschool.ems_student_optional_paper
 CREATE TABLE IF NOT EXISTS `ems_student_optional_paper` (
   `st_class_id` int(11) NOT NULL,
   `paper_id` int(11) NOT NULL,
   PRIMARY KEY (`st_class_id`,`paper_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_student_optional_paper: ~3 rows (approximately)
+-- Dumping data for table eschool.ems_student_optional_paper: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_student_optional_paper` DISABLE KEYS */;
-INSERT INTO `ems_student_optional_paper` (`st_class_id`, `paper_id`) VALUES
-	(20, 1),
-	(20, 2),
-	(20, 3);
 /*!40000 ALTER TABLE `ems_student_optional_paper` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_student_teacher_class
+-- Dumping structure for table eschool.ems_student_teacher_class
 CREATE TABLE IF NOT EXISTS `ems_student_teacher_class` (
   `student_teacher_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
   `session_id` int(11) DEFAULT NULL,
   `roll_number` int(11) DEFAULT NULL,
   `house_id` int(11) DEFAULT NULL,
+  `card_no` varchar(50) DEFAULT NULL,
   `class_section_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_teacher_class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_student_teacher_class: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_student_teacher_class: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_student_teacher_class` DISABLE KEYS */;
-INSERT INTO `ems_student_teacher_class` (`student_teacher_class_id`, `student_id`, `session_id`, `roll_number`, `house_id`, `class_section_id`) VALUES
-	(42, 2, 1, 3323, 3232, 9);
 /*!40000 ALTER TABLE `ems_student_teacher_class` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_subject
+-- Dumping structure for table eschool.ems_subject
 CREATE TABLE IF NOT EXISTS `ems_subject` (
   `subject_id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_name` varchar(50) NOT NULL,
   `description` longtext,
   PRIMARY KEY (`subject_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_subject: 2 rows
+-- Dumping data for table eschool.ems_subject: 0 rows
 /*!40000 ALTER TABLE `ems_subject` DISABLE KEYS */;
-INSERT INTO `ems_subject` (`subject_id`, `subject_name`, `description`) VALUES
-	(1, 'hindi', 'dss'),
-	(2, 'Hindi', NULL);
 /*!40000 ALTER TABLE `ems_subject` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_sub_menu
+-- Dumping structure for table eschool.ems_sub_menu
 CREATE TABLE IF NOT EXISTS `ems_sub_menu` (
   `sub_menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `sub_menu_name` varchar(300) NOT NULL,
@@ -980,19 +1068,15 @@ CREATE TABLE IF NOT EXISTS `ems_sub_menu` (
   `user_type` varchar(5) NOT NULL,
   `menu_id` int(11) NOT NULL,
   PRIMARY KEY (`sub_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_sub_menu: ~35 rows (approximately)
+-- Dumping data for table eschool.ems_sub_menu: ~31 rows (approximately)
 /*!40000 ALTER TABLE `ems_sub_menu` DISABLE KEYS */;
 INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
 	(1, 'Student SMS', 'sms/sms/general_sms', 'A', 1),
 	(2, 'Teacher SMS', 'sms/sms/general_sms', 'A', 1),
 	(3, 'Student Attendance', 'student/student_attendance/get_attendance', 'A', 2),
-	(4, 'Teacher Attendance', 'student/student_attendance/get_attendance', 'A', 2),
-	(5, 'Fee Type', 'fee/fee/add_fee_type', 'A', 3),
-	(6, 'Fee Setting', 'fee/fee/add_fee_setting', 'A', 3),
-	(7, 'Exam Type', 'exam/exam/add_exam', 'A', 4),
-	(8, 'Exam Period', 'exam/exam/add_exam_period', 'A', 4),
+	(7, 'Feedback', 'feedback/feedback', 'S', 4),
 	(9, 'Student Registration', 'student/student/student_registraton', 'A', 5),
 	(10, 'Staff Registration', 'staff/staff/staff_registration', 'A', 5),
 	(11, 'Notice', 'notice/notice/add_notice', 'A', 6),
@@ -1012,29 +1096,30 @@ INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `use
 	(28, 'Attendance', 'dashboard/dashboard/student#', 'T1', 2),
 	(29, 'Time Table', 'dashboard/dashboard/student#', 'T1', 12),
 	(30, 'Profile', 'dashboard/dashboard/student#', 'T1', 14),
-	(31, 'Report Card', 'exam/exam/add_insert_marks', 'A', 4),
+	(31, 'Feedback', 'feedback/feedback/feedback_list', 'A', 4),
 	(32, 'Online Exam Result', 'dashboard/dashboard/student#', 'A', 13),
 	(33, 'Offline Result', 'dashboard/dashboard/student#', 'A', 13),
 	(34, 'Attandence approve', 'student/student_attendance/approve_attendance', 'A', 2),
 	(35, 'Season', 'session/session/add_season', 'A', 8),
 	(36, 'Student List', 'student/student/student_list', 'A', 5),
-	(37, 'Staff List', 'staff/staff/staff_list', 'A', 5);
+	(37, 'Staff List', 'staff/staff/staff_list', 'A', 5),
+	(38, 'Fee Submission', 'fee/fee/fee_submission_add', 'A', 3);
 /*!40000 ALTER TABLE `ems_sub_menu` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_teacher_expertise
+-- Dumping structure for table eschool.ems_teacher_expertise
 CREATE TABLE IF NOT EXISTS `ems_teacher_expertise` (
   `teacher_id` int(11) NOT NULL,
   `paper_id` int(11) NOT NULL,
   PRIMARY KEY (`teacher_id`,`paper_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_teacher_expertise: ~0 rows (approximately)
+-- Dumping data for table eschool.ems_teacher_expertise: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_teacher_expertise` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_teacher_expertise` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_teacher_subject
+-- Dumping structure for table eschool.ems_teacher_subject
 CREATE TABLE IF NOT EXISTS `ems_teacher_subject` (
   `teacher_subject_id` int(11) NOT NULL AUTO_INCREMENT,
   `teacher_id` int(11) NOT NULL,
@@ -1042,12 +1127,12 @@ CREATE TABLE IF NOT EXISTS `ems_teacher_subject` (
   PRIMARY KEY (`teacher_subject_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_teacher_subject: 0 rows
+-- Dumping data for table eschool.ems_teacher_subject: 0 rows
 /*!40000 ALTER TABLE `ems_teacher_subject` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_teacher_subject` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_user
+-- Dumping structure for table eschool.ems_user
 CREATE TABLE IF NOT EXISTS `ems_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `salutation_id` int(11) NOT NULL,
@@ -1070,14 +1155,14 @@ CREATE TABLE IF NOT EXISTS `ems_user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_user: 1 rows
+-- Dumping data for table eschool.ems_user: 1 rows
 /*!40000 ALTER TABLE `ems_user` DISABLE KEYS */;
 INSERT INTO `ems_user` (`user_id`, `salutation_id`, `first_name`, `middle_name`, `last_name`, `gender`, `dob`, `mobile`, `phone`, `user_type_id`, `email`, `photo_url`, `login_id`, `password`, `created_by`, `created_date`, `updated_by`, `updated_date`) VALUES
-	(1, 0, 'Rahul', NULL, 'Sharma', 'M', '2013-08-16 06:51:48', '89923232', NULL, 1, 'er.rahul18mca@gmail.com', '143914428139884_download.png', 'A_admin', 'admin', NULL, NULL, NULL, NULL);
+	(1, 1, 'Jeevesh', 'N', 'Tiwari', 'M', '2013-08-16 06:51:48', '8750953636', NULL, 1, 'jiveshp12@gmail.com', '143914428139884_download.png', 'A_admin', 'admin', NULL, '2015-10-28 23:34:55', NULL, NULL);
 /*!40000 ALTER TABLE `ems_user` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_user_address
+-- Dumping structure for table eschool.ems_user_address
 CREATE TABLE IF NOT EXISTS `ems_user_address` (
   `user_address_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1089,35 +1174,33 @@ CREATE TABLE IF NOT EXISTS `ems_user_address` (
   `country_id` int(11) DEFAULT NULL,
   `pincode` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`user_address_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_user_address: 0 rows
+-- Dumping data for table eschool.ems_user_address: 0 rows
 /*!40000 ALTER TABLE `ems_user_address` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_user_address` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_user_menu_access
+-- Dumping structure for table eschool.ems_user_menu_access
 CREATE TABLE IF NOT EXISTS `ems_user_menu_access` (
   `sub_menu_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`sub_menu_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_user_menu_access: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_user_menu_access: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_user_menu_access` DISABLE KEYS */;
-INSERT INTO `ems_user_menu_access` (`sub_menu_id`, `user_id`) VALUES
-	(26, 2);
 /*!40000 ALTER TABLE `ems_user_menu_access` ENABLE KEYS */;
 
 
--- Dumping structure for table school_gyan.ems_user_type
+-- Dumping structure for table eschool.ems_user_type
 CREATE TABLE IF NOT EXISTS `ems_user_type` (
   `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_type` varchar(225) NOT NULL,
   PRIMARY KEY (`user_type_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table school_gyan.ems_user_type: 2 rows
+-- Dumping data for table eschool.ems_user_type: 2 rows
 /*!40000 ALTER TABLE `ems_user_type` DISABLE KEYS */;
 INSERT INTO `ems_user_type` (`user_type_id`, `user_type`) VALUES
 	(1, 'Admin'),

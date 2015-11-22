@@ -327,57 +327,9 @@
 	    }
 		
 		
-	//select student_teacher_class_id from ems_student_teacher_class where session_id =1 and class_section_id=
-	
-	public function get_today_student_attendance(){
-	    $data =  array();
-	    $today = date("Y-m-d");
-	    
-	    // Get Total Student
-	    $this->db->select("count(attendance_id) as total_student_attendance");
-	    $this->db->from("ems_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $total_student = $this->db->get();
-	    $total_student_attendance = $total_student->result()[0]->total_student_attendance;
-	    
-	    //Get Total Absent Student	    
-	    $this->db->select("count(attendance_id) as total_absent_student");
-	    $this->db->from("ems_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $this->db->where("attendance_status","A");
-	    $absent_student = $this->db->get();
-	    $total_absent_student = $absent_student->result()[0]->total_absent_student;
-	    
-	    //Get Total Present Student	    
-	    $this->db->select("count(attendance_id) as total_present_student");
-	    $this->db->from("ems_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $this->db->where("attendance_status","P");
-	    $present_student = $this->db->get();
-	    $total_present_student = $present_student->result()[0]->total_present_student;
-	    
-	    //Get Total Leave Student	    
-	    $this->db->select("count(attendance_id) as total_leave_student");
-	    $this->db->from("ems_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $this->db->where("attendance_status","L");
-	    $leave_student = $this->db->get();
-	    $total_leave_student = $leave_student->result()[0]->total_leave_student;
-	    
-	    // Make percentange for present, absent, leave
-	    $leave_percentage = $total_leave_student * @(100/$total_student_attendance);
-	    $present_percentage = $total_present_student * @(100/$total_student_attendance);
-	    $absent_percentage = $total_absent_student * @(100/$total_student_attendance);
-	    
-	    $data['leave_percentage'] 		= number_format($leave_percentage,2);
-	    $data['present_percentage'] 	= number_format($present_percentage,2);
-	    $data['absent_percentage'] 		= number_format($absent_percentage,2);
-	    
-	    $data['total_leave_student'] 	= $total_leave_student;
-	    $data['total_present_student'] 	= $total_present_student;
-	    $data['total_absent_student'] 	= $total_absent_student;
-	    
-	    return $data;
+			//select student_teacher_class_id from ems_student_teacher_class where session_id =1 and class_section_id=
+			
+		
+		
 	}
-	
-    }	   
+	   

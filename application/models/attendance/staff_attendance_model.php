@@ -1,15 +1,13 @@
 	<?php
 	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-	class Attendance_model extends CI_Model  {
+	class Staff_attendance_model extends CI_Model  {
 	    
 	    public function __construct()
 	    {
 		parent::__construct();
 			$this->load->database();
 	    }
-		
-		
 		
 		
 		public function get_attendanceForAbsentAndLeave($cond = NULL, $offset = 0, $limit = NULL, $sort = NULL){
@@ -329,53 +327,54 @@
 		
 	//select student_teacher_class_id from ems_student_teacher_class where session_id =1 and class_section_id=
 	
-	public function get_today_student_attendance(){
+	public function get_today_staff_attendance(){
 	    $data =  array();
 	    $today = date("Y-m-d");
 	    
 	    // Get Total Student
-	    $this->db->select("count(attendance_id) as total_student_attendance");
-	    $this->db->from("ems_attendance");
+	    $this->db->select("count(attendance_id) as total_staff_attendance");
+	    $this->db->from("ems_staff_attendance");
 	    $this->db->where("date(approve_date)",$today);
-	    $total_student = $this->db->get();
-	    $total_student_attendance = $total_student->result()[0]->total_student_attendance;
+	    $total_staff = $this->db->get();
+	    $total_staff_attendance = $total_staff->result()[0]->total_staff_attendance; 
 	    
 	    //Get Total Absent Student	    
-	    $this->db->select("count(attendance_id) as total_absent_student");
-	    $this->db->from("ems_attendance");
+	    $this->db->select("count(attendance_id) as total_absent_staff");
+	    $this->db->from("ems_staff_attendance");
 	    $this->db->where("date(approve_date)",$today);
 	    $this->db->where("attendance_status","A");
-	    $absent_student = $this->db->get();
-	    $total_absent_student = $absent_student->result()[0]->total_absent_student;
+	    $absent_staff = $this->db->get();
+	    $total_absent_staff = $absent_staff->result()[0]->total_absent_staff;
 	    
 	    //Get Total Present Student	    
-	    $this->db->select("count(attendance_id) as total_present_student");
-	    $this->db->from("ems_attendance");
+	    $this->db->select("count(attendance_id) as total_present_staff");
+	    $this->db->from("ems_staff_attendance");
 	    $this->db->where("date(approve_date)",$today);
 	    $this->db->where("attendance_status","P");
-	    $present_student = $this->db->get();
-	    $total_present_student = $present_student->result()[0]->total_present_student;
+	    $present_staff = $this->db->get();
+	    $total_present_staff = $present_staff->result()[0]->total_present_staff;
 	    
 	    //Get Total Leave Student	    
-	    $this->db->select("count(attendance_id) as total_leave_student");
-	    $this->db->from("ems_attendance");
+	    $this->db->select("count(attendance_id) as total_leave_staff");
+	    $this->db->from("ems_staff_attendance");
 	    $this->db->where("date(approve_date)",$today);
 	    $this->db->where("attendance_status","L");
-	    $leave_student = $this->db->get();
-	    $total_leave_student = $leave_student->result()[0]->total_leave_student;
+	    $leave_staff = $this->db->get();
+	    $total_leave_staff = $leave_staff->result()[0]->total_leave_staff;
 	    
 	    // Make percentange for present, absent, leave
-	    $leave_percentage = $total_leave_student * @(100/$total_student_attendance);
-	    $present_percentage = $total_present_student * @(100/$total_student_attendance);
-	    $absent_percentage = $total_absent_student * @(100/$total_student_attendance);
+	    
+	    $leave_percentage = $total_leave_staff * @(100/$total_staff_attendance);
+	    $present_percentage = $total_present_staff * @(100/$total_staff_attendance);
+	    $absent_percentage = $total_absent_staff * @(100/$total_staff_attendance);
 	    
 	    $data['leave_percentage'] 		= number_format($leave_percentage,2);
 	    $data['present_percentage'] 	= number_format($present_percentage,2);
 	    $data['absent_percentage'] 		= number_format($absent_percentage,2);
 	    
-	    $data['total_leave_student'] 	= $total_leave_student;
-	    $data['total_present_student'] 	= $total_present_student;
-	    $data['total_absent_student'] 	= $total_absent_student;
+	    $data['total_leave_staff'] 		= $total_leave_staff;
+	    $data['total_present_staff'] 	= $total_present_staff;
+	    $data['total_absent_staff'] 	= $total_absent_staff;
 	    
 	    return $data;
 	}

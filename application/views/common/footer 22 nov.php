@@ -15,8 +15,6 @@
 		<script src="<?php echo base_url() ?>assets/assets/js/validation.js"></script> 
 		<script src="<?php echo base_url();?>assets/chartjs/highcharts.js"></script>
 		<script src="<?php echo base_url();?>assets/chartjs/modules/exporting.js"></script>
-		
-
 		<script type="text/javascript">
 			$(document).ready(function() {
 			//get_class_section();
@@ -24,8 +22,8 @@
 				prth_common.init();
 				prth_dialogs.init();
 				prth_charts.charts_resize();
-				prth_charts12.today_teacher_attendance();
-				prth_charts12.today_st_attendance();
+				prth_charts.today_teacher_attendance();
+				prth_charts.today_st_attendance();
 
 				//prth_charts.pl_plot1();
 				prth_charts.new_admission();

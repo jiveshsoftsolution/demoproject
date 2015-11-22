@@ -2,6 +2,7 @@
 		$(document).ready(function(){
 			get_state();
 			$("#parent_mobile").mask("9999999999"); 
+			$("#pincode").mask("999999"); 			
 		});
 		function get_state()
 		{	
@@ -214,7 +215,7 @@
 						<div class="row">
 							<div  class="three columns">
 								<label for="pincode">Pincode</label>
-								<input type="text" id="pincode" name="pincode" class="input-text large" placeholder="Pincode" />
+								<input type="text" id="pincode" name="pincode" class="input-text large" placeholder="Pincode" maxlength="6" />
 								<span id="sp_pincode" class="error">Enter Pincode.</span>
 							</div>
 							<div  class="seven columns">

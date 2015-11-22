@@ -299,7 +299,7 @@ class Student extends CI_Controller
 
 	public function student_edit($student_id = null) 
 	{
-             $logInUser = loggedUser();
+        $logInUser = loggedUser();
 		$studentRecord = array();
 		$sdata = array();
 		$pdata = array();

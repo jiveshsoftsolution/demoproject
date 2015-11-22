@@ -17,7 +17,7 @@
 */
 
 
-var base_path = 'http://localhost/school_gyan/assets/assets/';
+var base_path = 'http://localhost/eschool/assets/assets/';
 //var base_path = 'http://abetsys.com/assets/assets/';
 
 

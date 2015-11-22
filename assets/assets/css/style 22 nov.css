@@ -558,8 +558,8 @@
 	/* overview list */
 		.overview_list {list-style:none}
 		.overview_list a {position:relative;color:#222;display:block;line-height:18px;font-size:13px;padding:8px 8px 8px 80px;overflow:hidden;border:1px solid #dcdcdc;margin-bottom:10px;-webkit-border-radius: 6px 6px 6px 6px;-moz-border-radius: 6px 6px 6px 6px;border-radius: 6px 6px 6px 6px;background: #f7f7f7}
-		.overview_list a img {position:absolute;top:0;left:0;height:70px;width:60px;background-color:#fff;background-repeat:no-repeat;background-position:center center;border-right:1px solid #e4e4e4;box-shadow:1px 0 0 #fff;-webkit-border-top-left-radius: 6px;-webkit-border-bottom-left-radius: 6px;-moz-border-radius-topleft: 6px;-moz-border-radius-bottomleft: 6px;border-top-left-radius: 6px;border-bottom-left-radius: 6px}
-		.overview_list .ov_nb {color:#A80000;font-size:13px;display:block;font-weight:500;font-family: Tahoma}
+		.overview_list a img {position:absolute;top:0;left:0;height:52px;width:60px;background-color:#fff;background-repeat:no-repeat;background-position:center center;border-right:1px solid #e4e4e4;box-shadow:1px 0 0 #fff;-webkit-border-top-left-radius: 6px;-webkit-border-bottom-left-radius: 6px;-moz-border-radius-topleft: 6px;-moz-border-radius-bottomleft: 6px;border-top-left-radius: 6px;border-bottom-left-radius: 6px}
+		.overview_list .ov_nb {color:#A80000;font-size:14px;display:block;font-weight:700}
 		.overview_list .ov_text {font-size:12px}
         .overview_list a:hover {text-decoration:none;border-color:#cbcbcb;box-shadow: 0 0 5px #d4d4d4}
 

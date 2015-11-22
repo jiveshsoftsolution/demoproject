@@ -11,7 +11,6 @@ class Dashboard extends CI_Controller
 		$this->load->model('menu/menu_model', 'menuModel');
 		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->model('attendance/attendance_model', 'attendanceModel');
-		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 		$this->load->model('session/session_model','sessionModel');
 		$this->load->model('season/season_model','seasonModel');
 		$this->load->model('timetable/timetable_model','timetableModel');
@@ -37,11 +36,8 @@ class Dashboard extends CI_Controller
 		$data['leaveStudent'] 	= $classAttendanceStrength['leaveStudent'];
 		$data['className'] 	= $classAttendanceStrength['className'];
 		
-		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
-		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();
 		$birthday_student_data = $this->studentModel->get_birtday_students();
 		$this->session->set_userdata('birthday_student_data',$birthday_student_data);
-		
 		
 		$birthday_teacher_data = get_birtday_teachers();
 		$data['birthday_teacher_data']	= $birthday_teacher_data;		

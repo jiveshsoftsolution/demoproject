@@ -3,6 +3,7 @@
 	{
 		border-bottom: 1px solid #EDEDED;
 		padding: 9px 18px;
+		cursor:pointer !important;
 	}
 	.teacher-template-msg{
 		border-bottom: 1px solid #EDEDED;

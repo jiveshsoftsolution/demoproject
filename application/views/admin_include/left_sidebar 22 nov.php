@@ -1,59 +1,9 @@
-<script type="text/javascript">
-    prth_charts12 = {    	
-	today_st_attendance: function() { 
-	    var today_st_attendance_data = [
-		['Present', <?php echo $today_student_attendance['present_percentage']?>],['Absent', <?php echo $today_student_attendance['absent_percentage']?>], ['Leave', <?php echo $today_student_attendance['leave_percentage']?>]
-	    ];
-	    todayStAttendance = $.jqplot ('today_st_attendance', [today_st_attendance_data],
-	    {
-		seriesDefaults: {
-		    renderer: $.jqplot.PieRenderer,
-		    rendererOptions: {
-			    showDataLabels: true,
-			    dataLabelNudge: 26,
-			    dataLabelCenterOn: false
-		    }
-		},
-		seriesColors: ["#0f98de","#f8ff1a","#05da15","#05da15","#0f98de","#0d5add"],
-		grid: {
-		    borderWidth: '0',
-		    shadow: false,
-		    background: '#fff'
-		},
-		legend: { show:true, location:'e', marginTop: '15px', border: "none" }
-	    });
-	},
-	today_teacher_attendance: function() { 
-	    var today_teacher_attendance_data = [
-		    ['Present', <?php echo $today_staff_attendance['present_percentage']?>],['Absent', <?php echo $today_staff_attendance['present_percentage']?>], ['Leave', <?php echo $today_staff_attendance['present_percentage']?>]
-	    ];
-	    todayTeacherAttendance = $.jqplot ('today_teacher_attendance', [today_teacher_attendance_data],
-	    {
-		seriesDefaults: {
-			renderer: $.jqplot.PieRenderer,
-			rendererOptions: {
-			    showDataLabels: true,
-			    dataLabelNudge: 26,
-			    dataLabelCenterOn: false
-			}
-		    },
-		    seriesColors: ["#dc0a00","#f8ff1a","#05da15","#05da15","#0f98de","#0d5add"],
-		    grid: {
-			borderWidth: '0',
-			shadow: false,
-			background: '#fff'
-		},
-		legend: { show:true, location:'e', marginTop: '15px', border: "none" }
-	    });
-	},
-    };
-</script>
 <div class="container container_bg">
     <div class="row">
 		<!-- Start Left Slide Bar-->
 		<div class="three columns">
 			<div class="box_c"> 
-				<div style="display: block">
+				<div style="display: none">
 					<div class="box_c">
 						<div class="box_c_heading cf box_actions" >
 							<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
@@ -66,16 +16,16 @@
 								<li>
 									<a href="#">
 										<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/dollar.png)" alt="" />
-										<span class="ov_nb" style="font-weight:normal"><?php echo $today_student_attendance['total_present_student']?> Present</span>
-										<span class="ov_nb" style="font-weight:normal"><?php echo $today_student_attendance['total_absent_student']?> Absent</span>
-										<span class="ov_nb" style="font-weight:normal"><?php echo $today_student_attendance['total_leave_student']?> Leave</span>
+										<span class="ov_nb" style="font-weight:normal">600 Present</span>
+										<span class="ov_nb" style="font-weight:normal">100 Absent</span>
+										<span class="ov_nb" style="font-weight:normal">100 Leave</span>
 									</a>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div style="display: block">
+				<div style="display: none">
 					<div class="box_c">
 						<div class="box_c_heading cf box_actions">
 							<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
@@ -88,9 +38,9 @@
 								<li>
 									<a href="#">
 										<img src="<?php echo base_url()?>assets/assets/img/blank.gif" style="background-image: url(<?php echo base_url()?>assets/assets/img/ico/open/dollar.png)" alt="" />
-										<span class="ov_nb"><?php echo $today_staff_attendance['total_present_staff']?> Present</span>
-										<span class="ov_nb"><?php echo $today_staff_attendance['total_absent_staff']?> Absent</span>
-										<span class="ov_nb"><?php echo $today_staff_attendance['total_leave_staff']?> Leave</span>
+										<span class="ov_nb">50 Present</span>
+										<span class="ov_nb">20 Absent</span>
+										<span class="ov_nb">20 Leave</span>
 									</a>
 								</li>
 							</ul>
