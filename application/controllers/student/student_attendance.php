@@ -4,12 +4,13 @@ class Student_attendance extends CI_Controller
 {
     public function __construct() {
         parent::__construct();
+		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
         $this->load->model('attendance/attendance_model', 'attendanceModel');
-	$this->load->model('student/student_model','studentModel');
+		$this->load->model('student/student_model','studentModel');
         $this->load->helper('crud_model');
         $this->load->helper('student_model');
-	require_once APPPATH.'third_party/sms/sms.php';
-	$this->load->helper('student_model');
+		require_once APPPATH.'third_party/sms/sms.php';
+		$this->load->helper('student_model');
     }
 
     public function index() {}
@@ -141,12 +142,12 @@ class Student_attendance extends CI_Controller
         $session_Id = NULL;
         $class_section_Id = NULL;
         $this->template->getScript(); 
-	$this->template->getAdminHeader(); 
-	
-	
-	$birthday_teacher_data = get_birtday_teachers();
-	$data['birthday_teacher_data']	= $birthday_teacher_data;	
-	$this->load->view('admin_include/left_sidebar',$data);
+		$this->template->getAdminHeader(); 
+		
+		
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$this->load->view('admin_include/left_sidebar',$data);
 	
         $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");
         $data['classSecton'] = getClass_section();
@@ -352,5 +353,69 @@ class Student_attendance extends CI_Controller
 		curl_close($ch);
 	}
 	
+	public function attendance_history() 
+	{
+        $data = array();
+        $filterColumns = array();
+        $offset = NULL;
+        $limit = NULL;
+        $sort = array();
+        $session_id = NULL;
+        $class_section_id = NULL;
+        $this->template->getScript(); 
+		$this->template->getAdminHeader(); 
+		
+		
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
+		$this->load->view('admin_include/left_sidebar',$data);
+	
+        $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");
+        $data['classSecton'] = getClass_section();
+
+        $data['session_id'] = 0;
+        $data['class_section_id'] = 0;
+        $data['StudentAttendance'] = array();
+        $data['studentListForSendSms'] = array();
+        if ($this->input->post()) 
+		{
+            $session_id = (int) $this->input->post('session_id');
+            $filterColumns['session_id'] = $session_id;
+            $data['session_id'] = $session_id;
+
+			$class_section_id = (int) $this->input->post('class_section_id');
+			$filterColumns['class_section_id'] = $class_section_id;
+			$data['class_section_id'] = $class_section_id;
+			$data['attendance_date'] = $this->input->post('attendance_date');
+			
+			if($this->input->post('attendance_for')=='Student'){
+				$data['attendance_date'] = $this->input->post('attendance_date');
+				$student_data = getStudentBySessionId_ClassSectionId($filterColumns, $offset, $limit, $sort);
+				$student_attendance_data = array();
+				if (count($student_data)>0) {
+					$i=0;				
+					foreach($student_data as $student){
+						$attendance_date = $this->input->post('attendance_date'); 
+						$attendance_data = $this->attendanceModel->getStudentAttendance($student->student_teacher_class_id, $attendance_date);
+						if(count($attendance_data)>0){
+							$attendance_status = explode("_",$attendance_data[$student->student_teacher_class_id]);
+							$student_data[$i]->attendance_status = $attendance_status[0];
+							$student_attendance_data[$i] = $student_data[$i];
+						}							
+						$i++;
+					}				
+					$data['StudentAttendance'] = $student_attendance_data;
+				}
+			}else{				
+				$attendance_date = $this->input->post('attendance_date'); 
+				$attendance_data = $this->staffAttendanceModel->staff_attendance($attendance_date);	
+				$data['StaffAttendance'] = $attendance_data;
+			}			
+		}      
+		$this->load->view('attendance/attendance_history', $data);
+		$this->template->getFooter();
+    }
 }
 ?>

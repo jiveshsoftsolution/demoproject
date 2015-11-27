@@ -328,55 +328,65 @@
 	//select student_teacher_class_id from ems_student_teacher_class where session_id =1 and class_section_id=
 	
 	public function get_today_staff_attendance(){
-	    $data =  array();
-	    $today = date("Y-m-d");
-	    
-	    // Get Total Student
-	    $this->db->select("count(attendance_id) as total_staff_attendance");
-	    $this->db->from("ems_staff_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $total_staff = $this->db->get();
-	    $total_staff_attendance = $total_staff->result()[0]->total_staff_attendance; 
-	    
-	    //Get Total Absent Student	    
-	    $this->db->select("count(attendance_id) as total_absent_staff");
-	    $this->db->from("ems_staff_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $this->db->where("attendance_status","A");
-	    $absent_staff = $this->db->get();
-	    $total_absent_staff = $absent_staff->result()[0]->total_absent_staff;
-	    
-	    //Get Total Present Student	    
-	    $this->db->select("count(attendance_id) as total_present_staff");
-	    $this->db->from("ems_staff_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $this->db->where("attendance_status","P");
-	    $present_staff = $this->db->get();
-	    $total_present_staff = $present_staff->result()[0]->total_present_staff;
-	    
-	    //Get Total Leave Student	    
-	    $this->db->select("count(attendance_id) as total_leave_staff");
-	    $this->db->from("ems_staff_attendance");
-	    $this->db->where("date(approve_date)",$today);
-	    $this->db->where("attendance_status","L");
-	    $leave_staff = $this->db->get();
-	    $total_leave_staff = $leave_staff->result()[0]->total_leave_staff;
-	    
-	    // Make percentange for present, absent, leave
-	    
-	    $leave_percentage = $total_leave_staff * @(100/$total_staff_attendance);
-	    $present_percentage = $total_present_staff * @(100/$total_staff_attendance);
-	    $absent_percentage = $total_absent_staff * @(100/$total_staff_attendance);
-	    
-	    $data['leave_percentage'] 		= number_format($leave_percentage,2);
-	    $data['present_percentage'] 	= number_format($present_percentage,2);
-	    $data['absent_percentage'] 		= number_format($absent_percentage,2);
-	    
-	    $data['total_leave_staff'] 		= $total_leave_staff;
-	    $data['total_present_staff'] 	= $total_present_staff;
-	    $data['total_absent_staff'] 	= $total_absent_staff;
-	    
-	    return $data;
+		$data =  array();
+		$today = date("Y-m-d");
+		
+		// Get Total Student
+		$this->db->select("count(attendance_id) as total_staff_attendance");
+		$this->db->from("ems_staff_attendance");
+		$this->db->where("date(approve_date)",$today);
+		$total_staff = $this->db->get();
+		$total_staff_attendance = $total_staff->result()[0]->total_staff_attendance; 
+		
+		//Get Total Absent Student	    
+		$this->db->select("count(attendance_id) as total_absent_staff");
+		$this->db->from("ems_staff_attendance");
+		$this->db->where("date(approve_date)",$today);
+		$this->db->where("attendance_status","A");
+		$absent_staff = $this->db->get();
+		$total_absent_staff = $absent_staff->result()[0]->total_absent_staff;
+		
+		//Get Total Present Student	    
+		$this->db->select("count(attendance_id) as total_present_staff");
+		$this->db->from("ems_staff_attendance");
+		$this->db->where("date(approve_date)",$today);
+		$this->db->where("attendance_status","P");
+		$present_staff = $this->db->get();
+		$total_present_staff = $present_staff->result()[0]->total_present_staff;
+		
+		//Get Total Leave Student	    
+		$this->db->select("count(attendance_id) as total_leave_staff");
+		$this->db->from("ems_staff_attendance");
+		$this->db->where("date(approve_date)",$today);
+		$this->db->where("attendance_status","L");
+		$leave_staff = $this->db->get();
+		$total_leave_staff = $leave_staff->result()[0]->total_leave_staff;
+		
+		// Make percentange for present, absent, leave
+		
+		$leave_percentage = $total_leave_staff * @(100/$total_staff_attendance);
+		$present_percentage = $total_present_staff * @(100/$total_staff_attendance);
+		$absent_percentage = $total_absent_staff * @(100/$total_staff_attendance);
+		
+		$data['leave_percentage'] 		= number_format($leave_percentage,2);
+		$data['present_percentage'] 	= number_format($present_percentage,2);
+		$data['absent_percentage'] 		= number_format($absent_percentage,2);
+		
+		$data['total_leave_staff'] 		= $total_leave_staff;
+		$data['total_present_staff'] 	= $total_present_staff;
+		$data['total_absent_staff'] 	= $total_absent_staff;
+		return $data;
 	}
-	
-    }	   
+
+	public function staff_attendance($search_date){
+		$data =  array();
+		
+		// Get Total Staff Attendance  for given date 
+		$this->db->select("s.staff_id,s.first_name,s.middle_name,s.last_name,st.attendance_status,s.card_no");
+		$this->db->from("ems_staff s");
+		$this->db->join("ems_staff_attendance st","s.staff_id=st.staff_id");
+		$this->db->where("date(approve_date)=",$search_date);
+		$total_staff = $this->db->get();
+		return $total_staff->result();
+	}
+}	   

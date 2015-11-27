@@ -25,7 +25,7 @@
 	},
 	today_teacher_attendance: function() { 
 	    var today_teacher_attendance_data = [
-		    ['Present', <?php echo $today_staff_attendance['present_percentage']?>],['Absent', <?php echo $today_staff_attendance['present_percentage']?>], ['Leave', <?php echo $today_staff_attendance['present_percentage']?>]
+		    ['Present', <?php echo $today_staff_attendance['present_percentage']?>],['Absent', <?php echo $today_staff_attendance['absent_percentage']?>], ['Leave', <?php echo $today_staff_attendance['leave_percentage']?>]
 	    ];
 	    todayTeacherAttendance = $.jqplot ('today_teacher_attendance', [today_teacher_attendance_data],
 	    {

@@ -9,9 +9,13 @@
 			    <div class="box_c_content" style="line-height:30px">
 				   <ul class="sepH_b filter_content" >
 					  <li>
-						 <div class="user_avatar" style="vertical-align:top"> 							
-							<img src="<?php echo base_url()?>assets/teachers_images/<?php echo $photo_url;?>" style="height:160px; border: 4px solid #00A8E1; background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" />
-						 </div>
+						<div class="user_avatar" style="vertical-align:top"> 							
+							<?php if(strlen($photo_url)==0) { ?>
+								<img src="<?php echo base_url()?>assets/assets/img/no_image.gif" style="height:160px; border: 4px solid #00A8E1; background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" />							
+							<?php }else { ?>							
+								<img src="<?php echo base_url()?>assets/teachers_images/<?php echo $photo_url;?>" style="height:160px; border: 4px solid #00A8E1; background-image: url(<?php echo base_url()?>assets/assets/img/no_image_icon.png)" alt="" />
+							<?php } ?>
+						</div>						
 					  </li>
 					  <li><label><strong style="font-weight:600"><?php echo ucwords($userName); ?></strong></label></li>
 					  <li><label><strong style="font-weight:600">Email :</strong></label> <?php echo $email; ?></li>

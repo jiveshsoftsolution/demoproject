@@ -37,20 +37,12 @@ CREATE TABLE IF NOT EXISTS `emsparent` (
   `password` varchar(30) DEFAULT NULL,
   `parent_email` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.emsparent: ~9 rows (approximately)
+-- Dumping data for table eschool.emsparent: ~0 rows (approximately)
 /*!40000 ALTER TABLE `emsparent` DISABLE KEYS */;
 INSERT INTO `emsparent` (`parent_id`, `student_id`, `father_salutation_id`, `father_first_name`, `father_middle_name`, `father_last_name`, `mother_salutation_id`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `father_photo_url`, `mother_photo_url`, `mother_salutation`, `father_salutation`, `mail_to`, `parent_mobile`, `login_id`, `password`, `parent_email`) VALUES
-	(21, 6, 1, 'A1', NULL, 'A1', 2, 'A1', NULL, 'A1', NULL, NULL, NULL, NULL, 'jiveshp12@gmail.com', '8750953636', 'testId', '123789', NULL),
-	(22, 7, 1, 'B1', NULL, 'B1', 2, 'B1', NULL, 'B1', NULL, NULL, NULL, NULL, NULL, '8750953636', 'testId', '123789', NULL),
-	(23, 8, 1, 'C1', NULL, 'C1', 2, 'C1', NULL, 'C1', NULL, NULL, NULL, NULL, 'C1', '8750953636', 'testId', '123789', NULL),
-	(24, 9, 1, 'D1', NULL, 'D1', 2, 'D1', NULL, 'D1', NULL, NULL, NULL, NULL, 'D1', '8750953636', 'testId', '123789', NULL),
-	(25, 10, 1, 'E1', NULL, 'E1', 2, 'E1', NULL, 'E1', NULL, NULL, NULL, NULL, 'E1', '8750953636', 'testId', '123789', NULL),
-	(26, 11, 1, 'N.', 'P.', 'Tiwari', 1, 'Sumitra', '', 'Tiwari', 'F99.jpg', 'M99.jpg', NULL, NULL, 'admin@gmail.com', '87509536369999', 'testId', '123789', NULL),
-	(27, 12, 1, 'A', NULL, 'Tiwari', 1, 'sg', NULL, 'sgfgfs', NULL, NULL, NULL, NULL, 'admin@gmail.com', '9211776541', 'testId', '123789', NULL),
-	(28, 13, 1, 'Sandeep', '', 'Mishra', 2, 'Shivangi', '', 'Mishra', '144153072319602_father pic.jpg', '144153072426497_mother pic.jpg', NULL, NULL, 'amitinu59@gmail.com', '9555791720', 'testId', '123789', NULL),
-	(29, 14, 1, 'sandeep', NULL, 'singh', 2, 'shichha', NULL, 'singh', NULL, NULL, NULL, NULL, 'prisandeep@gmail.com', '99444444444', 'testId', '123789', NULL);
+	(30, 1, 1, 'dss', NULL, 'dsds', 2, 'dsd', NULL, 'dssd', NULL, NULL, NULL, NULL, '111@gmail.com', '8750953636', 'testId', '123789', NULL);
 /*!40000 ALTER TABLE `emsparent` ENABLE KEYS */;
 
 
@@ -75,10 +67,12 @@ CREATE TABLE IF NOT EXISTS `emsstudent` (
   `created_by_type` int(11) DEFAULT NULL,
   `updated_by_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.emsstudent: ~0 rows (approximately)
 /*!40000 ALTER TABLE `emsstudent` DISABLE KEYS */;
+INSERT INTO `emsstudent` (`student_id`, `salutation_id`, `first_name`, `middle_name`, `last_name`, `email`, `gender`, `dob`, `login_id`, `password`, `photo_url`, `admission_number`, `created_by`, `created_date`, `updated_by`, `updated_date`, `created_by_type`, `updated_by_type`) VALUES
+	(1, 1, 'jeevesh', NULL, 'Tiwari', NULL, 'M', '2015-11-04 00:00:00', 'S_jeevesh', '123789', NULL, NULL, 1, '2015-11-19 18:33:19', NULL, NULL, 0, NULL);
 /*!40000 ALTER TABLE `emsstudent` ENABLE KEYS */;
 
 
@@ -105,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `ems_attendance` (
   PRIMARY KEY (`attendance_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=573 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_attendance: 117 rows
+-- Dumping data for table eschool.ems_attendance: 0 rows
 /*!40000 ALTER TABLE `ems_attendance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_attendance` ENABLE KEYS */;
 
@@ -121,75 +115,144 @@ CREATE TABLE IF NOT EXISTS `ems_city` (
 -- Dumping data for table eschool.ems_city: 70 rows
 /*!40000 ALTER TABLE `ems_city` DISABLE KEYS */;
 INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
-	(8, 'Agra', '37'),
-	(7, 'Ghaziabad', '37'),
-	(6, 'Lucknow', '37'),
-	(5, 'Kanpur', '37'),
-	(9, 'Varanasi', '37'),
-	(10, 'Meerut', '37'),
-	(11, 'Allahabad', '37'),
-	(12, 'Bareilly', '37'),
-	(13, 'Aligarh', '37'),
-	(14, 'Moradabad', '37'),
-	(15, 'Saharanpur', '37'),
-	(16, 'Gorakhpur', '37'),
-	(17, 'Noida', '37'),
-	(18, 'Jhansi', '37'),
-	(19, 'Muzaffarnagar', '37'),
-	(20, 'Mathura', '37'),
-	(21, 'Badaun', '37'),
-	(22, 'Rampur', '37'),
-	(23, 'Shahjahanpur', '37'),
-	(24, 'Farrukhabad', '37'),
-	(25, 'Mau', '37'),
-	(26, 'Hapur', '37'),
-	(27, 'Faizabad', '37'),
-	(28, 'Etawah', '37'),
-	(29, 'Mirzapur', '37'),
-	(30, 'Bulandshahr', '37'),
-	(31, 'Bhimnagar', '37'),
-	(32, 'Amroha', '37'),
-	(33, 'Hardoi', '37'),
-	(34, 'Fatehpur', '37'),
-	(35, 'Raebareli', '37'),
-	(36, 'Orai', '37'),
-	(37, 'Sitapur', '37'),
-	(38, 'Bahraich', '37'),
-	(39, 'Ghaziabad', '37'),
-	(40, 'Unnao', '37'),
-	(41, 'Jaunpur', '37'),
-	(42, 'Lakhimpur Kheri', '37'),
-	(43, 'Hathras', '37'),
-	(44, 'Banda', '37'),
-	(45, 'Pilibhit', '37'),
-	(46, 'Mughalsarai	', '37'),
-	(47, 'Barabanki', '37'),
-	(48, 'Bulandshahr', '37'),
-	(49, 'Gonda', '37'),
-	(50, 'Mainpuri', '37'),
-	(51, 'Lalitpur', '37'),
-	(52, 'Etah', '37'),
-	(53, 'Deoria', '37'),
-	(54, 'Ujhan', '37'),
-	(55, 'Ghazipur', '37'),
-	(56, 'Sultanpur', '37'),
-	(57, 'Azamgarh', '37'),
-	(58, 'Bijnor', '37'),
-	(59, 'Sahaswan', '37'),
-	(60, 'Basti', '37'),
-	(61, 'Chandausi', '37'),
-	(62, 'Ambedkar Nagar', '37'),
-	(63, 'Ballia', '37'),
-	(64, 'Mubarakpur', '37'),
-	(65, 'Gautam Budh Nagar', '37'),
-	(66, 'Firozabad', '37'),
-	(67, 'Shamli', '37'),
-	(68, 'Aligarh', '37'),
-	(69, 'Kanshi Ram Nagar', '37'),
-	(70, 'East Delhi', '9'),
-	(71, 'West Delhi', '9'),
-	(72, 'North Delhi', '9'),
-	(73, 'South Delhi', '9'),
+	(8, 'Agra', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(7, 'Ghaziabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(6, 'Lucknow', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(5, 'Kanpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(9, 'Varanasi', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(10, 'Meerut', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(11, 'Allahabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(12, 'Bareilly', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(13, 'Aligarh', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(14, 'Moradabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(15, 'Saharanpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(16, 'Gorakhpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(17, 'Noida', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(18, 'Jhansi', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(19, 'Muzaffarnagar', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(20, 'Mathura', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(21, 'Badaun', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(22, 'Rampur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(23, 'Shahjahanpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(24, 'Farrukhabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(25, 'Mau', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(26, 'Hapur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(27, 'Faizabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(28, 'Etawah', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(29, 'Mirzapur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(30, 'Bulandshahr', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(31, 'Bhimnagar', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(32, 'Amroha', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(33, 'Hardoi', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(34, 'Fatehpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(35, 'Raebareli', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(36, 'Orai', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(37, 'Sitapur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(38, 'Bahraich', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(39, 'Ghaziabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(40, 'Unnao', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(41, 'Jaunpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(42, 'Lakhimpur Kheri', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(43, 'Hathras', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(44, 'Banda', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(45, 'Pilibhit', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(46, 'Mughalsarai	', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(47, 'Barabanki', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(48, 'Bulandshahr', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(49, 'Gonda', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(50, 'Mainpuri', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(51, 'Lalitpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(52, 'Etah', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(53, 'Deoria', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(54, 'Ujhan', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(55, 'Ghazipur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(56, 'Sultanpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(57, 'Azamgarh', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(58, 'Bijnor', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(59, 'Sahaswan', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(60, 'Basti', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(61, 'Chandausi', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(62, 'Ambedkar Nagar', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(63, 'Ballia', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(64, 'Mubarakpur', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(65, 'Gautam Budh Nagar', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(66, 'Firozabad', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(67, 'Shamli', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(68, 'Aligarh', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(69, 'Kanshi Ram Nagar', '37');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(70, 'East Delhi', '9');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(71, 'West Delhi', '9');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(72, 'North Delhi', '9');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
+	(73, 'South Delhi', '9');
+INSERT INTO `ems_city` (`city_id`, `city_name`, `state_id`) VALUES
 	(74, 'Pratapgarh', '37');
 /*!40000 ALTER TABLE `ems_city` ENABLE KEYS */;
 
@@ -204,19 +267,32 @@ CREATE TABLE IF NOT EXISTS `ems_class` (
 -- Dumping data for table eschool.ems_class: ~14 rows (approximately)
 /*!40000 ALTER TABLE `ems_class` DISABLE KEYS */;
 INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
-	(1, 'LKG'),
-	(2, 'UKG'),
-	(3, 'I'),
-	(4, 'II'),
-	(5, 'III'),
-	(6, 'IV'),
-	(7, 'V'),
-	(8, 'VI'),
-	(9, 'VII'),
-	(10, 'VIII'),
-	(11, 'IX'),
-	(12, 'X'),
-	(13, 'XI'),
+	(1, 'LKG');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(2, 'UKG');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(3, 'I');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(4, 'II');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(5, 'III');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(6, 'IV');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(7, 'V');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(8, 'VI');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(9, 'VII');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(10, 'VIII');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(11, 'IX');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(12, 'X');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
+	(13, 'XI');
+INSERT INTO `ems_class` (`class_id`, `class_name`) VALUES
 	(14, 'XII');
 /*!40000 ALTER TABLE `ems_class` ENABLE KEYS */;
 
@@ -228,10 +304,12 @@ CREATE TABLE IF NOT EXISTS `ems_class_section` (
   `section_id` int(11) NOT NULL,
   `sequence` int(11) DEFAULT NULL,
   PRIMARY KEY (`class_section_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_class_section: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_class_section` DISABLE KEYS */;
+INSERT INTO `ems_class_section` (`class_section_id`, `class_id`, `section_id`, `sequence`) VALUES
+	(1, 1, 2, 1);
 /*!40000 ALTER TABLE `ems_class_section` ENABLE KEYS */;
 
 
@@ -254,17 +332,17 @@ CREATE TABLE IF NOT EXISTS `ems_daily_timetable` (
   `daily_timetable_id` int(55) NOT NULL AUTO_INCREMENT,
   `session_id` int(55) NOT NULL,
   `season_id` int(11) DEFAULT NULL,
-  `teacher_id` int(55) NOT NULL,
+  `staff_id` int(55) NOT NULL,
   `paper_id` int(55) NOT NULL,
   `class_section_id` int(55) NOT NULL,
   `period_id` int(55) NOT NULL,
-  `week_day` varchar(250) DEFAULT NULL,
+  `week_id` int(11) NOT NULL,
   `created_by` int(55) NOT NULL,
   `created_date` datetime NOT NULL,
   `updated_by` int(50) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`daily_timetable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_daily_timetable: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_daily_timetable` DISABLE KEYS */;
@@ -356,7 +434,7 @@ CREATE TABLE IF NOT EXISTS `ems_fee_amount` (
   `amount` float NOT NULL,
   `fee_type_id` int(11) NOT NULL,
   PRIMARY KEY (`amount_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_fee_amount: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_fee_amount` DISABLE KEYS */;
@@ -380,7 +458,7 @@ CREATE TABLE IF NOT EXISTS `ems_fee_submission` (
   `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`submission_id`),
   KEY `submission_id` (`submission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_fee_submission: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_fee_submission` DISABLE KEYS */;
@@ -398,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `ems_fee_submission_old` (
   `fine` float DEFAULT NULL,
   `submitted_date` datetime NOT NULL,
   PRIMARY KEY (`submission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_fee_submission_old: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_fee_submission_old` DISABLE KEYS */;
@@ -413,7 +491,7 @@ CREATE TABLE IF NOT EXISTS `ems_fee_type` (
   `is_active` enum('0','1') NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`fee_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_fee_type: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_fee_type` DISABLE KEYS */;
@@ -434,6 +512,26 @@ CREATE TABLE IF NOT EXISTS `ems_grade_to_marks` (
 /*!40000 ALTER TABLE `ems_grade_to_marks` ENABLE KEYS */;
 
 
+-- Dumping structure for table eschool.ems_holidays
+CREATE TABLE IF NOT EXISTS `ems_holidays` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `holiday_reason` varchar(250) DEFAULT NULL,
+  `holiday_date` date DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table eschool.ems_holidays: ~2 rows (approximately)
+/*!40000 ALTER TABLE `ems_holidays` DISABLE KEYS */;
+INSERT INTO `ems_holidays` (`id`, `holiday_reason`, `holiday_date`, `created_date`, `updated_date`) VALUES
+	(1, 'Due To Guru Purina', '2015-11-25', '2015-11-23 22:25:56', '2015-11-23 22:25:57');
+INSERT INTO `ems_holidays` (`id`, `holiday_reason`, `holiday_date`, `created_date`, `updated_date`) VALUES
+	(2, 'Due To Guru Purina', '2015-11-26', '2015-11-23 22:26:11', '2015-11-23 22:26:11');
+/*!40000 ALTER TABLE `ems_holidays` ENABLE KEYS */;
+
+
 -- Dumping structure for table eschool.ems_login
 CREATE TABLE IF NOT EXISTS `ems_login` (
   `user_login_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -442,12 +540,16 @@ CREATE TABLE IF NOT EXISTS `ems_login` (
   `password` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL COMMENT 'PK of ems_student, ems_parent, ems_teacher, ems_user',
   PRIMARY KEY (`user_login_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_login: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_login: ~3 rows (approximately)
 /*!40000 ALTER TABLE `ems_login` DISABLE KEYS */;
 INSERT INTO `ems_login` (`user_login_id`, `user_login_type`, `login_id`, `password`, `user_id`) VALUES
 	(1, 'A', 'Admin', 'admin', 1);
+INSERT INTO `ems_login` (`user_login_id`, `user_login_type`, `login_id`, `password`, `user_id`) VALUES
+	(2, 'S', 'Sjee11264', 'zcBtAjN3', 1);
+INSERT INTO `ems_login` (`user_login_id`, `user_login_type`, `login_id`, `password`, `user_id`) VALUES
+	(3, 'P', 'Pdss303679', '3TAjUu60', 30);
 /*!40000 ALTER TABLE `ems_login` ENABLE KEYS */;
 
 
@@ -464,11 +566,16 @@ CREATE TABLE IF NOT EXISTS `ems_marks` (
 -- Dumping data for table eschool.ems_marks: 6 rows
 /*!40000 ALTER TABLE `ems_marks` DISABLE KEYS */;
 INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
-	(23, 1, 20, 1, 50),
-	(22, 1, 21, 2, 60),
-	(48, 1, 20, 2, 50),
-	(47, 1, 20, 1, 50),
-	(49, 9, 21, 1, 45),
+	(23, 1, 20, 1, 50);
+INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
+	(22, 1, 21, 2, 60);
+INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
+	(48, 1, 20, 2, 50);
+INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
+	(47, 1, 20, 1, 50);
+INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
+	(49, 9, 21, 1, 45);
+INSERT INTO `ems_marks` (`marks_id`, `exam_period_id`, `st_class_id`, `paper_id`, `obtained_marks`) VALUES
 	(50, 9, 21, 2, 89);
 /*!40000 ALTER TABLE `ems_marks` ENABLE KEYS */;
 
@@ -483,17 +590,28 @@ CREATE TABLE IF NOT EXISTS `ems_menu` (
 -- Dumping data for table eschool.ems_menu: ~12 rows (approximately)
 /*!40000 ALTER TABLE `ems_menu` DISABLE KEYS */;
 INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
-	(1, 'General SMS'),
-	(2, 'Attendance'),
-	(3, 'Fee'),
-	(4, 'Feedback'),
-	(5, 'Registration'),
-	(6, 'Notice'),
-	(14, 'Profile'),
-	(24, 'Exam'),
-	(210, 'Online Exam'),
-	(211, 'Access Right'),
-	(212, 'Time Table'),
+	(1, 'General SMS');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(2, 'Attendance');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(3, 'Fee');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(4, 'Feedback');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(5, 'Registration');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(6, 'Notice');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(14, 'Profile');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(24, 'Exam');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(210, 'Online Exam');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(211, 'Access Right');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
+	(212, 'Time Table');
+INSERT INTO `ems_menu` (`menu_id`, `menu_name`) VALUES
 	(213, 'Result');
 /*!40000 ALTER TABLE `ems_menu` ENABLE KEYS */;
 
@@ -508,17 +626,28 @@ CREATE TABLE IF NOT EXISTS `ems_month` (
 -- Dumping data for table eschool.ems_month: ~12 rows (approximately)
 /*!40000 ALTER TABLE `ems_month` DISABLE KEYS */;
 INSERT INTO `ems_month` (`month_id`, `month`) VALUES
-	(1, 'January'),
-	(2, 'Febuary'),
-	(3, 'March'),
-	(4, 'April'),
-	(5, 'May'),
-	(6, 'June'),
-	(7, 'July'),
-	(8, 'August'),
-	(9, 'September'),
-	(10, 'October'),
-	(11, 'Novermber'),
+	(1, 'January');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(2, 'Febuary');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(3, 'March');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(4, 'April');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(5, 'May');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(6, 'June');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(7, 'July');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(8, 'August');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(9, 'September');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(10, 'October');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
+	(11, 'Novermber');
+INSERT INTO `ems_month` (`month_id`, `month`) VALUES
 	(12, 'December');
 /*!40000 ALTER TABLE `ems_month` ENABLE KEYS */;
 
@@ -699,9 +828,12 @@ CREATE TABLE IF NOT EXISTS `ems_salutation` (
 -- Dumping data for table eschool.ems_salutation: 4 rows
 /*!40000 ALTER TABLE `ems_salutation` DISABLE KEYS */;
 INSERT INTO `ems_salutation` (`salutation_id`, `salutation`) VALUES
-	(1, 'Mr.'),
-	(2, 'Mrs.'),
-	(3, 'Prof.'),
+	(1, 'Mr.');
+INSERT INTO `ems_salutation` (`salutation_id`, `salutation`) VALUES
+	(2, 'Mrs.');
+INSERT INTO `ems_salutation` (`salutation_id`, `salutation`) VALUES
+	(3, 'Prof.');
+INSERT INTO `ems_salutation` (`salutation_id`, `salutation`) VALUES
 	(4, 'Dr.');
 /*!40000 ALTER TABLE `ems_salutation` ENABLE KEYS */;
 
@@ -738,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `ems_school_profile` (
   PRIMARY KEY (`school_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_school_profile: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_school_profile: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_school_profile` DISABLE KEYS */;
 INSERT INTO `ems_school_profile` (`school_id`, `school_name`, `school_address`, `school_logo`) VALUES
 	(2, 'UDT eSchool', 'New Delhi-1110004', 'assets/assets/img/school_logo.png');
@@ -755,8 +887,10 @@ CREATE TABLE IF NOT EXISTS `ems_school_user_type` (
 -- Dumping data for table eschool.ems_school_user_type: 3 rows
 /*!40000 ALTER TABLE `ems_school_user_type` DISABLE KEYS */;
 INSERT INTO `ems_school_user_type` (`school_user_type_id`, `user_type`) VALUES
-	(1, 'Teacher'),
-	(2, 'Principal'),
+	(1, 'Teacher');
+INSERT INTO `ems_school_user_type` (`school_user_type_id`, `user_type`) VALUES
+	(2, 'Principal');
+INSERT INTO `ems_school_user_type` (`school_user_type_id`, `user_type`) VALUES
 	(3, 'Other Category');
 /*!40000 ALTER TABLE `ems_school_user_type` ENABLE KEYS */;
 
@@ -770,7 +904,7 @@ CREATE TABLE IF NOT EXISTS `ems_season` (
   PRIMARY KEY (`season_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_season: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_season: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_season` DISABLE KEYS */;
 INSERT INTO `ems_season` (`season_id`, `season_name`, `start_date`, `end_date`) VALUES
 	(1, 'winter', '2015-07-03 22:40:38', '2016-08-02 22:40:39');
@@ -787,11 +921,16 @@ CREATE TABLE IF NOT EXISTS `ems_section` (
 -- Dumping data for table eschool.ems_section: ~6 rows (approximately)
 /*!40000 ALTER TABLE `ems_section` DISABLE KEYS */;
 INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
-	(2, 'A'),
-	(3, 'B'),
-	(4, 'C'),
-	(5, 'D'),
-	(6, 'E'),
+	(2, 'A');
+INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
+	(3, 'B');
+INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
+	(4, 'C');
+INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
+	(5, 'D');
+INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
+	(6, 'E');
+INSERT INTO `ems_section` (`section_id`, `section_name`) VALUES
 	(7, 'F');
 /*!40000 ALTER TABLE `ems_section` ENABLE KEYS */;
 
@@ -821,7 +960,7 @@ CREATE TABLE IF NOT EXISTS `ems_session` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_session: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_session: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_session` DISABLE KEYS */;
 INSERT INTO `ems_session` (`session_id`, `session_name`, `start_date`, `end_date`) VALUES
 	(1, '2015-16', '2015-04-01 00:02:49', '2015-04-01 00:03:05');
@@ -838,7 +977,8 @@ CREATE TABLE IF NOT EXISTS `ems_session_season` (
 -- Dumping data for table eschool.ems_session_season: ~2 rows (approximately)
 /*!40000 ALTER TABLE `ems_session_season` DISABLE KEYS */;
 INSERT INTO `ems_session_season` (`session_id`, `season_id`) VALUES
-	(1, 1),
+	(1, 1);
+INSERT INTO `ems_session_season` (`session_id`, `season_id`) VALUES
 	(1, 2);
 /*!40000 ALTER TABLE `ems_session_season` ENABLE KEYS */;
 
@@ -850,7 +990,7 @@ CREATE TABLE IF NOT EXISTS `ems_sms_api` (
   PRIMARY KEY (`api_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_sms_api: ~1 rows (approximately)
+-- Dumping data for table eschool.ems_sms_api: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_sms_api` DISABLE KEYS */;
 INSERT INTO `ems_sms_api` (`api_id`, `api_url`) VALUES
 	(1, 'http://alerts.sinfini.com/web2sms.php');
@@ -869,7 +1009,8 @@ CREATE TABLE IF NOT EXISTS `ems_sms_template` (
 -- Dumping data for table eschool.ems_sms_template: ~2 rows (approximately)
 /*!40000 ALTER TABLE `ems_sms_template` DISABLE KEYS */;
 INSERT INTO `ems_sms_template` (`template_id`, `template_content`, `is_active`, `api_id`) VALUES
-	(1, 'Tomorrow will be holiday', 1, 1),
+	(1, 'Tomorrow will be holiday', 1, 1);
+INSERT INTO `ems_sms_template` (`template_id`, `template_content`, `is_active`, `api_id`) VALUES
 	(2, 'Tomorrow will be College Annual Function Day', 1, 1);
 /*!40000 ALTER TABLE `ems_sms_template` ENABLE KEYS */;
 
@@ -936,9 +1077,11 @@ CREATE TABLE IF NOT EXISTS `ems_staff_attendance` (
   `attendance_approve_by_type` varchar(5) NOT NULL,
   `attendance_taken_by` int(11) DEFAULT NULL,
   `attendance_approve_by` int(11) DEFAULT NULL,
-  `attendance_taken_by_type` int(11) DEFAULT NULL,
+  `attendance_taken_by_type` varchar(11) DEFAULT NULL,
   `attendance_updated_by` int(11) DEFAULT NULL,
-  `attendance_updated_by_type` int(11) DEFAULT NULL,
+  `attendance_updated_by_type` varchar(11) DEFAULT NULL,
+  `card_no` varchar(20) NOT NULL,
+  `is_send` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`attendance_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -959,41 +1102,76 @@ CREATE TABLE IF NOT EXISTS `ems_state` (
 -- Dumping data for table eschool.ems_state: 36 rows
 /*!40000 ALTER TABLE `ems_state` DISABLE KEYS */;
 INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
-	(5, 'Chandigarh', 1),
-	(4, 'Andaman and Nicobar', 1),
-	(6, 'Dadra and Nagar Haveli', 1),
-	(7, 'Daman and Diu', 1),
-	(8, 'Lakshadweep', 1),
-	(9, 'New Delhi', 1),
-	(10, 'Puducherry', 1),
-	(11, 'Andhra Pradesh', 1),
-	(12, 'Arunachal Pradesh', 1),
-	(13, 'Assam', 1),
-	(14, 'Bihar', 1),
-	(15, 'Chhattisgarh', 1),
-	(16, 'Goa', 1),
-	(17, 'Gujarat', 1),
-	(18, 'Haryana', 1),
-	(19, 'Himachal Pradesh', 1),
-	(20, 'Jammu and Kashmir', 1),
-	(21, 'Jharkhand', 1),
-	(22, 'Karnataka', 1),
-	(23, 'Kerala', 1),
-	(24, 'Madhya', 1),
-	(25, 'Maharashtra', 1),
-	(26, 'Manipur', 1),
-	(27, 'Meghalaya', 1),
-	(28, 'Mizoram', 1),
-	(29, 'Nagaland', 1),
-	(30, 'Odisha', 1),
-	(31, 'Punjab', 1),
-	(32, 'Rajasthan', 1),
-	(33, 'Sikkim', 1),
-	(34, 'Tamil Nadu', 1),
-	(35, 'Telangana', 1),
-	(36, 'Tripura', 1),
-	(37, 'Uttar Pradesh', 1),
-	(38, 'Uttarakhand', 1),
+	(5, 'Chandigarh', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(4, 'Andaman and Nicobar', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(6, 'Dadra and Nagar Haveli', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(7, 'Daman and Diu', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(8, 'Lakshadweep', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(9, 'New Delhi', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(10, 'Puducherry', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(11, 'Andhra Pradesh', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(12, 'Arunachal Pradesh', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(13, 'Assam', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(14, 'Bihar', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(15, 'Chhattisgarh', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(16, 'Goa', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(17, 'Gujarat', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(18, 'Haryana', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(19, 'Himachal Pradesh', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(20, 'Jammu and Kashmir', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(21, 'Jharkhand', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(22, 'Karnataka', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(23, 'Kerala', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(24, 'Madhya', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(25, 'Maharashtra', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(26, 'Manipur', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(27, 'Meghalaya', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(28, 'Mizoram', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(29, 'Nagaland', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(30, 'Odisha', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(31, 'Punjab', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(32, 'Rajasthan', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(33, 'Sikkim', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(34, 'Tamil Nadu', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(35, 'Telangana', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(36, 'Tripura', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(37, 'Uttar Pradesh', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
+	(38, 'Uttarakhand', 1);
+INSERT INTO `ems_state` (`state_id`, `state_name`, `country_id`) VALUES
 	(39, 'West Bengal', 1);
 /*!40000 ALTER TABLE `ems_state` ENABLE KEYS */;
 
@@ -1011,10 +1189,12 @@ CREATE TABLE IF NOT EXISTS `ems_student_address` (
   `pincode` varchar(6) DEFAULT NULL,
   `landmark_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`address_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eschool.ems_student_address: 0 rows
+-- Dumping data for table eschool.ems_student_address: 1 rows
 /*!40000 ALTER TABLE `ems_student_address` DISABLE KEYS */;
+INSERT INTO `ems_student_address` (`address_id`, `student_id`, `address1`, `address2`, `address3`, `city_id`, `state_id`, `country_id`, `pincode`, `landmark_id`) VALUES
+	(1, 1, '12', '2', '1', 8, 37, 1, '123456', NULL);
 /*!40000 ALTER TABLE `ems_student_address` ENABLE KEYS */;
 
 
@@ -1040,10 +1220,12 @@ CREATE TABLE IF NOT EXISTS `ems_student_teacher_class` (
   `card_no` varchar(50) DEFAULT NULL,
   `class_section_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_teacher_class_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_student_teacher_class: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_student_teacher_class` DISABLE KEYS */;
+INSERT INTO `ems_student_teacher_class` (`student_teacher_class_id`, `student_id`, `session_id`, `roll_number`, `house_id`, `card_no`, `class_section_id`) VALUES
+	(1, 1, 1, NULL, NULL, '001', 1);
 /*!40000 ALTER TABLE `ems_student_teacher_class` ENABLE KEYS */;
 
 
@@ -1068,42 +1250,78 @@ CREATE TABLE IF NOT EXISTS `ems_sub_menu` (
   `user_type` varchar(5) NOT NULL,
   `menu_id` int(11) NOT NULL,
   PRIMARY KEY (`sub_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table eschool.ems_sub_menu: ~31 rows (approximately)
 /*!40000 ALTER TABLE `ems_sub_menu` DISABLE KEYS */;
 INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
-	(1, 'Student SMS', 'sms/sms/general_sms', 'A', 1),
-	(2, 'Teacher SMS', 'sms/sms/general_sms', 'A', 1),
-	(3, 'Student Attendance', 'student/student_attendance/get_attendance', 'A', 2),
-	(7, 'Feedback', 'feedback/feedback', 'S', 4),
-	(9, 'Student Registration', 'student/student/student_registraton', 'A', 5),
-	(10, 'Staff Registration', 'staff/staff/staff_registration', 'A', 5),
-	(11, 'Notice', 'notice/notice/add_notice', 'A', 6),
-	(12, 'Class', 'class-section/class_section/add_class', 'A', 7),
-	(13, 'Section', 'class-section/class_section/add_section', 'A', 7),
-	(14, 'Class Section', 'class-section/class_section/add_class_section', 'A', 7),
-	(15, 'Session', 'session/session/add_session', 'A', 8),
-	(18, 'Subject', 'subject/subject/add_subject', 'A', 9),
-	(19, 'Create Online Exam', 'onlineexam/online_exam/add_online_exam', 'A', 10),
-	(20, 'Search Paper', 'onlineexam/online_exam/get_question_answer_list', 'A', 10),
-	(21, 'Online Exam Result', 'onlineexam/online_exam/online_exam_result', 'A', 10),
-	(22, 'Access Right', 'menu/menu/student_list', 'A', 11),
-	(23, 'Time Table', 'timetable/timetable/createdailytimetable', 'A', 12),
-	(24, 'My Time Table', 'dashboard/dashboard/student#', 'S', 12),
-	(26, 'Online Exam Result', 'dashboard/dashboard/student#', 'S', 13),
-	(27, 'Offline Result', 'dashboard/dashboard/student#', 'S', 13),
-	(28, 'Attendance', 'dashboard/dashboard/student#', 'T1', 2),
-	(29, 'Time Table', 'dashboard/dashboard/student#', 'T1', 12),
-	(30, 'Profile', 'dashboard/dashboard/student#', 'T1', 14),
-	(31, 'Feedback', 'feedback/feedback/feedback_list', 'A', 4),
-	(32, 'Online Exam Result', 'dashboard/dashboard/student#', 'A', 13),
-	(33, 'Offline Result', 'dashboard/dashboard/student#', 'A', 13),
-	(34, 'Attandence approve', 'student/student_attendance/approve_attendance', 'A', 2),
-	(35, 'Season', 'session/session/add_season', 'A', 8),
-	(36, 'Student List', 'student/student/student_list', 'A', 5),
-	(37, 'Staff List', 'staff/staff/staff_list', 'A', 5),
+	(1, 'Student SMS', 'sms/sms/general_sms', 'A', 1);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(2, 'Teacher SMS', 'sms/sms/general_sms', 'A', 1);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(3, 'Student Attendance', 'student/student_attendance/get_attendance', 'A', 2);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(7, 'General Feedback', 'feedback/feedback', 'S', 4);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(9, 'Student Registration', 'student/student/student_registraton', 'A', 5);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(10, 'Staff Registration', 'staff/staff/staff_registration', 'A', 5);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(11, 'Notice', 'notice/notice/add_notice', 'A', 6);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(12, 'Class', 'class-section/class_section/add_class', 'A', 7);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(13, 'Section', 'class-section/class_section/add_section', 'A', 7);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(14, 'Class Section', 'class-section/class_section/add_class_section', 'A', 7);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(15, 'Session', 'session/session/add_session', 'A', 8);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(18, 'Subject', 'subject/subject/add_subject', 'A', 9);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(19, 'Create Online Exam', 'onlineexam/online_exam/add_online_exam', 'A', 10);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(20, 'Search Paper', 'onlineexam/online_exam/get_question_answer_list', 'A', 10);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(21, 'Online Exam Result', 'onlineexam/online_exam/online_exam_result', 'A', 10);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(22, 'Access Right', 'menu/menu/student_list', 'A', 11);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(23, 'Time Table', 'timetable/timetable/createdailytimetable', 'A', 12);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(24, 'My Time Table', 'dashboard/dashboard/student#', 'S', 12);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(26, 'Online Exam Result', 'dashboard/dashboard/student#', 'S', 13);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(27, 'Offline Result', 'dashboard/dashboard/student#', 'S', 13);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(28, 'Attendance', 'dashboard/dashboard/student#', 'T1', 2);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(29, 'Time Table', 'dashboard/dashboard/student#', 'T1', 12);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(30, 'Profile', 'dashboard/dashboard/student#', 'T1', 14);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(31, 'Feedback', 'feedback/feedback/feedback_list', 'A', 4);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(32, 'Online Exam Result', 'dashboard/dashboard/student#', 'A', 13);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(33, 'Offline Result', 'dashboard/dashboard/student#', 'A', 13);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(34, 'Attandence approve', 'student/student_attendance/approve_attendance', 'A', 2);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(35, 'Season', 'session/session/add_season', 'A', 8);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(36, 'Student List', 'student/student/student_list', 'A', 5);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(37, 'Staff List', 'staff/staff/staff_list', 'A', 5);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
 	(38, 'Fee Submission', 'fee/fee/fee_submission_add', 'A', 3);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(39, 'General Feedback', 'feedback/feedback', 'P', 4);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(40, 'Teacher Feedback', 'feedback/teacher_feedback', 'S', 4);
+INSERT INTO `ems_sub_menu` (`sub_menu_id`, `sub_menu_name`, `sub_menu_url`, `user_type`, `menu_id`) VALUES
+	(41, 'Teacher Feedback', 'feedback/teacher_feedback', 'P', 4);
 /*!40000 ALTER TABLE `ems_sub_menu` ENABLE KEYS */;
 
 
@@ -1117,6 +1335,54 @@ CREATE TABLE IF NOT EXISTS `ems_teacher_expertise` (
 -- Dumping data for table eschool.ems_teacher_expertise: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ems_teacher_expertise` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ems_teacher_expertise` ENABLE KEYS */;
+
+
+-- Dumping structure for table eschool.ems_teacher_feedback
+CREATE TABLE IF NOT EXISTS `ems_teacher_feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) DEFAULT NULL,
+  `ques_id` int(11) DEFAULT NULL,
+  `ans` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `user_type` enum('S','P') DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  `updated_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table eschool.ems_teacher_feedback: ~15 rows (approximately)
+/*!40000 ALTER TABLE `ems_teacher_feedback` DISABLE KEYS */;
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(2, 1, 1, 2, 1, 'S', '2015-11-22', '2015-11-22 16:35:12');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(3, 1, 1, 1, 1, 'S', '2015-11-22', '2015-11-22 16:39:22');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(4, 1, 1, 2, 1, 'S', '2015-11-22', '2015-11-22 16:35:12');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(5, 1, 1, 3, 1, 'S', '2015-11-22', '2015-11-22 16:39:13');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(6, 1, 1, 2, 1, 'S', '2015-11-22', '2015-11-22 16:35:12');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(7, 1, 1, 3, 1, 'S', '2015-11-22', '2015-11-22 16:39:04');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(8, 1, 1, 2, 1, 'S', '2015-11-22', '2015-11-22 16:35:12');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(9, 1, 1, 2, 1, 'S', '2015-11-22', '2015-11-22 16:35:12');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(10, 1, 1, 3, 1, 'S', '2015-11-22', '2015-11-22 16:39:25');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(11, 1, 1, 2, 1, 'S', '2015-11-22', '2015-11-22 16:35:12');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(12, 1, 1, 4, 1, 'S', '2015-11-22', '2015-11-22 16:39:06');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(13, 2, 1, 2, 1, 'S', '2015-11-22', '2015-11-23 22:44:39');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(14, 2, 1, 1, 1, 'S', '2015-11-22', '2015-11-23 22:44:34');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(15, 2, 1, 1, 1, 'S', '2015-11-22', '2015-11-23 22:44:32');
+INSERT INTO `ems_teacher_feedback` (`id`, `staff_id`, `ques_id`, `ans`, `user_id`, `user_type`, `created_date`, `updated_date`) VALUES
+	(16, 2, 1, 2, 1, 'S', '2015-11-22', '2015-11-23 22:44:30');
+/*!40000 ALTER TABLE `ems_teacher_feedback` ENABLE KEYS */;
 
 
 -- Dumping structure for table eschool.ems_teacher_subject
@@ -1203,9 +1469,22 @@ CREATE TABLE IF NOT EXISTS `ems_user_type` (
 -- Dumping data for table eschool.ems_user_type: 2 rows
 /*!40000 ALTER TABLE `ems_user_type` DISABLE KEYS */;
 INSERT INTO `ems_user_type` (`user_type_id`, `user_type`) VALUES
-	(1, 'Admin'),
+	(1, 'Admin');
+INSERT INTO `ems_user_type` (`user_type_id`, `user_type`) VALUES
 	(2, 'Accountent');
 /*!40000 ALTER TABLE `ems_user_type` ENABLE KEYS */;
+
+
+-- Dumping structure for table eschool.ems_weeks
+CREATE TABLE IF NOT EXISTS `ems_weeks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `week_name` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table eschool.ems_weeks: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ems_weeks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ems_weeks` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

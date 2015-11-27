@@ -7,19 +7,30 @@ class Teacher_feedback extends CI_Controller {
 	public function __construct() 
 	{
 		parent::__construct();
-		$this->load->model('feedback/feedback_model', 'feedbackModel');
-		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->helper('crud_model');
 	}
-
+	
+	//*This function will used to open teacher feedback form to student and parent*/
 	public function index() {
+		// $school_holidays = array();
+		// $this->db->select("holiday_date");
+		// $this->db->from("ems_holidays");
+		// $holiday_data = $this->db->get();
+		// foreach($holiday_data->result() as $holiday){
+			// $school_holidays[] = $holiday->holiday_date;
+		// }
+		// if(!in_array($today,$school_holidays)){	}
 		$data = array();
 		$this->template->getScript(); 
-		$this->template->getAdminHeader();
-		
 		$birthday_teacher_data = get_birtday_teachers();
 		$data['birthday_teacher_data']	= $birthday_teacher_data;	
-		$this->load->view('admin_include/left_sidebar',$data);
+		if($this->session->userdata('user_type') == 'S'){
+			$this->template->getStudentHeader();
+			$this->load->view('student_include/left_sidebar',$data);
+		}else if($this->session->userdata('user_type') == 'P'){
+			$this->template->getParentHeader();
+			$this->load->view('parent_include/left_sidebar',$data);
+		}		
 		
 		$filterColumns = array();
 		$filterColumns['user_type'] = $this->session->userdata('user_type');
@@ -34,8 +45,91 @@ class Teacher_feedback extends CI_Controller {
 		$this->template->getFooter(); 	
 	}
 	
+	//*This function will used to store teacher feedback given by student*/
 	public function feedback_by_student() {
-		echo '<pre>'; print_r($this->input->post()); die;
+		$data = array();
+		if($this->input->post()){
+			if($this->input->post('ans1')){
+				$data['ans1'] = $this->input->post('ans1');
+			}
+			if($this->input->post('ans2')){
+				$data['ans2'] = $this->input->post('ans2');
+			}
+			if($this->input->post('ans3')){
+				$data['ans3'] = $this->input->post('ans3');
+			}
+			if($this->input->post('ans4')){
+				$data['ans4'] = $this->input->post('ans4');
+			}
+			if($this->input->post('ans5')){
+				$data['ans5'] = $this->input->post('ans5');
+			}
+			if($this->input->post('ans6')){
+				$data['ans6'] = $this->input->post('ans6');
+			}
+			if($this->input->post('ans7')){
+				$data['ans7'] = $this->input->post('ans7');
+			}
+			if($this->input->post('ans8')){
+				$data['ans8'] = $this->input->post('ans8');
+			}
+			if($this->input->post('ans9')){
+				$data['ans9'] = $this->input->post('ans9');
+			}
+			if($this->input->post('ans10')){
+				$data['ans10'] = $this->input->post('ans10');
+			}
+		}
+		$data['user_type'] = $this->session->userdata('user_type');
+		$userdata = $this->session->userdata('user');
+		$data['user_id'] = $userdata['user_id'];
+		$data['created_date'] = date('Y-m-d H:i:s');
+		insert($data , "ems_teacher_feedback") ;
+		redirect('feedback/teacher_feedback');
+	}
+	
+	//*This function will used to store teacher feedback given by parent*/
+	public function feedback_by_parent() {
+		$data = array();
+		if($this->input->post()){
+			if($this->input->post('ans1')){
+				$data['ans1'] = $this->input->post('ans1');
+			}
+			if($this->input->post('ans2')){
+				$data['ans2'] = $this->input->post('ans2');
+			}
+			if($this->input->post('ans3')){
+				$data['ans3'] = $this->input->post('ans3');
+			}
+			if($this->input->post('ans4')){
+				$data['ans4'] = $this->input->post('ans4');
+			}
+			if($this->input->post('ans5')){
+				$data['ans5'] = $this->input->post('ans5');
+			}
+			if($this->input->post('ans6')){
+				$data['ans6'] = $this->input->post('ans6');
+			}
+			if($this->input->post('ans7')){
+				$data['ans7'] = $this->input->post('ans7');
+			}
+			if($this->input->post('ans8')){
+				$data['ans8'] = $this->input->post('ans8');
+			}
+			if($this->input->post('ans9')){
+				$data['ans9'] = $this->input->post('ans9');
+			}
+			if($this->input->post('ans10')){
+				$data['ans10'] = $this->input->post('ans10');
+			}
+		}
+		$data['staff_id'] = 1;
+		$data['user_type'] = $this->session->userdata('user_type');
+		$userdata = $this->session->userdata('user');
+		$data['user_id'] = $userdata['user_id'];
+		$data['created_date'] = date('Y-m-d H:i:s');
+		insert($data , "ems_teacher_feedback") ;
+		redirect('feedback/teacher_feedback');
 	}
 }
 ?>

@@ -1,68 +1,55 @@
 <script type="text/javascript" src="<?php echo base_url() ?>assets/chartjs/jquery.min.js"></script>
 <script type="text/javascript">
 /*  Student Attendance for Leave, Absent , Present*/
-$(function () {
-        $('#attendanceClassSection').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Today Attendance of Student'
-            },
-           
-            xAxis: {
-                categories: [ <?php if(isset($className))echo $className; ?> ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Students',
-                },
-		allowDecimals: false,
-            },
-            tooltip: {
-                headerFormat: '<span style="color:{series.color};font-size:10px">Class Section :{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y} </b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true,
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [
-		     {
-			
-			 name: 'Present',
-              data: [<?php if(isset($presentStudent)) echo $presentStudent;  ?>]
-			
+	$(function () {
+		$('#attendanceClassSection').highcharts({
+			chart: {
+				type: 'column'
 			},
-		     {
-				name: 'Absent',
-			data: [<?php if(isset($absentStudent)) echo $absentStudent;  ?>]
-            
-			 },
-			   
-			
-			{
-			
-			 name: 'Leave',
-                data: [<?php if(isset($leaveStudent)) echo $leaveStudent;  ?>]
-			
-			}
-			
-			
-			
-			]
-			
-        });
-    });
-	
-	  /* END*/ 
+			title: {
+				text: 'Today Attendance Of Student'
+			},
+			xAxis: {
+				categories: [ <?php if(isset($className))echo $className; ?> ]
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Students',
+				},
+				allowDecimals: false,
+			},
+			tooltip: {
+				headerFormat: '<span style="color:{series.color};font-size:10px">Class Section :{point.key}</span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					'<td style="padding:0"><b>{point.y} </b></td></tr>',
+				footerFormat: '</table>',
+				shared: true,
+				useHTML: true,
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+			series: [
+				{				
+					name: 'Present',
+					data: [<?php if(isset($presentStudent)) echo $presentStudent;  ?>]				
+				},
+				{
+					name: 'Absent',
+					data: [<?php if(isset($absentStudent)) echo $absentStudent;  ?>]			
+				},
+				{			
+					name: 'Leave',
+					data: [<?php if(isset($leaveStudent)) echo $leaveStudent;  ?>]
+				}
+			]			
+		});
+	});	
+/* END*/ 
 </script>
 
 <script type="text/javascript">
@@ -113,102 +100,49 @@ $(function () {
 </script>
 
 <script type="text/javascript">
-/*  Teacher Performence*/
-$(function () {
-        $('#teacherPerformance').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Teacher Performance'
-            },
-           
-            xAxis: {
-                categories: [
-                     '0-32%',
-                    '33-50%',
-                    '51-60%',
-                    '61-75%',
-                    '76% - Above',
-					''
-					
-                ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Students'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:12px">Percent: {point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:1f} </b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Student',
-                data: [50, 120, 200, 50, 10 ,0]
-			
-            },
-			
-			]
-			
-        });
-    });
+/*  Teacher Feedback*/
+	$(function () {
+		$('#teacher_feedback').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Stacked column chart'
+			},
+			xAxis: {
+				categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Total fruit consumption'
+				}
+			},
+			tooltip: {
+				pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+				shared: true
+			},
+			plotOptions: {
+				column: {
+					stacking: 'percent'
+				}
+			},
+			series: [{
+				name: 'Average',
+				data: [5, 3, 4, 7, 2]
+			}, {
+				name: 'Good',
+				data: [2, 2, 3, 2, 1]
+			}, {
+				name: 'Very Good',
+				data: [3, 4, 4, 2, 5]
+			},{
+				name: 'Excellent',
+				data: [3, 4, 4, 2, 5]
+			}]
+		});
+	});
 	  /* END*/ 
-</script>
-
-<script type="text/javascript">
- /* Student Performance*/ 
- 
-$(function () {
-    $('#studentPerformance').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
-        title: {
-            text: 'Student Performance'
-        },
-        tooltip: {
-    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    color: '#000000',
-                    connectorColor: '#000000',
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Percent',
-            data: [
-                ['First',   40.0],
-                ['Second',       30.8],
-                ['Third',    19.2],
-                ['Fail',     10]
-                 ]
-        }]
-    });
-});
-    
- /* END*/ 
 </script>
 
 <style type="text/css">
@@ -257,7 +191,7 @@ $(function () {
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
 					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-					<p>Admission Growth Status</p>
+					<p>New Admission Charts</p>
 				</div>
 				<div class="box_c_content">
 					<div class="inner_block">
@@ -278,7 +212,6 @@ $(function () {
 				</div>
 			</div>
 		</div>
-
 	</div>
 	
 	<div class="row">
@@ -339,21 +272,16 @@ $(function () {
 		</div>
 	</div>
 
-	<div class="row" style="display: none">
+	<div class="row">
 		<div class="six columns">
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
 					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-						<p>Student Performance
+						<p>Teacher Feedback
 							<select name="class_section_id" id="class section_id_SP" style="display: inline-table">
 							<?php foreach($classSection as $classSectonData) {?>
 								<option value="<?php echo $classSectonData->class_section_id ?>"><?php echo $classSectonData->class_name.' - '.$classSectonData->section_name; ?></option>
 							<?php } ?>
-							</select>
-							Exam
-							<select name="examID" id="exam_id" style="display: inline-table">
-								<option value="1">Half Yearly</option>
-								<option value="2">Annual</option> 
 							</select>
 						</p>
 				</div>
@@ -362,7 +290,7 @@ $(function () {
 						<div class="h_scrollable sepH_a sw_resizedEL" style="height:320px;">
 							<div class="items" style="width: 100%">
 								<div class="left" style="width: 100%">
-									<div id="studentPerformance" style="height:290px;margin:0 auto; width:100%"  title="Combined chart"></div>
+									<div id="teacher_feedback" style="height:290px;margin:0 auto; width:100%"  title="Combined chart"></div>
 								</div>
 								<div class="left">
 									<div id="ds_plot2" title="Another chart" style="height:280px;margin:0 auto" class="chart_flw"></div>
@@ -374,18 +302,11 @@ $(function () {
 			</div>
 		</div>
 
-		<div class="six columns">
+		<div class="six columns" style="display:none">
 			<div class="box_c">
 				<div class="box_c_heading cf box_actions">
 					<div class="box_c_ico"><img src="<?php echo base_url()?>assets/assets/img/ico/icSw2/16-Abacus.png" alt="" /></div>
-					<p>Class Strength
-						<select name="class_id" id="class_id" style="display:inline-table">
-							<option  value="-1">All Class </option><?php
-							foreach($ems_class as $classRow) {?>
-								<option  value="<?php echo $classRow->class_id; ?>"><?php echo $classRow->class_name;  ?> </option>
-							<?php } ?>
-						</select> 
-					</p>
+						<p>Class Strength</p>
 				</div>
 				<div class="box_c_content">
 					<div class="inner_block">

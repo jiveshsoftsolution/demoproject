@@ -92,22 +92,20 @@
 		   return $totalRecord;
 		}
 		
-		 public function getStudentAttendance($student_teacher_class_id, $attendance_date){
-		   $studentAttendance = array();
-		     $this->db->where_in('student_teacher_class_id', $student_teacher_class_id);
-		     //$this->db->where('ems_attendance.attendance_date>=', $attendance_date." 00:00:00");
-		     $this->db->where('attendance_date', $attendance_date." 00:00:00");
-		     $this->db->select('student_teacher_class_id,attendance_status,is_send');
-		     $this->db->from('ems_attendance');
-		       $query = $this->db->get();
-				   if ($query->num_rows() > 0) 
-				   {
-					  $result= $query->result();
-				       
-					  foreach($result as $row){
-					      $studentAttendance[$row->student_teacher_class_id] = $row->attendance_status.'_'.$row->is_send;
-					  }
-				   }
+		public function getStudentAttendance($student_teacher_class_id, $attendance_date){
+			$studentAttendance = array();
+			$this->db->where_in('student_teacher_class_id', $student_teacher_class_id);
+			$this->db->where('DATE(attendance_date)', $attendance_date);
+			$this->db->select('student_teacher_class_id,attendance_status,is_send');
+			$this->db->from('ems_attendance');
+		    $query = $this->db->get();
+		    if ($query->num_rows() > 0) 
+		    {
+			    $result= $query->result();			   
+			    foreach($result as $row){
+					$studentAttendance[$row->student_teacher_class_id] = $row->attendance_status.'_'.$row->is_send;
+			    }
+		    }
 		   return $studentAttendance;
 		}
 		
@@ -376,7 +374,6 @@
 	    $data['total_leave_student'] 	= $total_leave_student;
 	    $data['total_present_student'] 	= $total_present_student;
 	    $data['total_absent_student'] 	= $total_absent_student;
-	    
 	    return $data;
 	}
 	
