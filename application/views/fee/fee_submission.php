@@ -1,36 +1,80 @@
 <script>
-  function get_student_list()
-  {	
-    var class_section_id = $("#class_section_id").val();
-    var dataString = "class_section_id="+ class_section_id;
-    var urldata = '<?php echo base_url()?>';
-    $.ajax({
-      url:urldata+'student/student/get_student_list_by_class_section/',
-      data:dataString,
-      type:'POST',
-      success:function(response){
-	var obj = JSON.parse(response);
-	$("#student_id option").remove();
-	$('#student_id').append($('<option>', {
-	  value: -1,
-	  text: "Select Student"
-	}));
-	for(var i=0;i<obj.length;i++)
-	{
-		$('#student_id').append($('<option>', {
-		    value: obj[i].student_id,
-		    text: obj[i].student_name
-		}));
+	function get_student_list()
+	{	
+		var class_section_id = $("#class_section_id").val();
+		var dataString = "class_section_id="+ class_section_id;
+		var urldata = '<?php echo base_url()?>';
+		$.ajax({
+			url:urldata+'student/student/get_student_list_by_class_section/',
+			data:dataString,
+			type:'POST',
+			success:function(response){
+				var obj = JSON.parse(response);
+				$("#student_id option").remove();
+				$('#student_id').append($('<option>', {
+					value: -1,
+					text: "Select Student"
+				}));
+				for(var i=0;i<obj.length;i++)
+				{
+					$('#student_id').append($('<option>', {
+						value: obj[i].student_id,
+						text: obj[i].student_name
+					}));
+				}
+			}    
+		});
 	}
-      }    
-    });
-  }
+	
+	function get_student_cardno()
+	{	
+		var student_id = $("#student_id").val();
+		var dataString = "student_id="+ student_id;
+		var urldata = '<?php echo base_url()?>';
+		$.ajax({
+			url:urldata+'student/student/get_student_cardno/',
+			data:dataString,
+			type:'POST',
+			success:function(response){
+				var obj = JSON.parse(response);
+				$("#card_number").val(obj.card_no);
+			}    
+		});
+	}
+	
+	function get_total_fee(){
+		var tuition_fee = 0;
+		var transport_fee = 0;
+		var miscellaneous_fee = 0;
+		if($("#tuition_fee").val()!=""){
+			var tuition_fee 		= parseInt($("#tuition_fee").val());
+		}
+		if($("#transport_fee").val()!=""){
+			var transport_fee 		= parseInt($("#transport_fee").val());
+		}
+		if($("#miscellaneous_fee").val()!=""){
+			var miscellaneous_fee 		= parseInt($("#miscellaneous_fee").val());
+		}
+		var total_fee 			= tuition_fee + transport_fee + miscellaneous_fee;
+		$("#total_fee").val(total_fee);		
+	}
+	$(document).ready(function(){
+		$("#tuition_fee").keyup(function(){	
+			get_total_fee();
+		});
+		$("#transport_fee").keyup(function(){	
+			get_total_fee();
+		});
+		$("#miscellaneous_fee").keyup(function(){	
+			get_total_fee();
+		});
+	});
 </script>
 <div class="nine columns">
   <div class="row">
     <div class="twelve columns">
       <div class="box_c">
-	<div class="box_c_heading cf red">
+	<div class="box_c_heading cf">
 	  <div class="box_c_ico"><img src="<?php echo base_url();?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
 	  <p>Fee Submisssion</p>
 	</div>
@@ -61,14 +105,14 @@
 		</div>
 		<div class="three columns">
 		  <label for="student_id">Student Name</label>
-		  <select name="student_id" id="student_id" class="small">
+		  <select name="student_id" id="student_id" class="small" onchange="get_student_cardno()">
 		    <option value="-1">Select Student</option>
 		  </select>
 		  <span id="sp_fee_type_name" class="error">Select Fee Type.</span>
 		</div>
 		<div class="four columns">
-		  <label for="roll_number">Roll Number</label>
-		  <input type="text" name="roll_number" id="roll_number" class="input-text" placeholder="Roll Number">						  
+		  <label for="card_number">Card Number</label>
+		  <input type="text" name="card_number" id="card_number" class="input-text" placeholder="Card Number" readonly>						  
 		</div>
 	      </div>
 	    </div>
@@ -101,12 +145,12 @@
 		{
 		?>
 		  <div class="three columns">
-		    <input type="checkbox" name="month[]" id="month_<?php echo $monthData->month_id?>" value="<?php echo $monthData->month_id?>">
+		    <input type="checkbox" name="month[]" id="month_<?php echo $monthData->month_id?>" value="<?php echo $monthData->month?>">
 		    <label for="month_<?php echo $monthData->month_id?>"><?php echo $monthData->month?></label><br>
 		  </div>
 		  <?php } else {?>
 		  <div class="three columns" style="left:-71px">
-		    <input type="checkbox" name="month[]" id="month_<?php echo $monthData->month_id?>" value="<?php echo $monthData->month_id?>">
+		    <input type="checkbox" name="month[]" id="month_<?php echo $monthData->month_id?>" value="<?php echo $monthData->month?>">
 		    <label for="month_<?php echo $monthData->month_id?>"><?php echo $monthData->month?></label><br>
 		  </div>
 		<?php } } ?>						
@@ -129,10 +173,10 @@
 	<div class="twelve columns">
 	  <div class="box_c">
 	    <div class="box_c_heading cf box_actions">
-	      <p>Fee List</p>
+	      <p>Today Fee List</p>
 	    </div>
 	    <div class="box_c_content">
-	      <?php if(isset($student_data['result'])&& ($student_data['result'])==0) { ?>
+	      <?php if(isset($student_data) && count($student_data)==0) { ?>
 	      <div class="alert-box info">
 		Record not found!
 		<a href="javascript:void(0)" class="close">×</a>
@@ -143,6 +187,8 @@
 		    <tr>
 		      <th>Sr.No.</th>		      
 		      <th>Student Name</th>
+			  <th>Card No</th>
+			  <th>Total Fee</th>
 		      <th>Action</th>
 		    </tr>
 		  </thead>
@@ -150,9 +196,11 @@
 		    <?php $i = 1; foreach($student_data as $student_fee_data) {?>
 		      <tr>
 			<td class="essential"><?php echo $i++;?></td>
-			<td class="essential"><?php echo $student_fee_data->student_name;?></td>
+			<td class="essential"><?php echo ucfirst($student_fee_data->student_name);?></td>
+			<td class="essential"><?php echo $student_fee_data->card_number;?></td>
+			<td class="essential"><?php echo $student_fee_data->total_fee;?></td>
 			<td class="content_actions">
-			  <a  href="<?php echo base_url();?>index.php/fee/fee/get_fee_report/<?php echo $student_fee_data->student_id;?>" class="sepV_a" title="Report"  target="_BLANK">
+			  <a  href="<?php echo base_url();?>index.php/fee/fee/get_fee_report/<?php echo $student_fee_data->submission_id;?>" class="sepV_a" title="Report"  target="_BLANK">
 			    Report
 			  </a>&nbsp;&nbsp;&nbsp;
 			  <a title="Receipt" href="<?php echo base_url();?>index.php/fee/fee/get_fee_receipt/<?php echo $student_fee_data->student_id;?>" target="_BLANK">Receipt</a>

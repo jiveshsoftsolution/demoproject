@@ -453,5 +453,13 @@ class Student extends CI_Controller
 		$student_data = $this->studentModel->get_student_list_by_class_section($class_section_id);
 		echo json_encode($student_data); die;
 	}
+	
+	public function get_student_cardno(){
+		$card_data = array();
+		$student_id = $this->input->post("student_id");
+		$card_details = $this->studentModel->get_student_cardno($student_id);
+		$card_data['card_no'] = $card_details[0]->card_no; 
+		echo json_encode($card_data);die;
+	}
 }
 ?>

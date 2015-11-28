@@ -73,12 +73,13 @@ class Fee_model extends CI_Model {
 	}
 	
 	public function get_fee_receipt($student_id=NULL){
-	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
+	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name,GROUP_CONCAT(fm.month) as fee_month",FALSE);
 	    $this->db->from('ems_fee_submission fs');
 	    $this->db->join('emsstudent s','s.student_id=fs.student_id');
+		$this->db->join('ems_fee_month fm','fm.submission_id=fs.submission_id');
 	    $this->db->where('DATE(fs.created_date)',date('Y-m-d'));
+		$this->db->where('fs.submission_id',$student_id);
 	    $this->db->order_by('fs.created_date DESC');
-	    $this->db->limit($this->session->userdata('month_count'));
 	    $student_fee_data  =	$this->db->get();
 	    return $student_fee_data->result();
 	}
@@ -87,6 +88,18 @@ class Fee_model extends CI_Model {
 	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
 	    $this->db->from('ems_fee_submission fs');
 	    $this->db->join('emsstudent s','s.student_id=fs.student_id');
+	    $student_fee_data  =	$this->db->get();	
+	    return $student_fee_data->result();
+	}
+	
+	public function get_today_fee_list($fee_date = ""){
+	    $this->db->select("fs.card_number,fs.total_fee,fs.submission_id,s.student_id,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
+	    $this->db->from('ems_fee_submission fs');
+	    $this->db->join('ems_fee_month fm','fm.submission_id=fs.submission_id');
+		$this->db->join('emsstudent s','s.student_id=fs.student_id');
+		$this->db->where('DATE(fs.created_date)',$fee_date);
+		$this->db->group_by('s.student_id');
+		$this->db->order_by('fs.created_date','ASC');
 	    $student_fee_data  =	$this->db->get();	
 	    return $student_fee_data->result();
 	}

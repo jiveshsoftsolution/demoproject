@@ -1,6 +1,3 @@
-<script type="text/javascript">
-  function add
-</script>
 <div class="seven columns">
   <div class="row">
     <div class="nine columns">
@@ -16,9 +13,9 @@
 	      <table style="width:100%">
 		<tbody>
 		    <tr>	      
-		      <td>Student Name : <?php echo $student_fee_data[0]->student_name; ?> </td>
+		      <td>Student Name : <?php echo ucwords($student_fee_data[0]->student_name); ?> </td>
 		      <td>Class Section : <?php foreach($class_section  as $cs) { if($cs->class_section_id==$student_fee_data[0]->class_section_id) echo $cs->class_name." - ".$cs->section_name; } ?> </td>
-		      <td>Roll Number : <?php echo $student_fee_data[0]->roll_number; ?> </td></td>
+		      <td>Roll Number : <?php echo $student_fee_data[0]->card_number; ?> </td></td>
 		    </tr>
 		</tbody>
 	      </table>
@@ -27,12 +24,7 @@
 		<tbody>
 		    <tr>
 		      <td style="border-right: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc;padding-right: 5px !important">Months</td>
-		      <td style="border-bottom: 1px solid #dcdcdc;width: 40%"><?php $i=0; $month_string = ""; foreach($month as $monthData) {
-			foreach($student_fee_data as $fee_data){
-			  if($monthData->month_id==$fee_data->month_id)$month_string .= $monthData->month.", ";
-			}}
-			echo rtrim($month_string.", ",", ");
-			?>
+		      <td style="border-bottom: 1px solid #dcdcdc;width: 40%"><?php	echo $student_fee_data[0]->fee_month;?>
 		      </td>
 		    </tr>
 		    <tr>

@@ -29,10 +29,10 @@ class Teacher_feedback extends CI_Controller {
 		$data['staff_id'] = "";
 		if($this->session->userdata('user_type') == 'S'){
 			$this->template->getStudentHeader();
-			$this->load->view('student_include/left_sidebar',$data);
+			$this->template->getStudentLeftBar();
 		}else if($this->session->userdata('user_type') == 'P'){
 			$this->template->getParentHeader();
-			$this->load->view('parent_include/left_sidebar',$data);
+			$this->template->getParentLeftBar();
 		}		
 		
 		$filterColumns = array();

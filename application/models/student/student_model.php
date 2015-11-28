@@ -262,40 +262,47 @@ return $password;
     }
     
     public function get_birtday_students(){
-	$today = date('m-d');
-	$this->db->select("s.*,c.class_name,se.section_name");
-	$this->db->from("emsstudent s");
-	$this->db->join("ems_student_teacher_class stc","stc.student_id=s.student_id");
-	$this->db->join("ems_class_section cs","cs.class_section_id=stc.class_section_id");
-	$this->db->join("ems_class c","c.class_id= cs.class_id");
-	$this->db->join("ems_section se","se.section_id=cs.section_id");
-	$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
-	$result_data = $this->db->get();
-	return $result_data->result();
+		$today = date('m-d');
+		$this->db->select("s.*,c.class_name,se.section_name");
+		$this->db->from("emsstudent s");
+		$this->db->join("ems_student_teacher_class stc","stc.student_id=s.student_id");
+		$this->db->join("ems_class_section cs","cs.class_section_id=stc.class_section_id");
+		$this->db->join("ems_class c","c.class_id= cs.class_id");
+		$this->db->join("ems_section se","se.section_id=cs.section_id");
+		$this->db->where("DATE_FORMAT(dob, '%m-%d')='".$today."'");
+		$result_data = $this->db->get();
+		return $result_data->result();
     }
     
     public function get_student_present_status_by_month($student_teacher_class_id=""){
-	$sql = "SELECT COUNT(attendance_id) as present_count
-		FROM ems_attendance
-		WHERE student_teacher_class_id='".$student_teacher_class_id."' AND attendance_status='P' AND MONTH(attendance_date)= MONTH(CURRENT_DATE())";
-	$result_data = $this->db->query($sql);
-	return $result_data->result()[0];
+		$sql = "SELECT COUNT(attendance_id) as present_count
+			FROM ems_attendance
+			WHERE student_teacher_class_id='".$student_teacher_class_id."' AND attendance_status='P' AND MONTH(attendance_date)= MONTH(CURRENT_DATE())";
+		$result_data = $this->db->query($sql);
+		return $result_data->result()[0];
     }
     
     public function get_student_absent_status_by_month($student_teacher_class_id=""){
-	$sql = "SELECT COUNT(attendance_id) as absent_count
-		FROM ems_attendance
-		WHERE student_teacher_class_id='".$student_teacher_class_id."' AND attendance_status='A' AND MONTH(attendance_date)= MONTH(CURRENT_DATE())";
-	$result_data = $this->db->query($sql);
-	return $result_data->result()[0];
+		$sql = "SELECT COUNT(attendance_id) as absent_count
+			FROM ems_attendance
+			WHERE student_teacher_class_id='".$student_teacher_class_id."' AND attendance_status='A' AND MONTH(attendance_date)= MONTH(CURRENT_DATE())";
+		$result_data = $this->db->query($sql);
+		return $result_data->result()[0];
     }
     
     public function get_student_leave_status_by_month($student_teacher_class_id=""){
-	$sql = "SELECT COUNT(attendance_id) as leave_count
-		FROM ems_attendance
-		WHERE student_teacher_class_id='".$student_teacher_class_id."' AND attendance_status='L' AND MONTH(attendance_date)= MONTH(CURRENT_DATE())";
-	$result_data = $this->db->query($sql);
-	return $result_data->result()[0];
+		$sql = "SELECT COUNT(attendance_id) as leave_count
+			FROM ems_attendance
+			WHERE student_teacher_class_id='".$student_teacher_class_id."' AND attendance_status='L' AND MONTH(attendance_date)= MONTH(CURRENT_DATE())";
+		$result_data = $this->db->query($sql);
+		return $result_data->result()[0];
     }
-
+	public function get_student_cardno($student_id=""){
+		$this->db->select("stc.card_no");
+		$this->db->from("emsstudent s");
+		$this->db->join("ems_student_teacher_class stc","stc.student_id=s.student_id");
+		$this->db->where("s.student_id",$student_id);
+		$result_data = $this->db->get();
+		return $result_data->result();
+	}
 }

@@ -96,6 +96,7 @@ class Fee extends CI_Controller {
 	
 	public function fee_submission($session_id=NULL,$class_section_id=NULL)
 	{
+		$today = date("Y-m-d");
 		$data = array();
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
@@ -106,7 +107,7 @@ class Fee extends CI_Controller {
 		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
 		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
 		$data['class_section'] = $this->classSection->getClass_section();
-		$data['student_data'] = $this->studentModel->get_student_list_by_class_section($class_section_id);
+		$data['student_data'] = $this->feeModel->get_today_fee_list($today);
 		$this->load->view('admin_include/left_sidebar',$data);
 		$this->load->view('fee/fee_submission',$data);
 		$this->template->getFooter(); 	
@@ -119,32 +120,33 @@ class Fee extends CI_Controller {
 			$data['session_id'] 		= $this->input->post("session_id");			
 			$data['student_id'] 		= $this->input->post("student_id");
 			$data['class_section_id'] 	= $this->input->post("class_section_id");
-			$session_id 			= $data['session_id'];
-			$class_section_id 		= $data['class_section_id'];
-			$data['roll_number'] 		= $this->input->post("roll_number");
+			$session_id 				= $data['session_id'];
+			$class_section_id 			= $data['class_section_id'];
+			$data['card_number'] 		= $this->input->post("card_number");
 			$data['tuition_fee'] 		= $this->input->post("tuition_fee");
 			$data['transport_fee'] 		= $this->input->post("transport_fee");
 			$data['miscellaneous_fee'] 	= $this->input->post("miscellaneous_fee");
-			$data['total_fee'] 		= $this->input->post("total_fee");
-			$fee_months			= $this->input->post("month");
+			$data['total_fee'] 			= $this->input->post("total_fee");
+			$fee_months					= $this->input->post("month");
 			$data['submission_date'] 	= $now;
 			$data['created_date'] 		= $now;
-			$count = 0;
+			insert($data , "ems_fee_submission"); 
+			$submission_id = $this->db->insert_id();
+			$fee_month_data = array();
 			foreach($fee_months as $months){
-				$data['month_id'] 	= $months;
-				$count ++;
-				insert($data , "ems_fee_submission") ;
+				$fee_month_data['month'] 	= $months;
+				$fee_month_data['submission_id'] 	= $submission_id;
+				insert($fee_month_data , "ems_fee_month");				
 			}
-			$this->session->set_userdata("month_count",$count);
 		}
 		redirect("fee/fee/fee_submission/$session_id/$class_section_id");
 	}
 	
 	
-	public function get_fee_receipt($student_id){
+	public function get_fee_receipt($submission_id){
 		$data = array();
 		$data['school_data']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_school_profile");
-		$data['student_fee_data'] = $this->feeModel->get_fee_receipt($student_id);
+		$data['student_fee_data'] = $this->feeModel->get_fee_receipt($submission_id);
 		$data['class_section'] = $this->classSection->getClass_section();
 		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
 		$this->template->getScript();
