@@ -855,7 +855,7 @@
 	.overview_listTime_table a {position:relative;color:#222;display:block;line-height:18px;font-size:13px;padding:8px 8px 8px 8px;overflow:hidden;border:1px solid #dcdcdc;margin-bottom:10px;-webkit-border-radius: 6px 6px 6px 6px;-moz-border-radius: 6px 6px 6px 6px;border-radius: 6px 6px 6px 6px;background: #f7f7f7}
 	
 	.label-present {
-		background-color: #468847;
+		background-color: #90EE90;
 		border-radius: 3px;
 		font-weight:bold;
 		color:#fff;
@@ -863,14 +863,14 @@
 	}
 	.label-absent {
 		color:#fff;
-		background-color: #B94A48;
+		background-color: #FF0000;
 		border-radius: 3px;
 		font-weight:bold;
 		padding: 1px 4px 2px;
 	}
 	.label-leave {
-		color:#fff;
-		background-color: #F89406;
+		color:#000;
+		background-color: #FFFF33;
 		border-radius: 3px;
 		font-weight:bold;
 		padding: 1px 4px 2px;

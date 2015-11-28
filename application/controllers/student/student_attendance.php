@@ -4,8 +4,8 @@ class Student_attendance extends CI_Controller
 {
     public function __construct() {
         parent::__construct();
+		$this->load->model('attendance/attendance_model', 'attendanceModel');
 		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
-        $this->load->model('attendance/attendance_model', 'attendanceModel');
 		$this->load->model('student/student_model','studentModel');
         $this->load->helper('crud_model');
         $this->load->helper('student_model');
@@ -25,11 +25,14 @@ class Student_attendance extends CI_Controller
         $class_section_Id = NULL;
         $this->template->getScript(); 
 	
-	$this->template->getAdminHeader(); 
-	$birthday_teacher_data = get_birtday_teachers();
-	$data['birthday_teacher_data']	= $birthday_teacher_data;	
-	
-	$this->load->view('admin_include/left_sidebar',$data);
+		$this->template->getAdminHeader(); 
+		
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
+		$this->load->view('admin_include/left_sidebar',$data);
+		
         $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");
         $data['classSecton'] = getClass_section();
 
@@ -146,7 +149,9 @@ class Student_attendance extends CI_Controller
 		
 		
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 		$this->load->view('admin_include/left_sidebar',$data);
 	
         $data['session'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_session");

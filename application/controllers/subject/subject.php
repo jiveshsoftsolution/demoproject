@@ -10,6 +10,8 @@ class Subject extends CI_Controller {
 		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->helper('crud_model');
 		$this->load->helper('student_model');
+		$this->load->model('attendance/attendance_model', 'attendanceModel');
+		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 	}
 
 	public function index() {
@@ -21,8 +23,10 @@ class Subject extends CI_Controller {
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
-		$this->load->view('admin_include/left_sidebar',$data);	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
+		$this->load->view('admin_include/left_sidebar',$data);
 		$data['ems_subject'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_subject");
 		$this->load->view('subject_add' ,$data);
 		$this->template->getFooter(); 
@@ -33,7 +37,9 @@ class Subject extends CI_Controller {
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 		$this->load->view('admin_include/left_sidebar',$data);
 		$data['session']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");		
 		$data['season']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_season");	
@@ -47,8 +53,10 @@ class Subject extends CI_Controller {
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
-		$this->load->view('admin_include/left_sidebar',$data);	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
+		$this->load->view('admin_include/left_sidebar',$data);
 		$classSectionData['class'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");
 		$classSectionData['class_section'] = $this->classSection->getClass_section();
 		$classSectionData['notice'] = $this->sessionModel->getClass_section_class_notice();

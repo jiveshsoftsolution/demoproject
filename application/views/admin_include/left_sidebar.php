@@ -14,7 +14,7 @@
 			    dataLabelCenterOn: false
 		    }
 		},
-		seriesColors: ["#FF0000","#008000","#FFFF33","#05da15","#0f98de","#0d5add"],
+		seriesColors: ["#FF0000","#90EE90","#FFFF33","#05da15","#0f98de","#0d5add"],
 		grid: {
 		    borderWidth: '0',
 		    shadow: false,
@@ -37,7 +37,7 @@
 			    dataLabelCenterOn: false
 			}
 		    },
-		    seriesColors: ["#FF0000","#008000","#FFFF33","#05da15","#0f98de","#0d5add"],
+		    seriesColors: ["#FF0000","#90EE90","#FFFF33","#05da15","#0f98de","#0d5add"],
 		    grid: {
 			borderWidth: '0',
 			shadow: false,

@@ -11,6 +11,8 @@ class Staff extends CI_Controller
 		$this->load->helper('crud_model');
 		$this->load->library('image_lib');
 		$this->load->helper('student_model');
+		$this->load->model('attendance/attendance_model', 'attendanceModel');
+		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 	}
 
 	public function index() {
@@ -23,7 +25,9 @@ class Staff extends CI_Controller
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 		$this->load->view('admin_include/left_sidebar',$data);	
 		$data['salutation'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_salutation");
 		$data['country'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_country");
@@ -130,8 +134,10 @@ class Staff extends CI_Controller
 				$this->template->getScript(); 
 				$this->template->getAdminHeader(); 
 				$birthday_teacher_data = get_birtday_teachers();
-				$data['birthday_teacher_data']	= $birthday_teacher_data;	
-				$this->load->view('admin_include/left_sidebar',$data);	
+				$data['birthday_teacher_data']	= $birthday_teacher_data;			
+				$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+				$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
+				$this->load->view('admin_include/left_sidebar',$data);
 				$data['registration_message'] = "Staff Not Registered , Please Contact To Admin!";
 				$this->load->view('staff/staff_registration' ,$data);
 				$this->template->getFooter(); 
@@ -150,7 +156,9 @@ class Staff extends CI_Controller
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 		$this->load->view('admin_include/left_sidebar',$data);
 		$data['school_user_type_id'] = $school_user_type_id;
 		if($this->input->post('school_user_type_id'))
@@ -280,7 +288,9 @@ class Staff extends CI_Controller
 			$this->template->getScript(); 
 			$this->template->getAdminHeader(); 
 			$birthday_teacher_data = get_birtday_teachers();
-			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$data['birthday_teacher_data']	= $birthday_teacher_data;			
+			$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+			$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 			$this->load->view('admin_include/left_sidebar',$data);				
 			$this->load->view('staff/staff_registration_edit',$data);
 			$this->template->getFooter(); 

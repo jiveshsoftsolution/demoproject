@@ -8,6 +8,8 @@ class Fee extends CI_Controller {
 		$this->load->model('student/student_model','studentModel');
 		$this->load->model('fee/fee_model','feeModel');
 		$this->load->helper('crud_model');
+		$this->load->model('attendance/attendance_model', 'attendanceModel');
+		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 	}
 
 	public function index() {	}
@@ -98,7 +100,9 @@ class Fee extends CI_Controller {
 		$this->template->getScript(); 
 		$this->template->getAdminHeader(); 
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();
 		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
 		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
 		$data['class_section'] = $this->classSection->getClass_section();

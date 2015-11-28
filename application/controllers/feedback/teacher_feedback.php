@@ -23,8 +23,6 @@ class Teacher_feedback extends CI_Controller {
 		// if(!in_array($today,$school_holidays)){	}
 		$data = array();
 		$this->template->getScript(); 
-		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;
 		$data['staff_list'] = retrieve_records($filterColumns = NULL, $offset = NULL, $limit = NULL, $sort = NULL, "ems_staff");
         $data['classSecton'] = getClass_section();
 		$data['class_section_id'] = "";

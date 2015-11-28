@@ -11,6 +11,8 @@ class Notice extends CI_Controller {
 		$this->load->model('class_section/class_section_model','classSection');
 		$this->load->helper('crud_model');
 		$this->load->helper('student_model');
+		$this->load->model('attendance/attendance_model', 'attendanceModel');
+		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 	}
 
 	public function index() {	}
@@ -22,7 +24,9 @@ class Notice extends CI_Controller {
 		$this->template->getAdminHeader();
 		
 		$birthday_teacher_data = get_birtday_teachers();
-		$data['birthday_teacher_data']	= $birthday_teacher_data;	
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 		$this->load->view('admin_include/left_sidebar',$data);
 		
 		$classSectionData['class'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_class");		
@@ -79,7 +83,9 @@ class Notice extends CI_Controller {
 			$this->template->getAdminHeader();
 			
 			$birthday_teacher_data = get_birtday_teachers();
-			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$data['birthday_teacher_data']	= $birthday_teacher_data;			
+			$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+			$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 			$this->load->view('admin_include/left_sidebar',$data);
 			$filterColumns = array('notice_id' =>$notice_id);
 			$notice_data = retrieve_records($filterColumns, $offset=NULL, $limit=NULL, $sort=NULL, "ems_notice");

@@ -9,6 +9,8 @@ class Feedback extends CI_Controller {
 		parent::__construct();
 		$this->load->model('feedback/feedback_model', 'feedbackModel');
 		$this->load->model('class_section/class_section_model','classSection');
+		$this->load->model('attendance/attendance_model', 'attendanceModel');
+		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 		$this->load->helper('crud_model');
 		$this->load->helper('student_model');
 	}
@@ -109,7 +111,9 @@ class Feedback extends CI_Controller {
 			$this->template->getAdminHeader();
 			
 			$birthday_teacher_data = get_birtday_teachers();
-			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$data['birthday_teacher_data']	= $birthday_teacher_data;			
+			$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+			$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 			$this->load->view('admin_include/left_sidebar',$data);
 			
 			$data['feedback'] = $this->feedbackModel->get_feedback_list($start_date,$end_date);
@@ -121,7 +125,9 @@ class Feedback extends CI_Controller {
 			$this->template->getAdminHeader();
 			
 			$birthday_teacher_data = get_birtday_teachers();
-			$data['birthday_teacher_data']	= $birthday_teacher_data;	
+			$data['birthday_teacher_data']	= $birthday_teacher_data;			
+			$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+			$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();		
 			$this->load->view('admin_include/left_sidebar',$data);
 			
 			$data['feedback'] = $this->feedbackModel->get_feedback_list($start_date,$end_date);

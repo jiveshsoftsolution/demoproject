@@ -13,7 +13,7 @@
   <div class="row">
 	<div class="twelve columns">
 	  <div class="box_c">
-		<div class="box_c_heading cf red">
+		<div class="box_c_heading cf">
 		  <div class="box_c_ico"><img src="<?php echo base_url();?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
 		  <p>Attendace History</p>
 		</div>
@@ -102,10 +102,10 @@
 										<tr>
 											<td class="essential"><?php echo $count++;?></td>
 											<td><?php echo $StudentAttendance[$i]->card_no;?></td>
-											<td><?php echo $StudentAttendance[$i]->first_name;?></td>
-											<td><?php if($StudentAttendance[$i]->attendance_status=='P') echo "Present"; else echo "-";?></td>
-											<td><?php if($StudentAttendance[$i]->attendance_status=='A') echo "Absent"; else echo "-";?></td>
-											<td><?php if($StudentAttendance[$i]->attendance_status=='L') echo "Leave"; else echo "-";?></td>
+											<td><?php echo $StudentAttendance[$i]->first_name." ".$StudentAttendance[$i]->last_name;?></td>
+											<td><?php if($StudentAttendance[$i]->attendance_status=='P') echo "<label class='label-present'>Present</label>";?></td>
+											<td><?php if($StudentAttendance[$i]->attendance_status=='A') echo "<label class='label-absent'>Absent</label>";?></td>
+											<td><?php if($StudentAttendance[$i]->attendance_status=='L') echo "<label class='label-leave'>Leave</label>";?></td>
 											</tr>
 									<?php } ?>
 								</tbody>
