@@ -1223,3 +1223,110 @@ function validate_staff_registration()
 		}
 		return flag;
 	}
+	
+	function validate_teacher_feedback()
+	{	
+		var flag =  true;
+		if($("#staff_id").val()==-1)	
+		{		
+			flag = false;
+			$("#sp_staff_id").css('display','block');	
+			$("#staff_id").css('border-color','#FF0000');	
+		}	
+		else
+		{		
+			$("#sp_staff_id").css('display','none');
+			$("#staff_id").css('border-color','#BBBBBB');
+		}
+		if(!$("input[name=ans1]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans1").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans1").css('display','none');
+		}
+		if(!$("input[name=ans2]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans2").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans2").css('display','none');
+		}
+		if(!$("input[name=ans3]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans3").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans3").css('display','none');
+		}
+		if(!$("input[name=ans4]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans4").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans4").css('display','none');
+		}
+		if(!$("input[name=ans5]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans5").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans5").css('display','none');
+		}
+		if(!$("input[name=ans6]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans6").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans6").css('display','none');
+		}
+		if(!$("input[name=ans7]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans7").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans7").css('display','none');
+		}
+		if(!$("input[name=ans8]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans8").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans8").css('display','none');
+		}
+		if(!$("input[name=ans9]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans9").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans9").css('display','none');
+		}
+		if(!$("input[name=ans10]:checked").val())	
+		{		
+			flag = false;
+			$("#sp_ans10").css('display','block');	
+		}	
+		else
+		{		
+			$("#sp_ans10").css('display','none');
+		}
+		return flag;
+	}

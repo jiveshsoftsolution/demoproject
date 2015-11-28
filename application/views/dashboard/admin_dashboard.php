@@ -99,6 +99,53 @@ $(function () {
 	  /* END*/ 
 </script>
 
+<?php 
+	$staff_names = "";
+	$average_data = "";
+	$good_data = "";
+	$very_good_data = "";
+	$excellent_data = "";
+	if(isset($staffList)){
+		$c = 0;
+		$staff_names = "";
+		foreach($staffList as $staff) { 
+			$staff_names .= "'$staff',";			
+			$c++;
+		}
+	}
+	if(isset($staffFeedback['average'])){
+		$c = 0;
+		foreach($staffFeedback['average'] as $average) { 
+			$average_data .= $average.",";			
+			$c++;
+		}
+	}
+	
+	if(isset($staffFeedback['good'])){
+		$c = 0;
+		foreach($staffFeedback['good'] as $good) { 
+			$good_data .= $good.",";			
+			$c++;
+		}
+	}
+	if(isset($staffFeedback['very_good'])){
+		$c = 0;
+		foreach($staffFeedback['very_good'] as $very_good) { 
+			$very_good_data .= $very_good.",";			
+			$c++;
+		}
+	}
+	
+	if(isset($staffFeedback['excellent'])){
+		$c = 0;		
+		foreach($staffFeedback['excellent'] as $excellent) { 
+			$excellent_data .= $excellent.",";			
+			$c++;
+		}
+	}
+
+?>
+
 <script type="text/javascript">
 /*  Teacher Feedback*/
 	$(function () {
@@ -107,15 +154,15 @@ $(function () {
 				type: 'column'
 			},
 			title: {
-				text: 'Stacked column chart'
+				text: 'Teacher Feedback'
 			},
 			xAxis: {
-				categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+				categories: [<?php echo rtrim($staff_names,","); ?>]
 			},
 			yAxis: {
 				min: 0,
 				title: {
-					text: 'Total fruit consumption'
+					text: 'Teacher`s Feedback (in percentage)'
 				}
 			},
 			tooltip: {
@@ -129,16 +176,16 @@ $(function () {
 			},
 			series: [{
 				name: 'Average',
-				data: [5, 3, 4, 7, 2]
+				data: [<?php echo rtrim($average_data,","); ?>]
 			}, {
 				name: 'Good',
-				data: [2, 2, 3, 2, 1]
+				data: [<?php echo rtrim($good_data,","); ?>]
 			}, {
 				name: 'Very Good',
-				data: [3, 4, 4, 2, 5]
+				data: [<?php echo rtrim($good_data,","); ?>]
 			},{
 				name: 'Excellent',
-				data: [3, 4, 4, 2, 5]
+				data: [<?php echo rtrim($excellent_data,","); ?>]
 			}]
 		});
 	});

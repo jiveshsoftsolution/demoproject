@@ -2,7 +2,7 @@
       <div class="row">
         <div class="twelve columns">
           <div class="box_c">
-            <div class="box_c_heading cf red">
+            <div class="box_c_heading cf">
               <div class="box_c_ico"><img src="<?php echo base_url();?>assets/assets/img/ico/icSw2/16-Graph.png" alt="" /></div>
               <p>Search Staff</p>
             </div>

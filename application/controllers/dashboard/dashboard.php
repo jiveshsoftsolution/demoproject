@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('timetable/timetable_model','timetableModel');
 		$this->load->model('notice/notice_model', 'noticeModel');
 		$this->load->model('staff/staff_model', 'staffModel');
+		$this->load->model('feedback/teacher_feedback_model', 'staffFeedbackModel');
 	}
 
 	public function index() {}
@@ -39,6 +40,14 @@ class Dashboard extends CI_Controller
 		
 		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
 		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();
+		
+		$staff_list	= $this->staffFeedbackModel->get_staff_list();
+		$staff_data = array();
+		foreach($staff_list	as $staff){
+			$staff_data[] = $staff->staff_name;
+		}
+		$data['staffList'] 	= $staff_data;
+		$data['staffFeedback'] 	= $this->staffFeedbackModel->get_staff_feedback($staff_list);
 		$birthday_student_data = $this->studentModel->get_birtday_students();
 		$this->session->set_userdata('birthday_student_data',$birthday_student_data);
 		
