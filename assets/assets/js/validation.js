@@ -1195,6 +1195,21 @@ function validate_staff_registration()
 		return flag;
 	}
 	
+	function  fee_report_search(){
+		var flag =  true;
+		if($("#class_section_id").val()=="-1")	
+		{		
+			flag = false;
+			$("#sp_class_section_id").css('display','block');	
+			$("#class_section_id").css('border-color','#FF0000');	
+		}	
+		else
+		{		
+			$("#sp_class_section_id").css('display','none');
+			$("#class_section_id").css('border-color','#BBBBBB');
+		}
+		return flag;
+	}
 	function validate_attendance_history()
 	{	
 		var flag =  true;

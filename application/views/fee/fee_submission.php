@@ -194,18 +194,16 @@
 		  </thead>
 		  <tbody>
 		    <?php $i = 1; foreach($student_data as $student_fee_data) {?>
-		      <tr>
-			<td class="essential"><?php echo $i++;?></td>
-			<td class="essential"><?php echo ucfirst($student_fee_data->student_name);?></td>
-			<td class="essential"><?php echo $student_fee_data->card_number;?></td>
-			<td class="essential"><?php echo $student_fee_data->total_fee;?></td>
-			<td class="content_actions">
-			  <a  href="<?php echo base_url();?>index.php/fee/fee/get_fee_report/<?php echo $student_fee_data->submission_id;?>" class="sepV_a" title="Report"  target="_BLANK">
-			    Report
-			  </a>&nbsp;&nbsp;&nbsp;
-			  <a title="Receipt" href="<?php echo base_url();?>index.php/fee/fee/get_fee_receipt/<?php echo $student_fee_data->student_id;?>" target="_BLANK">Receipt</a>
-			</td>
-		      </tr>
+				<tr>
+					<td class="essential"><?php echo $i++;?></td>
+					<td class="essential"><?php echo ucfirst($student_fee_data->student_name);?></td>
+					<td class="essential"><?php echo $student_fee_data->card_number;?></td>
+					<td class="essential"><?php echo $student_fee_data->total_fee;?></td>
+					<td class="content_actions">
+						&nbsp;
+						<a title="Receipt" href="<?php echo base_url();?>index.php/fee/fee/get_fee_receipt/<?php echo $student_fee_data->submission_id;?>" target="_BLANK">Fee Receipt</a>
+					</td>
+				</tr>
 		    <?php } ?>
 		  </tbody>
 		</table>

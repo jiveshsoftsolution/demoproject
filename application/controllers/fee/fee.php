@@ -11,87 +11,60 @@ class Fee extends CI_Controller {
 		$this->load->model('attendance/attendance_model', 'attendanceModel');
 		$this->load->model('attendance/staff_attendance_model', 'staffAttendanceModel');
 	}
-
-	public function index() {	}
-	
-	public function add_fee_type()
-	{
-		$data = array();
-		$this->template->getScript(); 
-		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
-		$data['fee_type'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_fee_type");
-		$this->load->view('fee/fee_type_add',$data);
-		$this->template->getFooter(); 	
-	}
-	
-	public function insert_fee_type()
-	{
-		$data = array();
-		if($this->input->post('fee_type_name')){
-			$data['fee_type_name'] = addslashes($this->input->post('fee_type_name'));
-		}		
-		//$this->input->post('refundable') ? $data['refundable'] = true : $data['refundable'] = false;
-		$this->input->post('is_active') ? $data['is_active'] = '1' : $data['is_active'] = '0';
-		insert($data , "ems_fee_type") ;
-		redirect('fee/fee/add_fee_type');
-	}
-	
-	public function add_fee_setting()
-	{
-		$data = array();
-		$this->template->getScript(); 
-		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
-		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
-		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
-		$data['class_section'] = $this->classSection->getClass_section();
-		$data['fee_type'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_fee_type");
-		$data['fee_setting'] = $this->feeModel->getfee_settings();
-		$this->load->view('fee/fee_setting_add',$data);
-		$this->template->getFooter(); 	
-	}
-	
-	public function insert_fee_setting()
-	{
-		$data = array();
-		if($this->input->post('session_id'))
-		$data['session_id'] = addslashes($this->input->post('session_id'));
-		if($this->input->post('fee_type_id'))
-		$data['fee_type_id'] = addslashes($this->input->post('fee_type_id'));
-		if($this->input->post('amount'))
-		$data['amount'] = addslashes($this->input->post('amount'));
-		if($this->input->post('class_section'))
-		{
-			$class_section = implode(',',$this->input->post('class_section'));
-			$data['class_section_id'] = $class_section;
-		}
-		if($this->input->post('month'))
-		{
-			$month = implode(',',$this->input->post('month'));
-			$data['month_id'] = $month;
-		}
-		insert($data , "ems_fee_amount") ;
-		redirect('fee/fee/add_fee_setting');
-	}
-	
-	public function add_fee_submisssion()
-	{
-		$data = array(); 
-		$this->template->getScript(); 
-		$this->template->getAdminHeader(); 
-		$this->template->getAdminLeftBar();	
-		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
-		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");
-		$data['class_section'] = $this->classSection->getClass_section();
-		$data['fee_setting'] = $this->feeModel->getfee_settings();
-		$this->load->view('fee/fee_submission_add',$data);
-		$this->template->getFooter(); 	
-	}
 	
 	public function retrive_student_name($class_section_id)
 	{
 		$this->studentModel->get_student_name($class_section_id);
+	}
+	
+	public function search_fee_report()
+	{
+		$data = array();
+		$filterColumns = array();
+		$data['student_data'] = array();
+		if($this->input->post()){
+			$student_data = array();
+			if($this->input->post('session_id'))
+			{
+			  $session_id= (int)$this->input->post('session_id');
+			  $filterColumns['session_id'] = $session_id;
+			}
+			if($this->input->post('class_section_id'))
+			{
+			  $class_section_id= (int)$this->input->post('class_section_id');
+			  $filterColumns['class_section_id'] = $class_section_id;
+			}
+			if($session_id==0 && $class_section_id==0)
+			{
+				$student_data = getStudentBySessionId_ClassSectionId($filterColumns, $offset=NULL, $limit=NULL, $sort=NULL);
+			}
+			else
+			{
+			  $student_data = getStudentBySessionId_ClassSectionId($filterColumns, $offset=NULL, $limit=NULL, $sort=NULL);
+			}
+			if(count($student_data)>0){
+				$i = 0;
+				foreach($student_data as $student){
+					$student_fee_data = $this->feeModel->get_student_fee_record($student->student_id);
+					if($student_fee_data){
+						$student_data[$i]->student_fee_data = $student_fee_data;
+					}
+					$i++;
+				}
+			}
+			$data['student_data']  = $student_data;
+		}	
+		$this->template->getScript(); 
+		$this->template->getAdminHeader(); 
+		$birthday_teacher_data = get_birtday_teachers();
+		$data['birthday_teacher_data']	= $birthday_teacher_data;			
+		$data['today_student_attendance'] 	= $this->attendanceModel->get_today_student_attendance();		
+		$data['today_staff_attendance'] 	= $this->staffAttendanceModel->get_today_staff_attendance();
+		$data['session'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
+		$data['class_section'] = $this->classSection->getClass_section();
+		$this->load->view('admin_include/left_sidebar',$data);
+		$this->load->view('fee/fee_report_search',$data);
+		$this->template->getFooter(); 	
 	}
 	
 	public function fee_submission($session_id=NULL,$class_section_id=NULL)
@@ -153,8 +126,11 @@ class Fee extends CI_Controller {
 		$this->load->view('fee/fee_receipt',$data);
 	}
 	
-	public function get_fee_report($student_id){
+	public function get_fee_report($student_id=NULL,$session_id=NULL){
 		$data = array();
+		$filterColumns = array("session_id"=>$session_id);
+		$data['school_session']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_session");
+		$data['school_data']  = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_school_profile");
 		$data['student_fee_data'] = $this->feeModel->get_fee_report($student_id);
 		$data['class_section'] = $this->classSection->getClass_section();
 		$data['month'] = retrieve_records($filterColumns=NULL, $offset=NULL, $limit=NULL, $sort=NULL, "ems_month");

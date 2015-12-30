@@ -9,39 +9,6 @@ class Fee_model extends CI_Model {
 		$this->load->database();
     }
 	
-	 
-	public function getfee_settings()
-	{
-		$this->db->select('ems_session.session_name,ems_fee_type.fee_type_name,ems_fee_amount.*');
-		$this->db->from('ems_fee_amount');
-		$this->db->join('ems_class_section', 'ems_class_section.class_section_id = ems_fee_amount.class_section_id');
-		$this->db->join('ems_session', 'ems_session.session_id = ems_fee_amount.session_id');
-		$this->db->join('ems_fee_type', 'ems_fee_type.fee_type_id = ems_fee_amount.fee_type_id');
-		$fee_query = $this->db->get();
-		$feedata = array();
-		foreach($fee_query->result() as $rowData)
-		{
-			$data = array();
-			$class_section = array();
-			$data['class_section_id']	= $rowData->class_section_id;
-			$class_section[] 			= $this->get_selected_class_section_name($rowData->class_section_id);
-			//echo '<pre>';print_r($class_section); die;
-			$data['class_section']		= $class_section;
-			$data['session_name']   	= $rowData->session_name;
-			$data['fee_type_name'] 		= $rowData->fee_type_name;
-			$data['amount_id']   		= $rowData->amount_id;
-			$data['session_id'] 		= $rowData->session_id;
-			$data['month_id'] 			= $rowData->month_id;
-			$data['created_date'] 		= $rowData->created_date;
-			$data['amount'] 			= $rowData->amount;
-			$data['fee_type_id'] 		= $rowData->fee_type_id;
-			$data['month_name']  		= $this->get_selected_monthname($rowData->month_id);
-			$feedata[] = $data;
-		}
-
-		return $feedata;
-    }
-	
 	public function get_selected_monthname($month_id)
 	{
 		$this->db->select('month');
@@ -73,9 +40,10 @@ class Fee_model extends CI_Model {
 	}
 	
 	public function get_fee_receipt($student_id=NULL){
-	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name,GROUP_CONCAT(fm.month) as fee_month",FALSE);
+	    $this->db->select("fs.*,s.first_name,s.middle_name,s.last_name,p.father_first_name,p.father_middle_name,p.father_last_name,GROUP_CONCAT(fm.month) as fee_month",FALSE);
 	    $this->db->from('ems_fee_submission fs');
 	    $this->db->join('emsstudent s','s.student_id=fs.student_id');
+		$this->db->join('emsparent p','p.student_id=fs.student_id');
 		$this->db->join('ems_fee_month fm','fm.submission_id=fs.submission_id');
 	    $this->db->where('DATE(fs.created_date)',date('Y-m-d'));
 		$this->db->where('fs.submission_id',$student_id);
@@ -85,10 +53,16 @@ class Fee_model extends CI_Model {
 	}
 		
 	public function get_fee_report($student_id=NULL){
-	    $this->db->select("fs.*,CONCAT(s.first_name,' ',s.last_name) AS student_name",FALSE);
+	    $this->db->select("fs.*,s.first_name,s.middle_name,s.last_name,p.father_first_name,p.father_middle_name,p.father_last_name",FALSE);
 	    $this->db->from('ems_fee_submission fs');
 	    $this->db->join('emsstudent s','s.student_id=fs.student_id');
-	    $student_fee_data  =	$this->db->get();	
+		$this->db->join('emsparent p','p.student_id=fs.student_id');
+		$this->db->join('ems_fee_month fm','fm.submission_id=fs.submission_id');
+		$this->db->group_by('fs.submission_id');
+	    $this->db->having('Year(fs.submission_date)',date('Y'));
+		$this->db->where('fs.student_id',$student_id);
+	    $this->db->order_by('fs.submission_date DESC');
+	    $student_fee_data  =	$this->db->get();
 	    return $student_fee_data->result();
 	}
 	
@@ -102,5 +76,13 @@ class Fee_model extends CI_Model {
 		$this->db->order_by('fs.created_date','ASC');
 	    $student_fee_data  =	$this->db->get();	
 	    return $student_fee_data->result();
+	}
+	
+	public function get_student_fee_record($student_id = ""){
+	    $this->db->select("*");
+	    $this->db->from('ems_fee_submission fs');
+		$this->db->where('fs.student_id',$student_id);
+	    $student_data  =	$this->db->get();	
+	    return $student_data->num_rows();
 	}
 }

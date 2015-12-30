@@ -109,3 +109,6 @@ ALTER TABLE `ems_fee_submission`
 	
 	ALTER TABLE `ems_fee_submission`
 	CHANGE COLUMN `card_number` `card_number` VARCHAR(50) NULL DEFAULT NULL AFTER `session_id`;
+	ALTER TABLE `ems_school_profile`
+	ADD COLUMN `school_contact_no` VARCHAR(100) NULL AFTER `school_address`,
+	ADD COLUMN `school_website` VARCHAR(500) NULL AFTER `school_contact_no`;
